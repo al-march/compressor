@@ -1,0 +1,27 @@
+<section class="main-page">
+  <form class="form">
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="fileInput.click()"
+    >
+      Download
+    </button>
+
+    <input
+      (input)="onInputChange($event)"
+      #fileInput
+      type="file"
+      multiple
+      hidden
+    >
+  </form>
+
+  <app-image-list>
+    <app-image-card
+      *ngFor="let image of images"
+      [image]="image">
+    </app-image-card>
+  </app-image-list>
+</section>
