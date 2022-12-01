@@ -13,15 +13,38 @@
       (input)="onInputChange($event)"
       #fileInput
       type="file"
+      accept="image/*"
       multiple
       hidden
     >
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      *ngIf="images.length"
+      (click)="compress()"
+    >
+      Compress
+    </button>
   </form>
 
-  <app-image-list>
-    <app-image-card
-      *ngFor="let image of images"
-      [image]="image">
-    </app-image-card>
-  </app-image-list>
+  <div class="images">
+    <app-image-list *ngIf="images.length">
+      <h3>Your images</h3>
+      <app-image-card
+        *ngFor="let image of images"
+        [image]="image">
+      </app-image-card>
+    </app-image-list>
+
+    <app-image-list *ngIf="compressedImages.length">
+      <h3>Compressed images</h3>
+      <app-image-card
+        *ngFor="let image of compressedImages"
+        [image]="image">
+      </app-image-card>
+    </app-image-list>
+  </div>
+
 </section>

@@ -2,11 +2,25 @@
   height: 100%;
 }
 
+h3 {
+  margin: 0;
+}
+
 .main-page {
   height: 100%;
   display: flex;
   gap: 10px;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 15px;
+}
+
+.form {
+  display: flex;
+  gap: 15px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
 }
