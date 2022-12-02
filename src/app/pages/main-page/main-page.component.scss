@@ -1,3 +1,5 @@
+$gap: 15px;
+
 :host {
   height: 100%;
 }
@@ -11,6 +13,8 @@ h3 {
   display: flex;
   gap: 10px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 15px;
   box-sizing: border-box;
 }
@@ -23,5 +27,58 @@ h3 {
 .images {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 15px;
+  grid-gap: $gap;
+}
+
+.download {
+  max-width: 850px;
+  width: 100%;
+  padding: $gap;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $gap;
+  }
+
+  &-container {
+    width: 100%;
+    min-height: 220px;
+    padding: $gap;
+    margin: $gap 0;
+    border: 2px dashed #dedede;
+    border-radius: 12px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    overflow-y: scroll;
+
+    &__placeholder {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+
+      opacity: .5;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.image-card {
+  height: 100%;
+  width: 220px;
 }

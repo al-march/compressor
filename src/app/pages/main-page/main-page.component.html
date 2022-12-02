@@ -1,50 +1,64 @@
 <section class="main-page">
-  <form class="form">
-    <button
-      mat-flat-button
-      color="primary"
-      type="button"
-      (click)="fileInput.click()"
-    >
-      Download
-    </button>
 
-    <input
-      (input)="onInputChange($event)"
-      #fileInput
-      type="file"
-      accept="image/*"
-      multiple
-      hidden
-    >
+  <div class="download mat-elevation-z4">
+    <header class="download-header">
+      <button
+        mat-button
+        color="primary"
+        type="button"
+        (click)="fileInput.click()"
+      >
+        <mat-icon>download</mat-icon>
+        Download
+      </button>
 
-    <button
-      mat-flat-button
-      color="primary"
-      type="button"
-      *ngIf="images.length"
-      (click)="compress()"
-    >
-      Compress
-    </button>
-  </form>
+      <input
+        (input)="onInputChange($event)"
+        #fileInput
+        type="file"
+        accept="image/*"
+        multiple
+        hidden
+      >
 
-  <div class="images">
-    <app-image-list *ngIf="images.length">
-      <h3>Your images</h3>
-      <app-image-card
-        *ngFor="let image of images"
-        [image]="image">
-      </app-image-card>
-    </app-image-list>
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        [disabled]="!images.length"
+        (click)="reset()"
+      >
+        <mat-icon>delete_sweep</mat-icon>
+        Clear
+      </button>
+    </header>
 
-    <app-image-list *ngIf="compressedImages.length">
-      <h3>Compressed images</h3>
-      <app-image-card
-        *ngFor="let image of compressedImages"
-        [image]="image">
-      </app-image-card>
-    </app-image-list>
+    <div class="download-container">
+      <p
+        *ngIf="!images.length"
+        class="download-container__placeholder"
+      >
+        Drag your images here <br> for compressing
+      </p>
+
+      <app-image-list>
+        <app-image-card
+          class="image-card"
+          *ngFor="let image of images"
+          [image]="image"
+          [compressedImage]="compressed.get(image)"
+          (remove)="removeImage(image)"
+        >
+        </app-image-card>
+      </app-image-list>
+    </div>
+
+    <footer class="download-footer">
+      <button mat-button [disabled]="!images.length">
+        <mat-icon>download</mat-icon>
+        <span>Download all</span>
+        <span *ngIf="images.length">({{images.length}})</span>
+      </button>
+    </footer>
   </div>
-
 </section>

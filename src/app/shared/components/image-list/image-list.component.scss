@@ -1,7 +1,8 @@
-.file {
-  &-list {
-    width: 300px;
-    display: grid;
-    grid-gap: 15px;
+.images {
+  &-row {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }

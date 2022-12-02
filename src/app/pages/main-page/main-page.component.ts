@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+
 import { Image } from 'models/image';
 import { ImageListComponent } from 'components/image-list';
 import { ImageCardComponent } from 'components/image-card';
@@ -17,6 +19,7 @@ import Compressor from 'compressorjs';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
     ImageListComponent,
     ImageCardComponent
   ],
@@ -26,19 +29,24 @@ import Compressor from 'compressorjs';
 export class MainPageComponent {
 
   images: Image[] = [];
-  compressedImages: Image[] = [];
+  compressed: Map<Image, File> = new Map();
 
   constructor(
     private ref: ChangeDetectorRef
   ) {}
 
-  async onInputChange($event: Event) {
+  onInputChange($event: Event) {
     const input = $event.target as HTMLInputElement;
     const files = input.files;
     if (files) {
       this.images = this.fileListToImages(files);
-      this.compressedImages = [];
+      this.compress();
     }
+  }
+
+  reset() {
+    this.images = [];
+    this.compressed.clear();
   }
 
   fileListToImages(list: FileList) {
@@ -59,25 +67,26 @@ export class MainPageComponent {
   }
 
   compress() {
-    const output: File[] = [];
-
-    this.images.forEach((image, index, initial) => {
+    this.images.forEach((image, index) => {
       new Compressor(image.file, {
         quality: 0.4,
 
         success: (file: File | Blob) => {
+          let compressedImage: File;
           if (file instanceof Blob) {
-            output[index] = new File([file], image.file.name);
+            compressedImage = new File([file], image.file.name);
           } else {
-            output[index] = file;
+            compressedImage = file;
           }
 
-          if (output.length === initial.length) {
-            this.compressedImages = this.filesToImages(output);
-            this.ref.detectChanges();
-          }
+          this.compressed.set(this.images[index], compressedImage);
+          this.ref.detectChanges();
         }
       });
     });
+  }
+
+  removeImage(image: Image) {
+    this.images = this.images.filter(img => img !== image);
   }
 }

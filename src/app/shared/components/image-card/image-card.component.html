@@ -1,17 +1,35 @@
-<mat-card class="card" *ngIf="image">
-  <mat-card-header>
-    <mat-card-title>{{image.file.name}}</mat-card-title>
-    <mat-card-subtitle>{{image.file.size}} bytes</mat-card-subtitle>
-  </mat-card-header>
+<div class="card" *ngIf="image">
+  <header class="card-header">
+    <h5 class="card-name">{{image.file.name}}</h5>
+    <div class="spacer"></div>
+    <button class="card-close-btn" (click)="onRemove()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="card-diff">
+    <ng-container *ngIf="compressedImage">
+      <span>
+        {{diff}}%
+      </span>
+      <span class="card-diff__sizes">
+        {{image.file.size}} / {{compressedImage.size}}
+      </span>
+    </ng-container>
+  </div>
+
+  <button
+    class="card-download-btn"
+    mat-button
+    type="button"
+  >
+    <mat-icon>download</mat-icon>
+    Download
+  </button>
 
   <img
     *ngIf="image.src"
     [src]="image.src"
     [alt]="image.file.name"
-    mat-card-image
   >
-
-  <mat-card-actions>
-    <button mat-button color="warn" (click)="onRemove()">DELETE</button>
-  </mat-card-actions>
-</mat-card>
+</div>
