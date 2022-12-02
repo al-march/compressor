@@ -1,5 +1,10 @@
 <section class="main-page">
 
+  <app-compress-config
+    [config]="config"
+    (change)="configChange($event)">
+  </app-compress-config>
+
   <div class="download mat-elevation-z4">
     <header class="download-header">
       <button

@@ -9,6 +9,10 @@ import { Image } from 'models/image';
 import { ImageListComponent } from 'components/image-list';
 import { ImageCardComponent } from 'components/image-card';
 import Compressor from 'compressorjs';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CompressConfigComponent } from 'components/compress/compress-config';
+import { CompressConfig } from 'models/compress';
 
 
 @Component({
@@ -21,7 +25,10 @@ import Compressor from 'compressorjs';
     MatCardModule,
     MatIconModule,
     ImageListComponent,
-    ImageCardComponent
+    ImageCardComponent,
+    MatSelectModule,
+    ReactiveFormsModule,
+    CompressConfigComponent
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
@@ -30,9 +37,10 @@ export class MainPageComponent {
 
   images: Image[] = [];
   compressed: Map<Image, File> = new Map();
+  config = new CompressConfig();
 
   constructor(
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
   ) {}
 
   onInputChange($event: Event) {
@@ -69,8 +77,8 @@ export class MainPageComponent {
   compress() {
     this.images.forEach((image, index) => {
       new Compressor(image.file, {
-        quality: 0.4,
-
+        quality: this.config.quality,
+        mimeType: this.config.mimeType,
         success: (file: File | Blob) => {
           let compressedImage: File;
           if (file instanceof Blob) {
@@ -88,5 +96,10 @@ export class MainPageComponent {
 
   removeImage(image: Image) {
     this.images = this.images.filter(img => img !== image);
+  }
+
+  configChange(config: CompressConfig) {
+    this.config = config;
+    this.compress();
   }
 }
