@@ -43,7 +43,6 @@ export class ImageCardComponent implements OnChanges {
       this.ref.detectChanges();
     }
 
-    console.log(changes);
     if (this.compressedImage && this.image) {
       const percent = 100 - ((100 / this.image.file.size) * this.compressedImage.size);
       this.diff = Math.ceil(percent);
