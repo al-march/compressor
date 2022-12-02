@@ -8,13 +8,12 @@
   <div class="download mat-elevation-z4">
     <header class="download-header">
       <button
-        mat-button
-        color="primary"
+        mat-stroked-button
         type="button"
         (click)="fileInput.click()"
       >
-        <mat-icon>download</mat-icon>
-        Download
+        <mat-icon>add_photo_alternate</mat-icon>
+        Check images
       </button>
 
       <input
@@ -25,26 +24,17 @@
         multiple
         hidden
       >
-
-      <button
-        mat-button
-        color="warn"
-        type="button"
-        [disabled]="!images.length"
-        (click)="reset()"
-      >
-        <mat-icon>delete_sweep</mat-icon>
-        Clear
-      </button>
     </header>
 
     <div class="download-container">
-      <p
+      <button
         *ngIf="!images.length"
+        mat-stroked-button
         class="download-container__placeholder"
+        (click)="fileInput.click()"
       >
-        Drag your images here <br> for compressing
-      </p>
+        Drag your images
+      </button>
 
       <app-image-list>
         <app-image-card
@@ -53,16 +43,27 @@
           [image]="image"
           [compressedImage]="compressed.get(image)"
           (remove)="removeImage(image)"
+          (download)="downloadImage($event)"
         >
         </app-image-card>
       </app-image-list>
     </div>
 
     <footer class="download-footer">
-      <button mat-button [disabled]="!images.length">
+      <button mat-button color="primary" [disabled]="!images.length">
         <mat-icon>download</mat-icon>
         <span>Download all</span>
         <span *ngIf="images.length">({{images.length}})</span>
+      </button>
+
+      <button
+        mat-button
+        color="warn"
+        [disabled]="!images.length"
+        (click)="reset()"
+      >
+        <mat-icon>delete_sweep</mat-icon>
+        <span>Clear</span>
       </button>
     </footer>
   </div>

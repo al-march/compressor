@@ -60,14 +60,12 @@ h3 {
     overflow-y: scroll;
 
     &__placeholder {
-      width: 100%;
       display: flex;
       justify-content: center;
       text-align: center;
 
       opacity: .5;
-      margin: 0;
-      padding: 0;
+      margin: 0 auto;
       font-weight: bold;
     }
   }

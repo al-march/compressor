@@ -33,6 +33,9 @@ export class ImageCardComponent implements OnChanges {
   @Output()
   remove = new EventEmitter<Image>();
 
+  @Output()
+  download = new EventEmitter<File>();
+
   diff = 0;
 
   ref = changeDetectorRef();
@@ -52,5 +55,9 @@ export class ImageCardComponent implements OnChanges {
 
   onRemove() {
     this.remove.emit(this.image);
+  }
+
+  onDownload() {
+    this.download.emit(this.compressedImage);
   }
 }

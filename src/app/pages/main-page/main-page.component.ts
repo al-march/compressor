@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompressConfigComponent } from 'components/compress/compress-config';
 import { CompressConfig } from 'models/compress';
+import { DownloadService } from 'services/download';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class MainPageComponent {
 
   constructor(
     private ref: ChangeDetectorRef,
+    private download: DownloadService
   ) {}
 
   onInputChange($event: Event) {
@@ -101,5 +103,9 @@ export class MainPageComponent {
   configChange(config: CompressConfig) {
     this.config = config;
     this.compress();
+  }
+
+  downloadImage(file: File) {
+    return this.download.image(file);
   }
 }
