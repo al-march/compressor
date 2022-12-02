@@ -43,14 +43,19 @@
           [image]="image"
           [compressedImage]="compressed.get(image)"
           (remove)="removeImage(image)"
-          (download)="downloadImage($event)"
+          (download)="downloadOne($event)"
         >
         </app-image-card>
       </app-image-list>
     </div>
 
     <footer class="download-footer">
-      <button mat-button color="primary" [disabled]="!images.length">
+      <button
+        mat-button
+        color="primary"
+        [disabled]="!images.length"
+        (click)="downloadAll()"
+      >
         <mat-icon>download</mat-icon>
         <span>Download all</span>
         <span *ngIf="images.length">({{images.length}})</span>

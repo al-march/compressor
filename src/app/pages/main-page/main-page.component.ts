@@ -105,7 +105,12 @@ export class MainPageComponent {
     this.compress();
   }
 
-  downloadImage(file: File) {
-    return this.download.image(file);
+  downloadOne(file: File) {
+    return this.download.file(file);
+  }
+
+  downloadAll() {
+    const files = [...this.compressed.values()];
+    return this.download.zip(files);
   }
 }
