@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule, KeyValue } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +39,8 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
     MatExpansionModule
   ],
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPageComponent {
 

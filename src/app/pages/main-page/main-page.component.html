@@ -1,115 +1,126 @@
 <section class="main-page">
 
-  <div class="download mat-elevation-z4">
-    <header class="download-header">
-      <div class="spacer"></div>
+  <div class="container">
+    <div class="grid">
+      <section class="description">
+        <h2>Lorem ipsum dolor sit.</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem delectus dicta distinctio, fuga nulla praesentium velit voluptates. Laudantium maxime nemo reiciendis.
+        </p>
+      </section>
 
-      <button
-        mat-stroked-button
-        type="button"
-        (click)="fileInput.click()"
-      >
-        <mat-icon>add_photo_alternate</mat-icon>
-        Check images
-      </button>
+      <div class="download mat-elevation-z4">
+        <header class="download-header">
+          <div class="spacer"></div>
 
-      <button
-        mat-stroked-button
-        type="button"
-        (click)="toggleSettings()"
-      >
-        <span class="settings-btn-content">
-          <mat-icon>settings</mat-icon>
-          <span>Settings</span>
-          <mat-icon class="settings-btn-arrow" [class.rotate]="expandSettings">expand_more</mat-icon>
-        </span>
-      </button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="fileInput.click()"
+          >
+            <mat-icon>add_photo_alternate</mat-icon>
+            Check images
+          </button>
 
-      <input
-        (input)="onInputChange($event)"
-        #fileInput
-        type="file"
-        accept="image/*"
-        multiple
-        hidden
-      >
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="toggleSettings()"
+          >
+            <span class="settings-btn-content">
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+              <mat-icon class="settings-btn-arrow" [class.rotate]="expandSettings">expand_more</mat-icon>
+            </span>
+          </button>
 
-      <div class="spacer"></div>
-    </header>
+          <input
+            (input)="onInputChange($event)"
+            #fileInput
+            type="file"
+            accept="image/*"
+            multiple
+            hidden
+          >
 
-    <mat-accordion>
-      <mat-expansion-panel
-        [expanded]="expandSettings"
-        class="settings-expander"
-      >
-        <!--
-          Angular material Accordion have bug without this component.
-          * Top border flickers when switching panel
-        -->
-        <mat-expansion-panel-header
-          style="height: 1px; opacity: 0">
-        </mat-expansion-panel-header>
+          <div class="spacer"></div>
+        </header>
 
-        <article class="settings-expander-content">
-          <app-compress-config
-            [config]="config"
-            (change)="configChange($event)">
-          </app-compress-config>
-        </article>
-      </mat-expansion-panel>
-    </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel
+            [expanded]="expandSettings"
+            class="settings-expander"
+          >
+            <!--
+              Angular material Accordion have bug without this component.
+              * Top border flickers when switching panel
+            -->
+            <mat-expansion-panel-header
+              style="height: 1px; opacity: 0">
+            </mat-expansion-panel-header>
 
-    <div class="download-container">
-      <button
-        *ngIf="!images.size"
-        mat-stroked-button
-        class="download-container__placeholder"
-        (click)="fileInput.click()"
-      >
-        Drag your images
-      </button>
+            <article class="settings-expander-content">
+              <app-compress-config
+                [config]="config"
+                (change)="configChange($event)">
+              </app-compress-config>
+            </article>
+          </mat-expansion-panel>
+        </mat-accordion>
 
-      <app-image-list>
-        <app-image-card
-          class="image-card"
-          *ngFor="
-            let image of images | keyvalue;
-            trackBy:trackByImageKeyValue
-          "
-          [image]="image.key"
-          [compressedImage]="image.value"
+        <div class="download-container">
+          <button
+            *ngIf="!images.size"
+            mat-stroked-button
+            class="download-container__placeholder"
+            (click)="fileInput.click()"
+          >
+            Drag your images
+          </button>
 
-          (remove)="removeImage(image.key)"
-          (download)="downloadOne($event)">
-        </app-image-card>
-      </app-image-list>
+          <app-image-list>
+            <app-image-card
+              class="image-card"
+              *ngFor="
+                let image of images | keyvalue;
+                trackBy:trackByImageKeyValue
+              "
+              [image]="image.key"
+              [compressedImage]="image.value"
+
+              (remove)="removeImage(image.key)"
+              (download)="downloadOne($event)">
+            </app-image-card>
+          </app-image-list>
+        </div>
+
+        <footer class="download-footer">
+          <button
+            mat-button
+            color="primary"
+            [disabled]="!images.size"
+            (click)="downloadAll()"
+          >
+            <mat-icon>download</mat-icon>
+            <span>Download all</span>
+            <span *ngIf="images.size">({{images.size}})</span>
+          </button>
+
+          <button
+            mat-button
+            color="warn"
+            [disabled]="!images.size"
+            (click)="reset()"
+          >
+            <mat-icon>delete_sweep</mat-icon>
+            <span>Clear</span>
+          </button>
+        </footer>
+      </div>
+
+      <app-compress-stats
+        [compressed]="images">
+      </app-compress-stats>
     </div>
-
-    <footer class="download-footer">
-      <button
-        mat-button
-        color="primary"
-        [disabled]="!images.size"
-        (click)="downloadAll()"
-      >
-        <mat-icon>download</mat-icon>
-        <span>Download all</span>
-        <span *ngIf="images.size">({{images.size}})</span>
-      </button>
-
-      <button
-        mat-button
-        color="warn"
-        [disabled]="!images.size"
-        (click)="reset()"
-      >
-        <mat-icon>delete_sweep</mat-icon>
-        <span>Clear</span>
-      </button>
-    </footer>
   </div>
-
-  <app-compress-stats
-    [compressed]="images">
-  </app-compress-stats>
 </section>
