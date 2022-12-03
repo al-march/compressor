@@ -28,7 +28,7 @@
 
     <div class="download-container">
       <button
-        *ngIf="!images.length"
+        *ngIf="!images.size"
         mat-stroked-button
         class="download-container__placeholder"
         (click)="fileInput.click()"
@@ -39,12 +39,15 @@
       <app-image-list>
         <app-image-card
           class="image-card"
-          *ngFor="let image of images"
-          [image]="image"
-          [compressedImage]="compressed.get(image)"
-          (remove)="removeImage(image)"
-          (download)="downloadOne($event)"
-        >
+          *ngFor="
+            let image of images | keyvalue;
+            trackBy:trackByImageKeyValue
+          "
+          [image]="image.key"
+          [compressedImage]="image.value"
+
+          (remove)="removeImage(image.key)"
+          (download)="downloadOne($event)">
         </app-image-card>
       </app-image-list>
     </div>
@@ -53,18 +56,18 @@
       <button
         mat-button
         color="primary"
-        [disabled]="!images.length"
+        [disabled]="!images.size"
         (click)="downloadAll()"
       >
         <mat-icon>download</mat-icon>
         <span>Download all</span>
-        <span *ngIf="images.length">({{images.length}})</span>
+        <span *ngIf="images.size">({{images.size}})</span>
       </button>
 
       <button
         mat-button
         color="warn"
-        [disabled]="!images.length"
+        [disabled]="!images.size"
         (click)="reset()"
       >
         <mat-icon>delete_sweep</mat-icon>
@@ -72,4 +75,8 @@
       </button>
     </footer>
   </div>
+
+  <app-compress-stats
+    [compressed]="images">
+  </app-compress-stats>
 </section>
