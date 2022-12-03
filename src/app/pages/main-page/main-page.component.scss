@@ -80,3 +80,28 @@ h3 {
   height: 100%;
   width: 220px;
 }
+
+.settings {
+  &-btn {
+    &-content {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    &-arrow {
+      transition: .15s ease;
+    }
+  }
+  &-expander {
+    box-shadow: none;
+
+    &-content {
+      padding-top: $gap;
+    }
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}

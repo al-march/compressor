@@ -1,5 +1,9 @@
+import { BehaviorSubject } from 'rxjs';
+
 export class Image {
   src?: string;
+
+  compressing$ = new BehaviorSubject(false);
 
   constructor(
     public file: File
@@ -20,5 +24,13 @@ export class Image {
         }
       };
     });
+  }
+
+  startCompress() {
+    this.compressing$.next(true);
+  }
+
+  endCompress() {
+    this.compressing$.next(false);
   }
 }

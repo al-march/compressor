@@ -17,6 +17,7 @@ import { CompressConfigComponent } from 'components/compress/compress-config';
 import { CompressConfig } from 'models/compress';
 import { DownloadService } from 'services/download';
 import Compressor from 'compressorjs';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 export type ImageCompressedMap = Map<Image, File | undefined>;
 
@@ -34,7 +35,8 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
     MatSelectModule,
     ReactiveFormsModule,
     CompressConfigComponent,
-    CompressStatsComponent
+    CompressStatsComponent,
+    MatExpansionModule
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
@@ -43,6 +45,7 @@ export class MainPageComponent {
 
   images: ImageCompressedMap = new Map();
   config = new CompressConfig();
+  expandSettings = false;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -87,7 +90,9 @@ export class MainPageComponent {
   }
 
   compress() {
-    [...this.images.keys()].forEach((image, index) => {
+    [...this.images.keys()].forEach((image) => {
+      image.startCompress();
+
       new Compressor(image.file, {
         quality: this.config.quality,
         mimeType: this.config.mimeType,
@@ -100,6 +105,7 @@ export class MainPageComponent {
           }
 
           this.images.set(image, compressedImage);
+          image.endCompress();
           this.imagesForceUpdate();
           this.ref.detectChanges();
         }
@@ -135,4 +141,8 @@ export class MainPageComponent {
   trackByImageKeyValue(_: number, image: KeyValue<Image, File | undefined>) {
     return image.key;
   };
+
+  toggleSettings() {
+    this.expandSettings = !this.expandSettings;
+  }
 }

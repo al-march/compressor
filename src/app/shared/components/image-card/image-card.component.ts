@@ -1,7 +1,8 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  EventEmitter, inject,
+  EventEmitter,
   Input,
   OnChanges,
   Output,
@@ -13,13 +14,19 @@ import { Image } from 'models/image';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConvertPipe } from 'pipes/convert';
-
-const changeDetectorRef = () => inject(ChangeDetectorRef);
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-image-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, ConvertPipe],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    ConvertPipe,
+    MatProgressBarModule
+  ],
   templateUrl: './image-card.component.html',
   styleUrls: ['./image-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -39,7 +46,9 @@ export class ImageCardComponent implements OnChanges {
 
   diff = 0;
 
-  ref = changeDetectorRef();
+  constructor(
+    private ref: ChangeDetectorRef
+  ) {}
 
   async ngOnChanges(changes: SimpleChanges) {
     if (this.image) {
@@ -50,7 +59,7 @@ export class ImageCardComponent implements OnChanges {
     if (this.compressedImage && this.image) {
       const percent = 100 - ((100 / this.image.file.size) * this.compressedImage.size);
       this.diff = Math.ceil(percent);
-      this.ref.detectChanges()
+      this.ref.detectChanges();
     }
   }
 

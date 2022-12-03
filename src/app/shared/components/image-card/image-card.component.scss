@@ -19,8 +19,11 @@ $color: #dedede;
 
     display: flex;
     align-items: center;
-
     background-color: rgba(0, 0, 0, .2);
+
+    &.dark {
+      color: #333;
+    }
   }
 
   &-name {
@@ -73,7 +76,7 @@ $color: #dedede;
     }
   }
 
-  img {
+  .img {
     position: absolute;
     left: 0;
     right: 0;
@@ -84,5 +87,13 @@ $color: #dedede;
     height: 100%;
     object-fit: cover;
     filter: brightness(60%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader {
+    z-index: 1;
   }
 }

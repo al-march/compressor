@@ -1,5 +1,9 @@
 <div class="card" *ngIf="image">
-  <header class="card-header mat-elevation-z1">
+
+  <header
+    class="card-header mat-elevation-z1"
+    [class.dark]="image.compressing$ | async"
+  >
     <h5 class="card-name">{{image.file.name}}</h5>
     <div class="spacer"></div>
     <button class="card-close-btn" (click)="onRemove()">
@@ -8,17 +12,18 @@
   </header>
 
   <div class="card-diff">
-    <ng-container *ngIf="compressedImage">
+    <ng-container *ngIf="!(image.compressing$ | async)">
       <span>
         {{diff}}%
       </span>
-      <span class="card-diff__sizes">
+      <span class="card-diff__sizes" *ngIf="image && compressedImage">
         {{image.file.size | convert}}kb / {{compressedImage.size | convert}}kb
       </span>
     </ng-container>
   </div>
 
   <button
+    *ngIf="!(image.compressing$ | async)"
     class="card-download-btn"
     mat-button
     type="button"
@@ -28,9 +33,18 @@
     Download
   </button>
 
+  <div class="loader" *ngIf="image.compressing$ | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
   <img
-    *ngIf="image.src"
+    class="img"
+    *ngIf="!(image.compressing$ | async)"
     [src]="image.src"
     [alt]="image.file.name"
   >
+
+  <div class="img" *ngIf="image.compressing$ | async">
+    <mat-icon>imagesmode</mat-icon>
+  </div>
 </div>

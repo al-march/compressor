@@ -1,12 +1,9 @@
 <section class="main-page">
 
-  <app-compress-config
-    [config]="config"
-    (change)="configChange($event)">
-  </app-compress-config>
-
   <div class="download mat-elevation-z4">
     <header class="download-header">
+      <div class="spacer"></div>
+
       <button
         mat-stroked-button
         type="button"
@@ -14,6 +11,18 @@
       >
         <mat-icon>add_photo_alternate</mat-icon>
         Check images
+      </button>
+
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="toggleSettings()"
+      >
+        <span class="settings-btn-content">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+          <mat-icon class="settings-btn-arrow" [class.rotate]="expandSettings">expand_more</mat-icon>
+        </span>
       </button>
 
       <input
@@ -24,7 +33,31 @@
         multiple
         hidden
       >
+
+      <div class="spacer"></div>
     </header>
+
+    <mat-accordion>
+      <mat-expansion-panel
+        [expanded]="expandSettings"
+        class="settings-expander"
+      >
+        <!--
+          Angular material Accordion have bug without this component.
+          * Top border flickers when switching panel
+        -->
+        <mat-expansion-panel-header
+          style="height: 1px; opacity: 0">
+        </mat-expansion-panel-header>
+
+        <article class="settings-expander-content">
+          <app-compress-config
+            [config]="config"
+            (change)="configChange($event)">
+          </app-compress-config>
+        </article>
+      </mat-expansion-panel>
+    </mat-accordion>
 
     <div class="download-container">
       <button
