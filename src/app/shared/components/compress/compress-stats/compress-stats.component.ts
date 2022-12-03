@@ -2,15 +2,17 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  inject,
   Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
   SimpleChanges
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConvertPipe } from 'pipes/convert';
 import { ImageCompressedMap } from 'pages/main-page';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 interface Stats {
   initialSize: number;
@@ -26,18 +28,40 @@ interface Stats {
   styleUrls: ['./compress-stats.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CompressStatsComponent implements OnChanges {
+export class CompressStatsComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   compressed: ImageCompressedMap = new Map();
 
+  stats$ = new Subject<Stats>();
   stats?: Stats;
 
-  ref = inject(ChangeDetectorRef);
+  destroy$ = new Subject();
+
+  constructor(
+    private ref: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.stats$.pipe(
+      debounceTime(300),
+      takeUntil(this.destroy$)
+    ).subscribe(stats => {
+      this.stats = stats;
+      this.ref.detectChanges();
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['compressed'].currentValue) {
-      this.parseStats();
+      if (this.isCompressedAll()) {
+        this.parseStats();
+      }
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 
   parseStats() {
@@ -55,8 +79,10 @@ export class CompressStatsComponent implements OnChanges {
     }, 0);
 
     stats.percent = 100 - Math.round((stats.compressedSize / stats.initialSize) * 100);
-
-    this.stats = stats;
+    this.stats$.next(stats);
   }
 
+  isCompressedAll() {
+    return this.compressed.size > 0 && [...this.compressed.values()].every(v => !!v);
+  }
 }
