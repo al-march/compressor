@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompressConfigComponent } from './compress-config.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CompressConfigComponent', () => {
   let component: CompressConfigComponent;
@@ -8,7 +9,7 @@ describe('CompressConfigComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ CompressConfigComponent ]
+      imports: [ CompressConfigComponent, NoopAnimationsModule ]
     })
     .compileComponents();
 

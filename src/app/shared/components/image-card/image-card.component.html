@@ -13,7 +13,7 @@
         {{diff}}%
       </span>
       <span class="card-diff__sizes">
-        {{image.file.size}} / {{compressedImage.size}}
+        {{image.file.size | convert}}kb / {{compressedImage.size | convert}}kb
       </span>
     </ng-container>
   </div>

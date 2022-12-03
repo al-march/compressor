@@ -12,13 +12,14 @@ import { MatCardModule } from '@angular/material/card';
 import { Image } from 'models/image';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ConvertPipe } from 'pipes/convert';
 
 const changeDetectorRef = () => inject(ChangeDetectorRef);
 
 @Component({
   selector: 'app-image-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, ConvertPipe],
   templateUrl: './image-card.component.html',
   styleUrls: ['./image-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

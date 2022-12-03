@@ -29,6 +29,7 @@
       "shared/*": ["./src/app/shared/*"],
       "components/*": ["./src/app/shared/components/*"],
       "services/*": ["./src/app/shared/services/*"],
+      "pipes/*": ["./src/app/shared/pipes/*"],
     }
   },
   "angularCompilerOptions": {

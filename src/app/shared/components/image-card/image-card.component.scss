@@ -28,6 +28,10 @@ $color: #dedede;
     margin: 0;
     font-weight: 600;
     padding: 0 0 0 6px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &-close-btn {
@@ -79,6 +83,6 @@ $color: #dedede;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(70%);
+    filter: brightness(60%);
   }
 }
