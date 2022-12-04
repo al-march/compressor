@@ -32,7 +32,7 @@ export class CompressStatsComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   compressed: ImageCompressedMap = new Map();
 
-  stats$ = new Subject<Stats>();
+  stats$ = new Subject<Stats | undefined>();
   stats?: Stats;
 
   destroy$ = new Subject();
@@ -55,6 +55,8 @@ export class CompressStatsComponent implements OnInit, OnChanges, OnDestroy {
     if (changes['compressed'].currentValue) {
       if (this.isCompressedAll()) {
         this.parseStats();
+      } else {
+        this.stats$.next(undefined);
       }
     }
   }
