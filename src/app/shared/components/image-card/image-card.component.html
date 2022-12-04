@@ -18,7 +18,7 @@
     </header>
     <div class="card-diff">
       <ng-container *ngIf="!(image.compressing$ | async)">
-      <span>
+      <span class="card-diff__percent">
         {{diff}}%
       </span>
         <span class="card-diff__sizes" *ngIf="image && compressedImage">

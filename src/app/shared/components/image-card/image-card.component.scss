@@ -66,8 +66,11 @@ $color: #dedede;
     color: $color;
     transition: all .3s ease;
 
+    background-color: #222;
+    margin: 2px;
+
     &:hover {
-      transform: scale(1.1) translateY(-4px);
+      background-color: #444;
     }
   }
 
@@ -79,11 +82,16 @@ $color: #dedede;
     z-index: 1;
     flex: 1;
 
-    font-size: 2rem;
+    &__percent {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
 
     &__sizes {
-      padding-top: 3px;
-      font-size: .6rem;
+      padding-top: 10px;
+      font-size: .8rem;
+      font-weight: normal;
     }
   }
 
