@@ -44,6 +44,8 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
 })
 export class MainPageComponent {
 
+  highlightDropZone = false;
+
   images: ImageCompressedMap = new Map();
   config = new CompressConfig();
   expandSettings = false;
@@ -58,12 +60,26 @@ export class MainPageComponent {
     const files = input.files;
 
     if (files) {
-      this.images.clear();
-      this.images = this.fileListToImages(files);
-      this.compress();
+      this.processFileList(files);
     }
 
     input.value = '';
+  }
+
+  onDrop(event: DragEvent) {
+    this.highlightDropZone = false;
+    event.preventDefault();
+
+    const dt = event.dataTransfer;
+    if (dt) {
+      this.processFileList(dt.files);
+    }
+  }
+
+  processFileList(list: FileList) {
+    this.images.clear();
+    this.images = this.fileListToImages(list);
+    this.compress();
   }
 
   reset() {
@@ -145,5 +161,18 @@ export class MainPageComponent {
 
   toggleSettings() {
     this.expandSettings = !this.expandSettings;
+  }
+
+  onDragEnter(event: DragEvent) {
+    event.preventDefault();
+    setTimeout(() => {
+      this.highlightDropZone = true;
+      this.ref.detectChanges();
+    })
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.highlightDropZone = false;
   }
 }

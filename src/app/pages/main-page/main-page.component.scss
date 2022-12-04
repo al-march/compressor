@@ -66,6 +66,12 @@ h3 {
     align-items: center;
 
     overflow-y: scroll;
+    transition: .2s ease all;
+
+    &.highlight {
+      border: 2px dashed purple;
+      background-color: rgba(0, 0, 0, .2);
+    }
 
     &__placeholder {
       display: flex;
@@ -75,6 +81,8 @@ h3 {
       opacity: .5;
       margin: 0 auto;
       font-weight: bold;
+
+      z-index: -1;
     }
   }
 
@@ -87,6 +95,11 @@ h3 {
 .image-card {
   height: 100%;
   width: 220px;
+  transition: .15s ease all;
+
+  &.highlight {
+    opacity: .3;
+  }
 }
 
 .settings {

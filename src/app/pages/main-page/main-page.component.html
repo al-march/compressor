@@ -68,7 +68,15 @@
           </mat-expansion-panel>
         </mat-accordion>
 
-        <div class="download-container">
+        <div
+          class="download-container"
+          [class.highlight]="highlightDropZone"
+          (dragenter)="onDragEnter($event)"
+          (dragleave)="onDragLeave($event)"
+          (dragend)="$event.preventDefault()"
+          (dragover)="$event.preventDefault()"
+          (drop)="onDrop($event)"
+        >
           <button
             *ngIf="!images.size"
             mat-stroked-button
@@ -81,6 +89,7 @@
           <app-image-list>
             <app-image-card
               class="image-card"
+              [class.highlight]="highlightDropZone"
               *ngFor="
                 let image of images | keyvalue;
                 trackBy:trackByImageKeyValue
