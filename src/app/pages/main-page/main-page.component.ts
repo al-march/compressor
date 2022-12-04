@@ -18,6 +18,7 @@ import { CompressConfig } from 'models/compress';
 import { DownloadService } from 'services/download';
 import Compressor from 'compressorjs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { DropZoneDirective } from 'directives/drop-zone';
 
 export type ImageCompressedMap = Map<Image, File | undefined>;
 
@@ -36,15 +37,14 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
     ReactiveFormsModule,
     CompressConfigComponent,
     CompressStatsComponent,
-    MatExpansionModule
+    MatExpansionModule,
+    DropZoneDirective
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPageComponent {
-
-  highlightDropZone = false;
 
   images: ImageCompressedMap = new Map();
   config = new CompressConfig();
@@ -64,16 +64,6 @@ export class MainPageComponent {
     }
 
     input.value = '';
-  }
-
-  onDrop(event: DragEvent) {
-    this.highlightDropZone = false;
-    event.preventDefault();
-
-    const dt = event.dataTransfer;
-    if (dt) {
-      this.processFileList(dt.files);
-    }
   }
 
   processFileList(list: FileList) {
@@ -161,18 +151,5 @@ export class MainPageComponent {
 
   toggleSettings() {
     this.expandSettings = !this.expandSettings;
-  }
-
-  onDragEnter(event: DragEvent) {
-    event.preventDefault();
-    setTimeout(() => {
-      this.highlightDropZone = true;
-      this.ref.detectChanges();
-    })
-  }
-
-  onDragLeave(event: DragEvent) {
-    event.preventDefault();
-    this.highlightDropZone = false;
   }
 }

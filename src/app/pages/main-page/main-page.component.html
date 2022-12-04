@@ -69,13 +69,11 @@
         </mat-accordion>
 
         <div
+          appDropZone
+          #dropZone="dropZone"
           class="download-container"
-          [class.highlight]="highlightDropZone"
-          (dragenter)="onDragEnter($event)"
-          (dragleave)="onDragLeave($event)"
-          (dragend)="$event.preventDefault()"
-          (dragover)="$event.preventDefault()"
-          (drop)="onDrop($event)"
+          [class.highlight]="dropZone.isEntered"
+          (dropFiles)="processFileList($event)"
         >
           <button
             *ngIf="!images.size"
@@ -89,7 +87,7 @@
           <app-image-list>
             <app-image-card
               class="image-card"
-              [class.highlight]="highlightDropZone"
+              [class.highlight]="dropZone.isEntered"
               *ngFor="
                 let image of images | keyvalue;
                 trackBy:trackByImageKeyValue
