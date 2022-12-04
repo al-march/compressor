@@ -13,6 +13,8 @@ import { ConvertPipe } from 'pipes/convert';
 import { ImageCompressedMap } from 'pages/main-page';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
+import { trigger } from '@angular/animations';
+import { SlideInOutAnimation } from 'shared/animations';
 
 interface Stats {
   initialSize: number;
@@ -26,7 +28,13 @@ interface Stats {
   imports: [CommonModule, ConvertPipe, MatProgressSpinnerModule],
   templateUrl: './compress-stats.component.html',
   styleUrls: ['./compress-stats.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger(
+      'slideInOut',
+      SlideInOutAnimation
+    )
+  ]
 })
 export class CompressStatsComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
