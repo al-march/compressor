@@ -34,7 +34,7 @@
       (click)="onDownload()"
     >
       <mat-icon>download</mat-icon>
-      Download
+      <span>Загрузить</span>
     </button>
     <div class="loader" *ngIf="image.compressing$ | async">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>

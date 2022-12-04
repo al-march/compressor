@@ -3,9 +3,13 @@
   <div class="container">
     <div class="grid">
       <section class="description">
-        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Сжатие изображений онлайн</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem delectus dicta distinctio, fuga nulla praesentium velit voluptates. Laudantium maxime nemo reiciendis.
+          На compressor.monster вы можете бесплатно сжать изображения с расширением <strong>jpg</strong>, <strong>webp</strong>, <strong>png</strong>.
+        </p>
+        <p>
+          Сжатие происходит исключительно средствами браузера, поэтому никаких личные данные не будут украдены или
+          скопированы. Загружаемые изображения остаются только в вашем браузере.
         </p>
       </section>
 
@@ -19,7 +23,7 @@
             (click)="fileInput.click()"
           >
             <mat-icon>add_photo_alternate</mat-icon>
-            Check images
+            <span>Выбрать</span>
           </button>
 
           <button
@@ -29,7 +33,7 @@
           >
             <span class="settings-btn-content">
               <mat-icon>settings</mat-icon>
-              <span>Settings</span>
+              <span>Настройки</span>
               <mat-icon class="settings-btn-arrow" [class.rotate]="expandSettings">expand_more</mat-icon>
             </span>
           </button>
@@ -100,7 +104,7 @@
             class="download-container__placeholder"
             (click)="fileInput.click()"
           >
-            Drag your images
+            Перетащите файлы изображений
           </button>
         </div>
 
@@ -112,7 +116,7 @@
             (click)="downloadAll()"
           >
             <mat-icon>download</mat-icon>
-            <span>Download all</span>
+            <span>Выгрузить архив</span>
             <span *ngIf="images.size">({{images.size}})</span>
           </button>
 
@@ -123,7 +127,7 @@
             (click)="reset()"
           >
             <mat-icon>delete_sweep</mat-icon>
-            <span>Clear</span>
+            <span>Очистить</span>
           </button>
         </footer>
       </div>
