@@ -19,6 +19,8 @@ import { DownloadService } from 'services/download';
 import Compressor from 'compressorjs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DropZoneDirective } from 'directives/drop-zone';
+import { ListAnimation } from 'shared/animations/list.animation';
+import { trigger } from '@angular/animations';
 
 export type ImageCompressedMap = Map<Image, File | undefined>;
 
@@ -42,7 +44,10 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('listAnimation', ListAnimation)
+  ]
 })
 export class MainPageComponent {
 

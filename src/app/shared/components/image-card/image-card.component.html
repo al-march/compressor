@@ -1,48 +1,45 @@
 <div class="card" *ngIf="image">
+  <div
+    class="img"
+    *ngIf="!(image.compressing$ | async)"
+    [style]="'background-image: url(' + image.src + ');'">
+  </div>
 
-  <header
-    class="card-header mat-elevation-z1"
-    [class.dark]="image.compressing$ | async"
-  >
-    <h5 class="card-name">{{image.file.name}}</h5>
-    <div class="spacer"></div>
-    <button class="card-close-btn" (click)="onRemove()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </header>
-
-  <div class="card-diff">
-    <ng-container *ngIf="!(image.compressing$ | async)">
+  <div class="card-content">
+    <header
+      class="card-header mat-elevation-z1"
+      [class.dark]="image.compressing$ | async"
+    >
+      <h5 class="card-name">{{image.file.name}}</h5>
+      <div class="spacer"></div>
+      <button class="card-close-btn" (click)="onRemove()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+    <div class="card-diff">
+      <ng-container *ngIf="!(image.compressing$ | async)">
       <span>
         {{diff}}%
       </span>
-      <span class="card-diff__sizes" *ngIf="image && compressedImage">
+        <span class="card-diff__sizes" *ngIf="image && compressedImage">
         {{image.file.size | convert}}kb / {{compressedImage.size | convert}}kb
       </span>
-    </ng-container>
+      </ng-container>
+    </div>
+    <button
+      *ngIf="!(image.compressing$ | async)"
+      class="card-download-btn"
+      mat-button
+      type="button"
+      (click)="onDownload()"
+    >
+      <mat-icon>download</mat-icon>
+      Download
+    </button>
+    <div class="loader" *ngIf="image.compressing$ | async">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
   </div>
-
-  <button
-    *ngIf="!(image.compressing$ | async)"
-    class="card-download-btn"
-    mat-button
-    type="button"
-    (click)="onDownload()"
-  >
-    <mat-icon>download</mat-icon>
-    Download
-  </button>
-
-  <div class="loader" *ngIf="image.compressing$ | async">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
-
-  <img
-    class="img"
-    *ngIf="!(image.compressing$ | async)"
-    [src]="image.src"
-    [alt]="image.file.name"
-  >
 
   <div class="img" *ngIf="image.compressing$ | async">
     <mat-icon>imagesmode</mat-icon>

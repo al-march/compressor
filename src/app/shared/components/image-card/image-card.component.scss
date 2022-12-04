@@ -11,6 +11,17 @@ $color: #dedede;
   display: flex;
   flex-direction: column;
 
+  &-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
   &-header {
     padding: 4px;
     border-radius: 4px 4px 0 0;
@@ -77,16 +88,10 @@ $color: #dedede;
   }
 
   .img {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-
     width: 100%;
     height: 100%;
-    object-fit: cover;
     filter: brightness(60%);
+    background-size: cover;
 
     display: flex;
     align-items: center;

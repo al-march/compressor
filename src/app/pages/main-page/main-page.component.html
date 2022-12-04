@@ -75,16 +75,9 @@
           [class.highlight]="dropZone.isEntered"
           (dropFiles)="processFileList($event)"
         >
-          <button
-            *ngIf="!images.size"
-            mat-stroked-button
-            class="download-container__placeholder"
-            (click)="fileInput.click()"
+          <app-image-list
+            [@listAnimation]="images.size"
           >
-            Drag your images
-          </button>
-
-          <app-image-list>
             <app-image-card
               class="image-card"
               [class.highlight]="dropZone.isEntered"
@@ -99,6 +92,15 @@
               (download)="downloadOne($event)">
             </app-image-card>
           </app-image-list>
+
+          <button
+            *ngIf="!images.size"
+            mat-stroked-button
+            class="download-container__placeholder"
+            (click)="fileInput.click()"
+          >
+            Drag your images
+          </button>
         </div>
 
         <footer class="download-footer">
