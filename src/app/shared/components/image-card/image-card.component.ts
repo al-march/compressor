@@ -51,8 +51,8 @@ export class ImageCardComponent implements OnChanges {
   ) {}
 
   async ngOnChanges(changes: SimpleChanges) {
-    if (this.image) {
-      await this.image.createSrc();
+    if (this.image && this.image.preview) {
+      await this.image.addPreviewSrc();
       this.ref.detectChanges();
     }
 

@@ -2,7 +2,7 @@
   <div
     class="img"
     *ngIf="!(image.compressing$ | async)"
-    [style]="'background-image: url(' + image.src + ');'">
+    [style]="'background-image: url(' + image.previewSrc + ');'">
   </div>
 
   <div class="card-content">

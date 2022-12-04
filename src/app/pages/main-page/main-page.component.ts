@@ -55,6 +55,8 @@ export class MainPageComponent {
   config = new CompressConfig();
   expandSettings = false;
 
+  animationDisabled = false;
+
   constructor(
     private ref: ChangeDetectorRef,
     private download: DownloadService
@@ -72,9 +74,14 @@ export class MainPageComponent {
   }
 
   processFileList(list: FileList) {
+    this.animationDisabled = true;
     this.images.clear();
     this.images = this.fileListToImages(list);
     this.compress();
+
+    setTimeout(() => {
+      this.animationDisabled = false;
+    })
   }
 
   reset() {
@@ -104,6 +111,24 @@ export class MainPageComponent {
   compress() {
     [...this.images.keys()].forEach((image) => {
       image.startCompress();
+
+      /* Create preview for performance */
+      if (!image.preview) {
+        new Compressor(image.file, {
+          quality: .6,
+          width: 440,
+          success(file: File | Blob) {
+            let compressedImage: File;
+            if (file instanceof Blob) {
+              compressedImage = new File([file], image.file.name);
+            } else {
+              compressedImage = file;
+            }
+
+            image.preview = compressedImage;
+          }
+        });
+      }
 
       new Compressor(image.file, {
         quality: this.config.quality,

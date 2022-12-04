@@ -2,6 +2,8 @@ import { BehaviorSubject } from 'rxjs';
 
 export class Image {
   src?: string;
+  preview?: File;
+  previewSrc?: string;
 
   compressing$ = new BehaviorSubject(false);
 
@@ -10,15 +12,22 @@ export class Image {
   ) {
   }
 
-  createSrc(): Promise<string> {
+  async addPreviewSrc() {
+    if (this.preview) {
+      this.previewSrc = await this.createSrc(this.preview);
+      return;
+    }
+    return new Error('preview not found');
+  }
+
+  private createSrc(file: File): Promise<string> {
     return new Promise((res, rej) => {
       const fr = new FileReader();
-      fr.readAsDataURL(this.file);
+      fr.readAsDataURL(file);
       fr.onload = (event) => {
         const src = event.target?.result;
         if (src) {
-          this.src = String(src);
-          res(this.src);
+          res(String(src));
         } else {
           rej('cannot parse image');
         }
