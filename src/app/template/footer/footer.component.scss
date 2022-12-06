@@ -1,5 +1,10 @@
+.toolbar {
+  height: auto;
+  margin-top: 25px;
+  padding: 10px 0;
+}
+
 .footer {
-  margin: 25px 0;
   box-sizing: border-box;
   width: 100%;
   font-size: 0.9rem;
@@ -8,5 +13,9 @@
   &-row {
     display: flex;
     align-items: center;
+
+    @media (max-width: 400px) {
+      flex-direction: column;
+    }
   }
 }
