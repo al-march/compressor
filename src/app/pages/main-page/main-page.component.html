@@ -2,139 +2,212 @@
 
   <div class="container">
     <div class="grid">
-      <section class="description">
+      <section class="compress">
         <h2>Сжатие изображений онлайн</h2>
-        <p>
-          На compressor.monster вы можете бесплатно сжать изображения с расширением <strong>jpg</strong>, <strong>webp</strong>, <strong>png</strong>.
-        </p>
-        <p>
-          Сжатие происходит исключительно средствами браузера, поэтому никаких личные данные не будут украдены или
-          скопированы. Загружаемые изображения остаются только в вашем браузере.
-        </p>
-      </section>
 
-      <div class="download mat-elevation-z4">
-        <header class="download-header">
-          <div class="spacer"></div>
+        <div class="download mat-elevation-z4">
+          <header class="download-header">
+            <div class="spacer"></div>
 
-          <button
-            mat-stroked-button
-            type="button"
-            (click)="fileInput.click()"
-          >
-            <mat-icon>add_photo_alternate</mat-icon>
-            <span>Выбрать</span>
-          </button>
-
-          <button
-            mat-stroked-button
-            type="button"
-            (click)="toggleSettings()"
-          >
-            <span class="settings-btn-content">
+            <button
+              mat-icon-button
+              type="button"
+              (click)="toggleSettings()"
+            >
               <mat-icon>settings</mat-icon>
-              <span>Настройки</span>
-              <mat-icon class="settings-btn-arrow" [class.rotate]="expandSettings">expand_more</mat-icon>
-            </span>
-          </button>
+            </button>
 
-          <input
-            (input)="onInputChange($event)"
-            #fileInput
-            type="file"
-            accept="image/*"
-            multiple
-            hidden
+            <button
+              mat-icon-button
+              color="warn"
+              [disabled]="!images.size"
+              (click)="reset()"
+            >
+              <mat-icon>delete_sweep</mat-icon>
+            </button>
+          </header>
+
+          <mat-accordion>
+            <mat-expansion-panel
+              [expanded]="expandSettings"
+              class="settings-expander"
+            >
+              <!--
+                Angular material Accordion have bug without this component.
+                * Top border flickers when switching panel
+              -->
+              <mat-expansion-panel-header
+                style="height: 1px; opacity: 0">
+              </mat-expansion-panel-header>
+
+              <article class="settings-expander-content">
+                <app-compress-config
+                  [config]="config"
+                  (change)="configChange($event)">
+                </app-compress-config>
+              </article>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <div
+            appDropZone
+            #dropZone="dropZone"
+            class="download-container"
+            [class.highlight]="dropZone.isEntered"
+            (dropFiles)="processFileList($event)"
           >
-
-          <div class="spacer"></div>
-        </header>
-
-        <mat-accordion>
-          <mat-expansion-panel
-            [expanded]="expandSettings"
-            class="settings-expander"
-          >
-            <!--
-              Angular material Accordion have bug without this component.
-              * Top border flickers when switching panel
-            -->
-            <mat-expansion-panel-header
-              style="height: 1px; opacity: 0">
-            </mat-expansion-panel-header>
-
-            <article class="settings-expander-content">
-              <app-compress-config
-                [config]="config"
-                (change)="configChange($event)">
-              </app-compress-config>
-            </article>
-          </mat-expansion-panel>
-        </mat-accordion>
-
-        <div
-          appDropZone
-          #dropZone="dropZone"
-          class="download-container"
-          [class.highlight]="dropZone.isEntered"
-          (dropFiles)="processFileList($event)"
-        >
-          <app-image-list
-            [@listAnimation]="images.size"
-            [@.disabled]="animationDisabled"
-          >
-            <app-image-card
-              class="image-card"
-              [class.highlight]="dropZone.isEntered"
-              *ngFor="
+            <app-image-list
+              [@listAnimation]="images.size"
+              [@.disabled]="animationDisabled"
+            >
+              <app-image-card
+                class="image-card"
+                [class.highlight]="dropZone.isEntered"
+                *ngFor="
                 let image of images | keyvalue;
                 trackBy:trackByImageKeyValue
               "
-              [image]="image.key"
-              [compressedImage]="image.value"
+                [image]="image.key"
+                [compressedImage]="image.value"
 
-              (remove)="removeImage(image.key)"
-              (download)="downloadOne($event)">
-            </app-image-card>
-          </app-image-list>
+                (remove)="removeImage(image.key)"
+                (download)="downloadOne($event)">
+              </app-image-card>
+            </app-image-list>
 
-          <button
-            *ngIf="!images.size"
-            mat-stroked-button
-            class="download-container__placeholder"
-            (click)="fileInput.click()"
-          >
-            Перетащите файлы изображений
-          </button>
+            <div class="placeholder" *ngIf="!images.size">
+              <div
+                class="placeholder-logo"
+                [class.highlight]="dropZone.isEntered"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="97.627" height="73.773" viewBox="0 0 97.627 73.773">
+                  <g id="Group_2075" data-name="Group 2075" transform="translate(0 0)">
+                    <path id="Path_1520" data-name="Path 1520"
+                          d="M94.206,66.335h-.192a29.288,29.288,0,0,0-58.192,0h-.191a19.525,19.525,0,1,0,0,39.051H94.206a19.525,19.525,0,1,0,0-39.051Z"
+                          transform="translate(-16.105 -40.393)" fill="#e8edfc" opacity="0.549"/>
+                    <g id="Group_2072" data-name="Group 2072" transform="translate(15.41 9.241)">
+                      <g id="Page-1" transform="translate(0)">
+                        <g id="_055---Image-Folder" data-name="055---Image-Folder" transform="translate(0 0)">
+                          <path id="Shape"
+                                d="M65.484,25.659l-6.542,32.7a4.45,4.45,0,0,1-4.361,3.582H11.947a4.45,4.45,0,0,1-4.361-3.582l-6.542-32.7A2.225,2.225,0,0,1,3.225,23H63.3a2.225,2.225,0,0,1,2.181,2.659Z"
+                                transform="translate(0.111 1.479)" fill="#fff"/>
+                          <path id="Shape-2" data-name="Shape"
+                                d="M58.22,23H54.883a2.225,2.225,0,0,1,2.181,2.659l-6.542,32.7A4.45,4.45,0,0,1,46.16,61.94H49.5a4.45,4.45,0,0,0,4.361-3.582l6.542-32.7A2.225,2.225,0,0,0,58.22,23Z"
+                                transform="translate(5.194 1.479)" fill="#cad9fc"/>
+                          <path id="Shape-3" data-name="Shape"
+                                d="M19.074,13l-4.05,11.126H5V16.338A3.338,3.338,0,0,1,8.338,13Z"
+                                transform="translate(0.561 0.353)" fill="#cad9fc"/>
+                          <path id="Shape-4" data-name="Shape" d="M15.06,13,11.01,24.126h3.338L18.4,13Z"
+                                transform="translate(1.237 0.353)" fill="#b5cdfc"/>
+                          <path id="Shape-5" data-name="Shape"
+                                d="M61.706,17.921l-2.092,5.741-.623,1.7H54.263L56.287,19.8l.478-1.313L25.4,7.073,18.738,25.364H14.01l4.05-11.126,3.916-10.77a2.225,2.225,0,0,1,2.848-1.335L60.371,15.073A2.225,2.225,0,0,1,61.706,17.921Z"
+                                transform="translate(1.575 -0.885)" fill="#cad9fc"/>
+                          <path id="Shape-6" data-name="Shape"
+                                d="M59.5,15.072,23.953,2.133a2.2,2.2,0,0,0-2.2.414L56.161,15.072A2.225,2.225,0,0,1,57.5,17.921L55.4,23.661l-.623,1.7H58.12l.623-1.7,2.092-5.741A2.225,2.225,0,0,0,59.5,15.072Z"
+                                transform="translate(2.446 -0.885)" fill="#7facfa" opacity="0.283"/>
+                          <path id="Shape-7" data-name="Shape" d="M34.232,23.657H18.99l12.216-6.5Z"
+                                transform="translate(2.135 0.821)" fill="#a4c2f7"/>
+                          <path id="Shape-8" data-name="Shape"
+                                d="M56.287,17.975l-.478,1.313-2.025,5.563H50.814l-2.325-4.973-9.346,4.973H34.314l-3.026-6.5-12.216,6.5H18.26L24.924,6.56Z"
+                                transform="translate(2.053 -0.372)" fill="#e8edfc"/>
+                          <path id="Shape-9" data-name="Shape"
+                                d="M24.29,6.56,23.9,7.633,52.315,17.975l-.478,1.313-1.865,5.121.207.442h2.971l2.025-5.563.478-1.313Z"
+                                transform="translate(2.688 -0.372)" fill="#cad9fc"/>
+                          <path id="Shape-10" data-name="Shape" d="M48.7,23.5H37.03l9.346-4.973Z"
+                                transform="translate(4.166 0.976)" fill="#a4c2f7"/>
+                          <circle id="Oval" cx="2.225" cy="2.225" r="2.225" transform="translate(38.147 15.948)"
+                                  fill="#e8edfc"/>
+                          <path id="Shape-11" data-name="Shape"
+                                d="M6.563,24.126H8.788V16.338A3.338,3.338,0,0,1,12.125,13H8.788A3.338,3.338,0,0,0,5.45,16.338v7.788H3.225a2.225,2.225,0,0,0-2.181,2.659l6.542,32.7a4.45,4.45,0,0,0,4.361,3.582h3.338a4.45,4.45,0,0,1-4.361-3.582l-6.542-32.7a2.225,2.225,0,0,1,2.181-2.659Z"
+                                transform="translate(0.111 0.353)" fill="#fff"/>
+                          <path id="Rectangle-path" d="M0,0H2.225V8.9H0Z"
+                                transform="matrix(0.981, -0.196, 0.196, 0.981, 4.851, 51.351)" fill="#1e70b9"/>
+                          <g id="Group_2072-2" data-name="Group 2072">
+                            <path id="Shape-12" data-name="Shape"
+                                  d="M66,25.588a3.325,3.325,0,0,0-2.584-1.224H62.159l2.167-5.946a3.29,3.29,0,0,0-.1-2.538,3.331,3.331,0,0,0-1.891-1.74L26.786,1.2a3.294,3.294,0,0,0-2.538.1A3.33,3.33,0,0,0,22.507,3.2l-3.651,10.04H8.9a4.45,4.45,0,0,0-4.45,4.45v6.675H3.337A3.338,3.338,0,0,0,.067,28.355l4.8,23.97a1.113,1.113,0,1,0,2.182-.437l-4.8-23.97A1.086,1.086,0,0,1,2.471,27a1.113,1.113,0,0,1,.867-.411H63.416a1.113,1.113,0,0,1,.862.408,1.084,1.084,0,0,1,.223.919l-6.536,32.7A3.338,3.338,0,0,1,54.694,63.3H12.06a3.338,3.338,0,0,1-3.271-2.686,1.113,1.113,0,1,0-2.183.433,5.571,5.571,0,0,0,5.454,4.478H54.694a5.571,5.571,0,0,0,5.452-4.476l6.541-32.7A3.313,3.313,0,0,0,66,25.588ZM24.6,3.963a1.124,1.124,0,0,1,.585-.636,1.079,1.079,0,0,1,.838-.034L61.566,16.23a1.121,1.121,0,0,1,.636.586,1.079,1.079,0,0,1,.034.836l-2.448,6.712h-2.36l1.959-5.381a1.113,1.113,0,0,0-.668-1.426L27.36,6.14a1.113,1.113,0,0,0-1.425.668l-6.4,17.556H17.174ZM51.552,20.032a1.113,1.113,0,0,0-1.531-.511l-9.1,4.843H37.078L34.352,18.51A1.113,1.113,0,0,0,32.82,18L22.158,23.671l5.486-15.06L56.916,19.266l-1.855,5.1H53.576Zm-.432,4.332H45.657l4.375-2.327Zm-16.5,0H25.589l7.242-3.852ZM6.675,17.689A2.225,2.225,0,0,1,8.9,15.464h9.145l-3.238,8.9H6.675Z"
+                                  transform="translate(-0.002 -0.998)" fill="#1e70b9"/>
+                            <path id="Shape-13" data-name="Shape"
+                                  d="M37.769,14.535a3.338,3.338,0,1,0,1.965,4.339c.007-.016.016-.029.021-.045l.008-.017a3.338,3.338,0,0,0-1.994-4.277Zm-1.522,4.181a1.113,1.113,0,0,1,.379-2.158,1.125,1.125,0,0,1,.38.068,1.113,1.113,0,1,1-.76,2.091Z"
+                                  transform="translate(3.744 0.503)" fill="#1e70b9"/>
+                          </g>
+                        </g>
+                      </g>
+                      <g id="Group_2074" data-name="Group 2074" transform="translate(15.973 32.266)">
+                        <path id="Path_1517" data-name="Path 1517"
+                              d="M42.242,49.074h-.064a9.8,9.8,0,0,0-19.474,0h-.064a6.534,6.534,0,1,0,0,13.068h19.6a6.534,6.534,0,1,0,0-13.068Z"
+                              transform="translate(-15.01 -39.278)" fill="#e8edfc"/>
+                        <g id="Group_2073" data-name="Group 2073" transform="translate(0 0)">
+                          <path id="Path_1518" data-name="Path 1518"
+                                d="M28.11,32.764A10.89,10.89,0,0,0,6.75,32.757a7.623,7.623,0,0,0,.878,15.2h5.445a1.089,1.089,0,1,0,0-2.178H7.628a5.445,5.445,0,0,1,.064-10.89,1.089,1.089,0,0,0,1.083-.969,8.712,8.712,0,0,1,17.309,0,1.154,1.154,0,0,0,1.147.969,5.445,5.445,0,1,1,0,10.89H21.786a1.089,1.089,0,1,0,0,2.178h5.445a7.623,7.623,0,0,0,.879-15.19Z"
+                                transform="translate(0.001 -24)" fill="#1e70b9"/>
+                          <path id="Path_1519" data-name="Path 1519"
+                                d="M181.795,220.635a1.089,1.089,0,0,0,1.567-1.513l-.027-.027-4.619-4.619a1.089,1.089,0,0,0-1.54,0l0,0-4.619,4.62a1.089,1.089,0,1,0,1.513,1.567l.027-.027,2.761-2.762v9.081a1.089,1.089,0,1,0,2.178,0v-9.081Z"
+                                transform="translate(-160.515 -204.176)" fill="#1e70b9"/>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <p>
+                Перетащите
+                <span class="badge">.png</span>
+                ,
+                <span class="badge">.jpeg</span>
+                ,
+                <span class="badge">.jpg</span>
+                <br>
+                файлы для сжатия
+              </p>
+
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="fileInput.click()"
+              >
+                <mat-icon>add_photo_alternate</mat-icon>
+                <span>Выбрать</span>
+              </button>
+            </div>
+          </div>
+
+          <footer class="download-footer">
+            <button
+              mat-button
+              color="primary"
+              [disabled]="!images.size"
+              (click)="downloadAll()"
+            >
+              <mat-icon>download</mat-icon>
+              <span>Выгрузить архив </span>
+              <span *ngIf="images.size">({{images.size}})</span>
+            </button>
+          </footer>
         </div>
 
-        <footer class="download-footer">
-          <button
-            mat-button
-            color="primary"
-            [disabled]="!images.size"
-            (click)="downloadAll()"
-          >
-            <mat-icon>download</mat-icon>
-            <span>Выгрузить архив</span>
-            <span *ngIf="images.size">({{images.size}})</span>
-          </button>
+        <app-compress-stats
+          [compressed]="images">
+        </app-compress-stats>
+      </section>
 
-          <button
-            mat-button
-            color="warn"
-            [disabled]="!images.size"
-            (click)="reset()"
-          >
-            <mat-icon>delete_sweep</mat-icon>
-            <span>Очистить</span>
-          </button>
-        </footer>
-      </div>
-
-      <app-compress-stats
-        [compressed]="images">
-      </app-compress-stats>
+      <p>
+        На compressor.monster вы можете бесплатно сжать изображения с расширением <strong>jpg</strong>,
+        <strong>webp</strong>, <strong>png</strong>.
+      </p>
+      <p>
+        Сжатие происходит исключительно средствами браузера, поэтому никаких личные данные не будут украдены или
+        скопированы. Загружаемые изображения остаются только в вашем браузере.
+      </p>
     </div>
   </div>
 </section>
+
+
+<input
+  (input)="onInputChange($event)"
+  #fileInput
+  type="file"
+  accept="image/*"
+  multiple
+  hidden
+>

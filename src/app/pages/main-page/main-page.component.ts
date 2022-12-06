@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DropZoneDirective } from 'directives/drop-zone';
 import { ListAnimation } from 'shared/animations/list.animation';
 import { trigger } from '@angular/animations';
+import { MatChipsModule } from '@angular/material/chips';
 
 export type ImageCompressedMap = Map<Image, File | undefined>;
 
@@ -40,7 +41,8 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
     CompressConfigComponent,
     CompressStatsComponent,
     MatExpansionModule,
-    DropZoneDirective
+    DropZoneDirective,
+    MatChipsModule
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
