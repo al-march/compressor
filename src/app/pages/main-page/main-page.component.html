@@ -1,7 +1,8 @@
 <section class="main-page">
 
-  <div class="container">
-    <div class="grid">
+
+  <div class="grid">
+    <div class="container container--padding">
       <section class="compress">
         <div class="download">
           <header class="download-header">
@@ -189,11 +190,48 @@
           [compressed]="images">
         </app-compress-stats>
       </section>
+    </div>
+
+    <mat-toolbar class="nav-help">
+      <div class="container container--padding">
+        <a mat-button href="#how-use">Как использовать</a>
+      </div>
+    </mat-toolbar>
+
+    <div id="how-use" class="container container--padding">
+      <h2>Как использовать</h2>
+      <p>
+        На compressor.monster вы можете бесплатно сжать изображения с расширением
+        <span class="badge">.png</span>&nbsp;
+        <span class="badge">.jpeg</span>&nbsp;
+        <span class="badge">.jpg</span>&nbsp;
+        <span class="badge">.webp</span>
+      </p>
 
       <p>
-        На compressor.monster вы можете бесплатно сжать изображения с расширением <strong>jpg</strong>,
-        <strong>webp</strong>, <strong>png</strong>.
+        Для сжатия перетащите свои изображения
+        <span class="badge">.png</span>
+        ,
+        <span class="badge">.jpeg</span>
+        ,
+        <span class="badge">.jpg</span>
+        в область за пунктирной линией.
       </p>
+      <p>
+        Также для выбора изображений можно нажать на кнопку:
+      </p>
+
+      <p>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="fileInput.click()"
+        >
+          <mat-icon>add_photo_alternate</mat-icon>
+          <span>Выбрать</span>
+        </button>
+      </p>
+
       <p>
         Сжатие происходит исключительно средствами браузера, поэтому никаких личные данные не будут украдены или
         скопированы. Загружаемые изображения остаются только в вашем браузере.

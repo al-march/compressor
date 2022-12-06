@@ -22,6 +22,7 @@ import { DropZoneDirective } from 'directives/drop-zone';
 import { ListAnimation } from 'shared/animations/list.animation';
 import { trigger } from '@angular/animations';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 export type ImageCompressedMap = Map<Image, File | undefined>;
 
@@ -42,7 +43,8 @@ export type ImageCompressedMap = Map<Image, File | undefined>;
     CompressStatsComponent,
     MatExpansionModule,
     DropZoneDirective,
-    MatChipsModule
+    MatChipsModule,
+    MatToolbarModule
   ],
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
@@ -87,8 +89,13 @@ export class MainPageComponent {
   }
 
   reset() {
+    this.animationDisabled = true;
     this.images.clear();
     this.imagesForceUpdate();
+
+    setTimeout(() => {
+      this.animationDisabled = false;
+    })
   }
 
 
