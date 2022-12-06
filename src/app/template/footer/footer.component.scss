@@ -1,0 +1,12 @@
+.footer {
+  margin: 25px 0;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: normal;
+
+  &-row {
+    display: flex;
+    align-items: center;
+  }
+}
