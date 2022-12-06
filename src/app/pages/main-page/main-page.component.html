@@ -3,7 +3,7 @@
   <div class="container">
     <div class="grid">
       <section class="compress">
-        <div class="download mat-elevation-z4">
+        <div class="download">
           <header class="download-header">
             <div class="spacer"></div>
 
@@ -173,8 +173,10 @@
             <button
               mat-button
               color="primary"
+              class="download-footer-all-btn"
               [disabled]="!images.size"
               (click)="downloadAll()"
+              [style.opacity]="!images.size ? '0' : '1'"
             >
               <mat-icon>download</mat-icon>
               <span>Выгрузить архив </span>

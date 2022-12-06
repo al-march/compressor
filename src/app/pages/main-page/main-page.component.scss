@@ -79,6 +79,10 @@ h3 {
   &-footer {
     display: flex;
     justify-content: center;
+
+    &-all-btn {
+      transition: .2s ease all;
+    }
   }
 }
 
