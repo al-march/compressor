@@ -1,6 +1,7 @@
 import { createSignal, onMount, Show } from "solid-js";
 import { Image } from "../../models/image.model"
 import Compressor from 'compressorjs';
+import { downloadService } from "../../utils/download";
 
 interface CompressConfig {
   quality: number;
@@ -34,6 +35,7 @@ type Props = {
 export const ImageCard = (props: Props) => {
   const [preview, setPreview] = createSignal<string>();
   const [loading, setLoading] = createSignal(true);
+  const [image, setImage] = createSignal<Image>()
 
   onMount(() => {
     compress();
@@ -69,8 +71,16 @@ export const ImageCard = (props: Props) => {
       compressMain()
     ]);
 
+    setImage(image);
     setLoading(false);
   };
+
+  function download() {
+    const compressedImage = image()?.compressed;
+    if (compressedImage) {
+      downloadService.file(compressedImage);
+    }
+  }
 
   return (
     <div class="card shrink-0 w-96 bg-base-100 shadow-xl image-full overflow-hidden">
@@ -88,7 +98,7 @@ export const ImageCard = (props: Props) => {
         <h2 class="card-title">{props.image.name}</h2>
         <p>{props.image.size} bytes</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">Загрузить</button>
+          <button class="btn btn-primary" onClick={download}>Загрузить</button>
         </div>
       </div>
     </div>
