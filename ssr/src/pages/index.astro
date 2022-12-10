@@ -1,11 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { ImageCompressor } from "../components/Compress/ImageCompressor";
+import { Header } from "../components/template/Header";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="сжатие картинок png, jpeg, webp онлайн бесплатно">
-	<main>
-		<h1>Welcome to <span>Compressor</span></h1>
-		
-	</main>
-</Layout>
+  <main>
+    <Header />
 
+    <ImageCompressor client:idle />
+  </main>
+</Layout>
