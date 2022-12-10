@@ -110,25 +110,42 @@ export const ImageCard = (props: Props) => {
   }
 
   return (
-    <div class="card shrink-0 w-96 bg-base-100 shadow-xl image-full overflow-hidden">
+    <div class="card shrink-0 w-64 bg-base-100 shadow-xl image-full overflow-hidden">
       <figure>
         <Show
           when={!loading()}
           fallback={
-            <progress class="absolute top-0 left-0 w-full progress progress-primary z-10"></progress>
+            <progress class="absolute top-0 left-0 w-full progress progress-primary z-10" />
           }
         >
-          <img src={preview()} alt={props.image.file.name} />
+          <img class="w-full h-full object-cover" src={preview()} alt={props.image.file.name} />
         </Show>
       </figure>
 
       <div class="card-body p-4 overflow-hidden w-full">
-        <Show when={!loading()} fallback={'...loading'}>
-          <h2 class="card-title">
-            <span class="truncate">
-              {props.image.file.name}
+        <Show when={!loading()} fallback={
+          <span class="absolute left-0 top-0 h-full w-full flex items-center justify-center">
+            <span class="material-symbols-outlined text-4xl">
+              image
             </span>
-          </h2>
+          </span>
+        }>
+          <header class="flex items-center gap-2 justify-between">
+            <h2 class="card-title w-full overflow-hidden">
+              <span class="truncate" title={props.image.file.name}>
+                {props.image.file.name}
+              </span>
+            </h2>
+
+            <button
+              class="btn btn-sm btn-circle btn-ghost"
+              onClick={remove}
+            >
+              <span class="material-symbols-outlined">
+                close
+              </span>
+            </button>
+          </header>
 
           <p class="flex flex-col items-center gap-2">
             <PercentDiff image={props.image} />
@@ -136,8 +153,15 @@ export const ImageCard = (props: Props) => {
           </p>
 
           <div class="card-actions justify-end">
-            <button class="btn btn-primary" onClick={remove}>Удалить</button>
-            <button class="btn btn-primary" onClick={download}>Загрузить</button>
+            <button
+              class="btn btn-sm btn-primary btn-block"
+              onClick={download}
+            >
+              <span class="material-symbols-outlined">
+                download
+              </span>
+              Загрузить
+            </button>
           </div>
         </Show>
       </div>
