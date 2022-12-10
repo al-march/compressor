@@ -1,8 +1,9 @@
 import { createSignal, For, Show } from 'solid-js'
-import { ImageStore } from './CompressStore';
-import { CompressLogo } from './CompressLogo';
+import { ImageStore } from './Store';
+import { ImageUploadLogo } from './ImageUploadIcon';
 import { ImageCard } from './ImageCard';
 import { downloadService, imageService } from '../../services';
+import { Stats } from './Stats';
 
 
 export const ImageCompressor = () => {
@@ -68,7 +69,7 @@ export const ImageCompressor = () => {
 
             <Show when={!store.state.images.size}>
               <article class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center">
-                <CompressLogo />
+                <ImageUploadLogo />
 
                 <div class="text-center">
                   Выберете {' '}
@@ -92,7 +93,9 @@ export const ImageCompressor = () => {
         </div>
       </div>
 
-      <footer class="flex">
+      <footer class="flex items-center">
+        <Stats images={store.state.images} />
+
         <span class="flex-1" />
         <button
           class="btn btn-primary"

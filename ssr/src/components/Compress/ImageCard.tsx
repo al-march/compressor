@@ -1,7 +1,7 @@
 import { createSignal, onMount, Show } from "solid-js";
 import type { Image } from "../../models/image.model"
 import { compressorService, convertService, downloadService } from "../../services";
-import { ImageStore } from "./CompressStore";
+import { ImageStore } from "./Store";
 
 
 type Props = {

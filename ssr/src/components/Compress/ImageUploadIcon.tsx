@@ -1,4 +1,4 @@
-export const CompressLogo = () => (
+export const ImageUploadLogo = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="97.627" height="73.773" viewBox="0 0 97.627 73.773">
     <g id="Group_2075" data-name="Group 2075" transform="translate(0 0)">
       <path id="Path_1520" data-name="Path 1520"
