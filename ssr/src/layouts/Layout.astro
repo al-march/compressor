@@ -1,6 +1,6 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,28 +8,32 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Бесплатное и неограниченное сжатие изображений png jpeg webp и других"
+    />
+    <meta name="author" content="al-march" />
+    <meta
+      name="keywords"
+      content="сжатие изображений, сжатие картинок, сжатие png, jpeg, webp, сжать, бесплатно"
+    />
+
+    <meta name="yandex-verification" content="b8531cf9e142b8b7" />
+    <meta
+      name="google-site-verification"
+      content="fjwHW8kVrKKMP-R1Hrsyc5-KzERQijovKu4C2GBzgKQ"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compressor | {title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
+
