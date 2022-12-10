@@ -1,33 +1,7 @@
-import { createSignal, onMount, ParentProps, Show } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
 import type { Image } from "../../models/image.model"
-import Compressor from 'compressorjs';
-import { downloadService } from "../../services/download";
+import { compressorService, convertService, downloadService } from "../../services";
 import { ImageStore } from "./CompressStore";
-import { convertService } from "../../services/coverter";
-
-interface CompressConfig {
-  quality: number;
-  width?: number;
-}
-
-const compressImage = (file: File, config: CompressConfig): Promise<File> => {
-  return new Promise(res => {
-    new Compressor(file, {
-      quality: config.quality,
-      width: config.width,
-      success: (file: File | Blob) => {
-        let compressedImage: File;
-        if (file instanceof Blob) {
-          compressedImage = new File([file], file.name);
-        } else {
-          compressedImage = file;
-        }
-
-        res(compressedImage);
-      }
-    });
-  })
-}
 
 
 type Props = {
@@ -49,32 +23,23 @@ export const ImageCard = (props: Props) => {
     setLoading(true);
     const image = props.image;
     /* Create preview for performance */
-    const compressPreview = async () => {
-      if (!image.preview) {
-        const preview = await compressImage(image.file, {
-          quality: .8,
-          width: 440,
-        })
-
-        image.preview = preview;
-        await image.addPreviewSrc();
-        setPreview(image.previewSrc || '');
-      }
-    }
-
-    const compressMain = async () => {
-      const compressed = await compressImage(image.file, {
-        quality: .8
+    if (!image.preview) {
+      const preview = await compressorService.image(image.file, {
+        quality: .8,
+        width: 440,
       })
 
-      image.compressed = compressed;
-      store.setImage(image);
+      image.preview = preview;
+      await image.addPreviewSrc();
+      setPreview(image.previewSrc || '');
     }
 
-    await Promise.all([
-      compressPreview(),
-      compressMain()
-    ]);
+    const compressed = await compressorService.image(image.file, {
+      quality: .8
+    })
+
+    image.compressed = compressed;
+    store.setImage(image);
 
     setImage(image);
     setLoading(false);

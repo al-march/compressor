@@ -2,8 +2,7 @@ import { createSignal, For, Show } from 'solid-js'
 import { ImageStore } from './CompressStore';
 import { CompressLogo } from './CompressLogo';
 import { ImageCard } from './ImageCard';
-import { Image } from "../../models/image.model"
-import { downloadService } from '../../services/download';
+import { downloadService, imageService } from '../../services';
 
 
 export const ImageCompressor = () => {
@@ -26,22 +25,8 @@ export const ImageCompressor = () => {
   }
 
   function processFileList(list: FileList) {
-    const images = fileListToImages(list);
+    const images = imageService.fileListToImages(list);
     store.setImages(images);
-  }
-
-  function fileListToImages(list: FileList) {
-    const images: Image[] = [];
-
-    for (let i = 0; i < list.length; i++) {
-      const file = list[i];
-      if (file instanceof File) {
-        const image = new Image(file);
-        images.push(image);
-      }
-    }
-
-    return images;
   }
 
   function reset() {
@@ -70,6 +55,7 @@ export const ImageCompressor = () => {
             Очистить
           </button>
         </header>
+
         <div class="flex items-center justify-center">
           <div class="border-1 flex-1 p-2 border-dashed border-gray-500 border-2 rounded h-64 flex items-stretch overflow-hidden">
             <Show when={store.state.images.size}>
