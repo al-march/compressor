@@ -1,7 +1,8 @@
 import { createSignal, onMount, Show } from "solid-js";
-import { Image } from "../../models/image.model"
+import type { Image } from "../../models/image.model"
 import Compressor from 'compressorjs';
 import { downloadService } from "../../utils/download";
+import { ImageStore } from "./CompressStore";
 
 interface CompressConfig {
   quality: number;
@@ -29,10 +30,12 @@ const compressImage = (file: File, config: CompressConfig): Promise<File> => {
 
 
 type Props = {
-  image: File;
+  image: Image;
 }
 
 export const ImageCard = (props: Props) => {
+  const store = ImageStore;
+
   const [preview, setPreview] = createSignal<string>();
   const [loading, setLoading] = createSignal(true);
   const [image, setImage] = createSignal<Image>()
@@ -43,7 +46,7 @@ export const ImageCard = (props: Props) => {
 
   async function compress() {
     setLoading(true);
-    const image = new Image(props.image);
+    const image = props.image;
     /* Create preview for performance */
     const compressPreview = async () => {
       if (!image.preview) {
@@ -64,6 +67,7 @@ export const ImageCard = (props: Props) => {
       })
 
       image.compressed = compressed;
+      store.setImage(image);
     }
 
     await Promise.all([
@@ -82,6 +86,10 @@ export const ImageCard = (props: Props) => {
     }
   }
 
+  function remove() {
+    store.removeImage(props.image);
+  }
+
   return (
     <div class="card shrink-0 w-96 bg-base-100 shadow-xl image-full overflow-hidden">
       <figure>
@@ -91,15 +99,19 @@ export const ImageCard = (props: Props) => {
             <progress class="absolute top-0 left-0 w-full progress progress-primary z-10"></progress>
           }
         >
-          <img src={preview()} alt={props.image.name} />
+          <img src={preview()} alt={props.image.file.name} />
         </Show>
       </figure>
-      <div class="card-body">
-        <h2 class="card-title">{props.image.name}</h2>
-        <p>{props.image.size} bytes</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary" onClick={download}>Загрузить</button>
-        </div>
+
+      <div class="card-body p-4">
+        <Show when={!loading()} fallback={'...loading'}>
+          <h2 class="card-title">{props.image.file.name}</h2>
+          <p>{props.image.file.size} bytes</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" onClick={remove}>Удалить</button>
+            <button class="btn btn-primary" onClick={download}>Загрузить</button>
+          </div>
+        </Show>
       </div>
     </div>
   )

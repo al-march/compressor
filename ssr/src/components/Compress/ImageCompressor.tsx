@@ -1,11 +1,14 @@
 import { createSignal, For, Show } from 'solid-js'
+import { ImageStore } from './CompressStore';
 import { CompressLogo } from './CompressLogo';
 import { ImageCard } from './ImageCard';
+import { Image } from "../../models/image.model"
+import { downloadService } from '../../utils/download';
 
 
 export const ImageCompressor = () => {
+  const store = ImageStore;
   const [inputRef, setInputRef] = createSignal<HTMLInputElement>();
-  const [images, setImages] = createSignal<File[]>([]);
 
   function onSelectFiles() {
     inputRef()?.click();
@@ -23,16 +26,18 @@ export const ImageCompressor = () => {
   }
 
   function processFileList(list: FileList) {
-    setImages(fileListToImages(list));
+    const images = fileListToImages(list);
+    store.setImages(images);
   }
 
   function fileListToImages(list: FileList) {
-    const images: File[] = [];
+    const images: Image[] = [];
 
     for (let i = 0; i < list.length; i++) {
       const file = list[i];
       if (file instanceof File) {
-        images.push(file);
+        const image = new Image(file);
+        images.push(image);
       }
     }
 
@@ -40,34 +45,42 @@ export const ImageCompressor = () => {
   }
 
   function reset() {
-    setImages([]);
+    store.reset();
+  }
+
+  function downloadAll() {
+    const files = [...store.state.images]
+      .map(image => image.compressed)
+      .filter(file => file instanceof File) as File[];
+
+    downloadService.zip(files);
   }
 
   return (
-    <>
-      <div class="p-10 flex flex-col gap-2">
+    <section class="flex flex-col gap-4 p-10">
+      <div class="flex flex-col gap-2">
         <header class="flex items-center">
           <span class="flex-1" />
 
           <button
             class="btn btn-sm btn-error transition-all"
             onClick={reset}
-            disabled={!images().length}
+            disabled={!store.state.images.size}
           >
             Очистить
           </button>
         </header>
-        <section class="flex items-center justify-center">
+        <div class="flex items-center justify-center">
           <div class="border-1 flex-1 p-2 border-dashed border-gray-500 border-2 rounded h-64 flex items-stretch overflow-hidden">
-            <Show when={images().length}>
+            <Show when={store.state.images.size}>
               <div class="w-full flex gap-2 overflow-y-scroll">
-                <For each={images()}>
+                <For each={[...store.state.images]}>
                   {image => <ImageCard image={image} />}
                 </For>
               </div>
             </Show>
 
-            <Show when={!images().length}>
+            <Show when={!store.state.images.size}>
               <article class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center">
                 <CompressLogo />
 
@@ -90,8 +103,19 @@ export const ImageCompressor = () => {
               </article>
             </Show>
           </div>
-        </section>
+        </div>
       </div>
+
+      <footer class="flex">
+        <span class="flex-1" />
+        <button
+          class="btn btn-primary"
+          disabled={!store.state.images.size}
+          onClick={downloadAll}
+        >
+          Загрузить все
+        </button>
+      </footer>
 
       <input
         ref={setInputRef}
@@ -100,6 +124,6 @@ export const ImageCompressor = () => {
         onChange={onInputChange}
         multiple
       />
-    </>
+    </section>
   )
 }

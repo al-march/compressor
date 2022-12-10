@@ -1,9 +1,9 @@
 export class Image {
   src?: string;
+  compressed?: File;
+
   preview?: File;
   previewSrc?: string;
-
-  compressed?: File;
 
   constructor(
     public file: File
