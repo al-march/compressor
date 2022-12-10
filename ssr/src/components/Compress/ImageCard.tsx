@@ -1,8 +1,9 @@
-import { createSignal, onMount, Show } from "solid-js";
+import { createSignal, onMount, ParentProps, Show } from "solid-js";
 import type { Image } from "../../models/image.model"
 import Compressor from 'compressorjs';
-import { downloadService } from "../../utils/download";
+import { downloadService } from "../../services/download";
 import { ImageStore } from "./CompressStore";
+import { convertService } from "../../services/coverter";
 
 interface CompressConfig {
   quality: number;
@@ -90,6 +91,24 @@ export const ImageCard = (props: Props) => {
     store.removeImage(props.image);
   }
 
+  function MemoryDiff(props: { image: Image }) {
+    const initialSize = convertService.bytesToKb(props.image.file.size);
+    const compressedSize = convertService.bytesToKb(props.image.compressed?.size || 0);
+
+    return (
+      <span class="leading-none">{initialSize}kb / {compressedSize}kb</span>
+    )
+  }
+
+  function PercentDiff(props: { image: Image }) {
+    const percent = 100 - ((100 / props.image.file.size) * (props.image.compressed?.size || 0));
+    const diff = Math.ceil(percent);
+
+    return (
+      <span class="text-6xl leading-1 font-bold">{diff}%</span>
+    )
+  }
+
   return (
     <div class="card shrink-0 w-96 bg-base-100 shadow-xl image-full overflow-hidden">
       <figure>
@@ -103,10 +122,19 @@ export const ImageCard = (props: Props) => {
         </Show>
       </figure>
 
-      <div class="card-body p-4">
+      <div class="card-body p-4 overflow-hidden w-full">
         <Show when={!loading()} fallback={'...loading'}>
-          <h2 class="card-title">{props.image.file.name}</h2>
-          <p>{props.image.file.size} bytes</p>
+          <h2 class="card-title">
+            <span class="truncate">
+              {props.image.file.name}
+            </span>
+          </h2>
+
+          <p class="flex flex-col items-center gap-2">
+            <PercentDiff image={props.image} />
+            <MemoryDiff image={props.image} />
+          </p>
+
           <div class="card-actions justify-end">
             <button class="btn btn-primary" onClick={remove}>Удалить</button>
             <button class="btn btn-primary" onClick={download}>Загрузить</button>

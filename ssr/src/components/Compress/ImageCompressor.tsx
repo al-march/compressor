@@ -3,7 +3,7 @@ import { ImageStore } from './CompressStore';
 import { CompressLogo } from './CompressLogo';
 import { ImageCard } from './ImageCard';
 import { Image } from "../../models/image.model"
-import { downloadService } from '../../utils/download';
+import { downloadService } from '../../services/download';
 
 
 export const ImageCompressor = () => {
@@ -85,7 +85,7 @@ export const ImageCompressor = () => {
                 <CompressLogo />
 
                 <div class="text-center">
-                  Перетащите {' '}
+                  Выберете {' '}
                   <span class="badge badge-primary">.png</span>
                   <span class="badge badge-primary">.jpeg</span>
                   <span class="badge badge-primary">.webp</span>
