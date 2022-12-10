@@ -1,13 +1,11 @@
 import { createSignal, For, Show } from 'solid-js'
-import { Image } from '../../models/image.model';
 import { CompressLogo } from './CompressLogo';
 import { ImageCard } from './ImageCard';
 
-export type ImageCompressedMap = Map<Image, File | undefined>;
 
 export const ImageCompressor = () => {
   const [inputRef, setInputRef] = createSignal<HTMLInputElement>();
-  const [images, setImages] = createSignal<ImageCompressedMap>(new Map());
+  const [images, setImages] = createSignal<File[]>([]);
 
   function onSelectFiles() {
     inputRef()?.click();
@@ -25,19 +23,16 @@ export const ImageCompressor = () => {
   }
 
   function processFileList(list: FileList) {
-    images().clear();
     setImages(fileListToImages(list));
-    // compress();
   }
 
   function fileListToImages(list: FileList) {
-    const images: ImageCompressedMap = new Map();
+    const images: File[] = [];
 
     for (let i = 0; i < list.length; i++) {
       const file = list[i];
       if (file instanceof File) {
-        const image = new Image(file);
-        images.set(image, undefined);
+        images.push(file);
       }
     }
 
@@ -45,7 +40,7 @@ export const ImageCompressor = () => {
   }
 
   function reset() {
-    setImages(new Map());
+    setImages([]);
   }
 
   return (
@@ -57,22 +52,22 @@ export const ImageCompressor = () => {
           <button
             class="btn btn-sm btn-error transition-all"
             onClick={reset}
-            disabled={!images().size}
+            disabled={!images().length}
           >
             Очистить
           </button>
         </header>
         <section class="flex items-center justify-center">
           <div class="border-1 flex-1 p-2 border-dashed border-gray-500 border-2 rounded h-64 flex items-stretch overflow-hidden">
-            <Show when={images().size}>
+            <Show when={images().length}>
               <div class="w-full flex gap-2 overflow-y-scroll">
-                <For each={Array.from(images().keys())}>
+                <For each={images()}>
                   {image => <ImageCard image={image} />}
                 </For>
               </div>
             </Show>
 
-            <Show when={!images().size}>
+            <Show when={!images().length}>
               <article class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center">
                 <CompressLogo />
 

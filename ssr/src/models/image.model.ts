@@ -3,6 +3,8 @@ export class Image {
   preview?: File;
   previewSrc?: string;
 
+  compressed?: File;
+
   constructor(
     public file: File
   ) {
