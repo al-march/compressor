@@ -8,5 +8,9 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://compress.monster',
+  base: './',
+  output: 'static',
+  outDir: '../dist',
   integrations: [solidJs(), tailwind()]
 });
