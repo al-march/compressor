@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { AccessibleImagesBadges } from "../../base/AccessibleImages";
 import { DropZone } from "../../base/DropZone"
 import { ImageUploadLogo } from "../ImageUploadIcon";
 
@@ -52,11 +53,8 @@ export const CompressDropZone = (props: Props) => {
             <ImageUploadLogo />
 
             <div class="text-center">
-              <div class="flex justify-center gap-1">
-                <span class="badge badge-primary">.png</span>
-                <span class="badge badge-primary">.jpeg</span>
-                <span class="badge badge-primary">.webp</span>
-                <span class="badge badge-primary">.gif</span>
+              <div>
+                <AccessibleImagesBadges />
               </div>
               <span class="opacity-60 font-light text-sm text-center">Перетащите или нажмите на кнопку ниже</span>
             </div>
