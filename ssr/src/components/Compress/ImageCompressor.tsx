@@ -45,7 +45,7 @@ export const ImageCompressor = () => {
   }
 
   return (
-    <section class="flex flex-col gap-4 p-10">
+    <section class="flex flex-1 flex-col gap-4 p-10">
       <div class="flex flex-col gap-2">
         <header class="flex items-center">
           <span class="flex-1" />
