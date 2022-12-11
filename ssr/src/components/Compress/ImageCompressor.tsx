@@ -4,11 +4,13 @@ import { ImageUploadLogo } from './ImageUploadIcon';
 import { ImageCard } from './ImageCard';
 import { downloadService, imageService } from '../../services';
 import { Stats } from './Stats';
+import { DropZone } from '../base/DropZone';
 
 
 export const ImageCompressor = () => {
   const store = ImageStore;
   const [inputRef, setInputRef] = createSignal<HTMLInputElement>();
+  const [entered, setEntered] = createSignal(false);
 
   function onSelectFiles() {
     inputRef()?.click();
@@ -57,40 +59,55 @@ export const ImageCompressor = () => {
           </button>
         </header>
 
-        <div class="flex items-center justify-center">
-          <div class="border-1 flex-1 p-2 border-dashed border-gray-500 border-2 rounded h-64 flex items-stretch overflow-hidden">
-            <Show when={store.state.images.size}>
-              <div class="w-full flex gap-2 overflow-y-scroll">
-                <For each={[...store.state.images]}>
-                  {image => <ImageCard image={image} />}
-                </For>
-              </div>
-            </Show>
-
-            <Show when={!store.state.images.size}>
-              <article class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center">
-                <ImageUploadLogo />
-
-                <div class="text-center">
-                  Выберете {' '}
-                  <span class="badge badge-primary">.png</span>
-                  <span class="badge badge-primary">.jpeg</span>
-                  <span class="badge badge-primary">.webp</span>
-                  <br />
-                  для сжатия
-                </div>
-
-                <button
-                  class="btn btn-primary btn-sm"
-                  type="button"
-                  onClick={onSelectFiles}
+        <DropZone
+          onEnteredChange={setEntered}
+          onDropFiles={processFileList}
+        >
+          <div class="flex items-center justify-center">
+            <div
+              classList={{ 'bg-base-300': entered() }}
+              class="border-1 flex-1 p-2 border-dashed border-gray-500 border-2 rounded h-64 flex items-stretch overflow-hidden"
+            >
+              <Show when={store.state.images.size}>
+                <div
+                  classList={{ 'opacity-50': entered() }}
+                  class="w-full flex gap-2 overflow-y-scroll"
                 >
-                  Выбрать
-                </button>
-              </article>
-            </Show>
+                  <For each={[...store.state.images]}>
+                    {image => <ImageCard image={image} />}
+                  </For>
+                </div>
+              </Show>
+
+              <Show when={!store.state.images.size}>
+                <article
+                  classList={{ 'opacity-50': entered() }}
+                  class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center"
+                >
+                  <ImageUploadLogo />
+
+                  <div class="text-center">
+                    Выберете {' '}
+                    <span class="badge badge-primary">.png</span>
+                    <span class="badge badge-primary">.jpeg</span>
+                    <span class="badge badge-primary">.webp</span>
+                    <br />
+                    для сжатия
+                  </div>
+
+                  <button
+                    class="btn btn-primary btn-sm"
+                    type="button"
+                    onClick={onSelectFiles}
+                  >
+                    Выбрать
+                  </button>
+                </article>
+              </Show>
+            </div>
           </div>
-        </div>
+        </DropZone>
+
       </div>
 
       <footer class="flex items-center">
@@ -102,7 +119,8 @@ export const ImageCompressor = () => {
           disabled={!store.state.images.size}
           onClick={downloadAll}
         >
-          Загрузить все
+          <span class="material-symbols-outlined">photo_album</span>
+          <span>Загрузить все ({store.state.images.size})</span>
         </button>
       </footer>
 
