@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { AccessibleImages } from "../../../constants";
 import { AccessibleImagesBadges } from "../../base/AccessibleImages";
 import { DropZone } from "../../base/DropZone"
 import { ImageUploadLogo } from "../ImageUploadIcon";
@@ -30,10 +31,17 @@ export const CompressDropZone = (props: Props) => {
   function processFileList(fileList: FileList) {
     const images: File[] = [];
     for (let image of fileList) {
-      /* TODO: check is image */
-      images.push(image);
+      if (isAccessImage(image.type)) {
+        images.push(image);
+      } else {
+        console.warn(`image type [${image.type}] not access`);
+      }
     }
     props.onSelect?.(images);
+  }
+
+  function isAccessImage(imageType: string) {
+    return AccessibleImages.some(accessFormat => imageType.includes(accessFormat));
   }
 
   return (
