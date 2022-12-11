@@ -1,4 +1,4 @@
-import { createMemo, createSignal, onMount, ParentProps, Show } from "solid-js";
+import { createMemo, createSignal, onMount, Show } from "solid-js";
 import type { CompressImage } from "../../../models/image.model"
 import { compressorService, convertService, downloadService } from "../../../services";
 import { Loader } from "../../base/Loader";
@@ -14,8 +14,7 @@ type Props = {
 export const ResultRow = (props: Props) => {
 
   const image = createMemo(() => props.image);
-
-  const [compress, setCompress] = createSignal<File>();
+  const [load, setLoad] = createSignal(true);
 
   onMount(async () => {
     const file = await compressorService.image(props.image.initial, {
@@ -24,7 +23,7 @@ export const ResultRow = (props: Props) => {
 
     image().compress = file;
     props.onCompressed?.(image());
-    setCompress(file)
+    setLoad(false);
   })
 
   function download() {
@@ -36,30 +35,30 @@ export const ResultRow = (props: Props) => {
 
   return (
     <tr>
-      <td class="w-32">
-        <div class="font-bold opacity-75 overflow-hidden">
+      <th class="w-32">
+        <div class="font-bold opacity-75 w-32 overflow-hidden">
           <div class="truncate" title={image().initial.name}>{image().initial.name}</div>
+        </div>
+      </th>
+      <td>
+        <div class="text-sm text-center font-bold text-warning">
+          {toMb(image().initial.size)} MB
         </div>
       </td>
       <td>
-        <span class="text-sm font-bold text-warning">
-          {toMb(image().initial.size)} MB
-        </span>
-      </td>
-      <td>
-        <Show when={!!compress()} fallback={
-          <div class="h-12 flex items-center"><Loader /></div>
+        <Show when={!load()} fallback={
+          <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
-          <div class="h-12 flex items-center justify-center opacity-75 font-bold">
+          <div class="h-8 flex items-center justify-center opacity-75 font-bold">
             {image().percentDif}%
           </div>
         </Show>
       </td>
       <td>
-        <Show when={!!compress()} fallback={
-          <div class="h-12 flex items-center"><Loader /></div>
+        <Show when={!load()} fallback={
+          <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
-          <div class="h-12 flex items-center">
+          <div class="h-8 w-full flex justify-center items-center text-center">
             <span class="text-sm font-bold text-warning">{toMb(image().compress?.size || 0)} MB</span>
           </div>
         </Show>
@@ -67,9 +66,10 @@ export const ResultRow = (props: Props) => {
       <td>
         <div class="w-full flex justify-center">
           <button
-            disabled={!compress()}
+            disabled={load()}
             class="btn btn-circle btn-ghost btn-sm"
             onClick={download}
+            title="Выгрузить"
           >
             <span class="material-symbols-outlined">
               download

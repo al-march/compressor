@@ -17,7 +17,7 @@ export const Result = (props: Props) => {
         <table class="table table-compact w-full">
           <thead>
             <tr>
-              <th class="text-center">Имя</th>
+              <th class="text-center w-32">Имя</th>
               <th class="text-center">До</th>
               <th class="text-center">Статус</th>
               <th class="text-center">После</th>
@@ -35,12 +35,12 @@ export const Result = (props: Props) => {
             </For>
           </tbody>
         </table>
-
-        <footer class="flex items-center justify-between">
-          <Stats images={props.images}></Stats>
-          <button class="btn btn-primary btn-sm" onClick={props.onLoadAll}>Скачать архивом</button>
-        </footer>
       </div>
+
+      <footer class="flex items-center justify-between">
+        <Stats images={props.images}></Stats>
+        <button class="btn btn-primary btn-sm" onClick={props.onLoadAll}>Скачать архивом</button>
+      </footer>
     </Show>
   )
 }

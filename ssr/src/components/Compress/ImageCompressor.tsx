@@ -35,8 +35,8 @@ export const ImageCompressor = () => {
   }
 
   return (
-    <section class="flex flex-1 flex-col gap-4 p-10">
-      <div class="flex flex-col gap-2 p-10 rounded">
+    <section class="flex flex-1 flex-col gap-4 p-2">
+      <div class="flex flex-col gap-2 max-w-2xl w-full mx-auto rounded">
         <header class="flex items-center">
           <span class="flex-1" />
         </header>
