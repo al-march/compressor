@@ -6,7 +6,7 @@ export interface CompressConfig {
 }
 
 const image = (file: File, config: CompressConfig): Promise<File> => {
-  return new Promise(res => {
+  return new Promise((res, rej) => {
     new Compressor(file, {
       quality: config.quality,
       width: config.width,
@@ -20,7 +20,8 @@ const image = (file: File, config: CompressConfig): Promise<File> => {
         }
 
         res(compressedImage);
-      }
+      },
+      error: rej,
     });
   })
 }
