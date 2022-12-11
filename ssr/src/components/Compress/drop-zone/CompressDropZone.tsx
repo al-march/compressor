@@ -51,12 +51,15 @@ export const CompressDropZone = (props: Props) => {
     >
       <div class="flex items-center justify-center">
         <div
-          classList={{ 'bg-base-300': entered() }}
-          class="border-1 flex-1 p-2 py-4 border-dashed border-base-300 border-2 rounded flex items-stretch overflow-hidden"
+          classList={{ 
+            'border-base-300 shadow-lg': entered(),
+            'border-transparent': entered()
+          }}
+          class="transition-all border flex-1 p-2 py-4 flex items-stretch overflow-hidden rounded"
         >
           <article
-            classList={{ 'opacity-50': entered() }}
-            class="w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center"
+            classList={{ 'opacity-50 scale-95': entered() }}
+            class="transition-all w-full max-w-64 my-auto flex flex-col gap-4 justify-center items-center"
           >
             <ImageUploadLogo />
 

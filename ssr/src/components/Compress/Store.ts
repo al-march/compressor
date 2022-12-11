@@ -19,8 +19,9 @@ function setImages(images: CompressImage[]) {
 }
 
 function removeImage(image: CompressImage) {
-  state.images.delete(image);
-  setState('images', new Set(state.images));
+  const images = new Set(state.images);
+  images.delete(image);
+  setState('images', images);
 }
 
 function compressImage(image: CompressImage) {

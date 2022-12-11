@@ -9,6 +9,7 @@ type Props = {
   image: CompressImage;
 
   onCompressed?: (image: CompressImage) => void;
+  onRemove?: (image: CompressImage) => void;
 }
 
 export const ResultRow = (props: Props) => {
@@ -33,6 +34,10 @@ export const ResultRow = (props: Props) => {
     }
   }
 
+  function remove() {
+    props.onRemove?.(image());
+  }
+
   return (
     <tr>
       <th class="w-32">
@@ -41,7 +46,7 @@ export const ResultRow = (props: Props) => {
         </div>
       </th>
       <td>
-        <div class="text-sm text-center font-bold text-warning">
+        <div class="text-sm text-center font-bold text-error">
           {toMb(image().initial.size)} MB
         </div>
       </td>
@@ -49,8 +54,8 @@ export const ResultRow = (props: Props) => {
         <Show when={!load()} fallback={
           <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
-          <div class="h-8 flex items-center justify-center opacity-75 font-bold">
-            {image().percentDif}%
+          <div class="h-8 flex gap-1 items-center justify-center opacity-75 font-semibold">
+            <span class="badge badge-success">Сжато {image().percentDif}%</span> 
           </div>
         </Show>
       </td>
@@ -59,14 +64,25 @@ export const ResultRow = (props: Props) => {
           <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
           <div class="h-8 w-full flex justify-center items-center text-center">
-            <span class="text-sm font-bold text-warning">{toMb(image().compress?.size || 0)} MB</span>
+            <span class="text-sm font-bold text-success">{toMb(image().compress?.size || 0)} MB</span>
           </div>
         </Show>
       </td>
       <td>
         <div class="w-full flex justify-center">
           <button
-            disabled={load()}
+            classList={{ 'hidden': load() }}
+            class="btn btn-circle btn-ghost text-error btn-sm"
+            onClick={remove}
+            title="Удалить"
+          >
+            <span class="material-symbols-outlined">
+              backspace
+            </span>
+          </button>
+
+          <button
+            classList={{ 'hidden': load() }}
             class="btn btn-circle btn-ghost btn-sm"
             onClick={download}
             title="Выгрузить"

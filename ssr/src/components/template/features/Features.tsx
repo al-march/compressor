@@ -8,7 +8,7 @@ export const Features = () => {
         icon={<img src="speed.svg" alt="" />}
       >
         <h2 class="text-2xl mb-8">
-          <strong class="font-black">Легче</strong> изображения - выше <strong class="font-black">скорость</strong>!
+          <strong class="font-black">Легче</strong> изображения - <br /> выше <strong class="font-black">скорость</strong>!
         </h2>
 
         <p class="font-light leading-6">

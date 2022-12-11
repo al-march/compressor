@@ -7,6 +7,7 @@ type Props = {
   images: CompressImage[];
 
   onImageCompress?: (image: CompressImage) => void;
+  onImageRemove?: (image: CompressImage) => void;
   onLoadAll?: () => void;
 }
 
@@ -30,17 +31,13 @@ export const Result = (props: Props) => {
                 <ResultRow
                   image={image}
                   onCompressed={props.onImageCompress}
+                  onRemove={props.onImageRemove}
                 />
               )}
             </For>
           </tbody>
         </table>
       </div>
-
-      <footer class="flex items-center justify-between">
-        <Stats images={props.images}></Stats>
-        <button class="btn btn-primary btn-sm" onClick={props.onLoadAll}>Скачать архивом</button>
-      </footer>
     </Show>
   )
 }

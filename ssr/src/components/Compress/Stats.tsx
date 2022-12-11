@@ -50,12 +50,13 @@ export const Stats = (props: ParentProps<Props>) => {
 
   return (
     <Show when={stats().isDone}>
-      <section>
-        <p>
-          <span class="text-sm opacity-75">Размер уменьшился на</span>{' '}
-          <span class="text-2xl font-bold">{stats().percent}%</span>
-        </p>
-        <span>{toMb(stats().initialSize)} MB / {toMb(stats().compressedSize)} MB</span>
+      <section class="flex flex-col items-center gap-1">
+        <span class="text-4xl font-black opacity-90">{stats().percent}%</span>
+        <span>
+          <span class="text-error font-black">{toMb(stats().initialSize)} MB</span>
+          {' '}/{' '}
+          <span class="text-success font-black">{toMb(stats().compressedSize)} MB</span>
+        </span>
       </section>
     </Show>
   )
