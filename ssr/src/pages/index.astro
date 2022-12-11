@@ -1,6 +1,7 @@
 ---
 import { ImageCompressor } from "../components/compress/ImageCompressor";
 import { Features } from "../components/template/features";
+import { Footer } from "../components/template/Footer";
 import { Header } from "../components/template/Header";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -14,10 +15,15 @@ import Layout from "../layouts/Layout.astro";
         <ImageCompressor client:idle />
       </section>
 
+      <span class="divider"></span>
+
       <section class="py-6 px-2 flex flex-col gap-8" id="why-use">
         <Features />
       </section>
+
+      <span class="divider"></span>
     </div>
   </main>
-</Layout>
 
+  <Footer />
+</Layout>
