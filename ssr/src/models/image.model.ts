@@ -19,7 +19,7 @@ export class Image {
   }
 
   async addImageSrc() {
-      this.src = await this.createSrc(this.file);
+    this.src = await this.createSrc(this.file);
   }
 
   private createSrc(file: File): Promise<string> {
@@ -35,5 +35,24 @@ export class Image {
         }
       };
     });
+  }
+}
+
+export class CompressImage {
+
+  initial: File;
+  compress?: File;
+
+  get percentDif() {
+    if (this.compress) {
+      return Math.ceil(100 - ((100 / this.initial.size) * (this.compress.size)));
+    }
+    return 0;
+  }
+
+  constructor(
+    file: File
+  ) { 
+    this.initial = file;
   }
 }

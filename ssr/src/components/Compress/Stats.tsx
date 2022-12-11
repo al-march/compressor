@@ -1,5 +1,5 @@
 import { createMemo, ParentProps, createSignal, createEffect, on, Show } from "solid-js";
-import type { Image } from "../../models/image.model";
+import type { CompressImage } from "../../models/image.model";
 import { convertService } from "../../services";
 
 interface Stats {
@@ -17,10 +17,10 @@ const initialStats: Stats = {
 }
 
 type Props = {
-  images: Set<Image>
+  images: CompressImage[];
 }
 
-const bytesToKb = convertService.bytesToKb;
+const toMb = convertService.bytesToMb;
 
 export const Stats = (props: ParentProps<Props>) => {
 
@@ -28,18 +28,18 @@ export const Stats = (props: ParentProps<Props>) => {
   const [stats, setStats] = createSignal<Stats>({ ...initialStats })
 
   createEffect(on(images, (images) => {
-    if (!images.size) {
+    if (!images.length) {
       setStats({ ...initialStats });
       return;
     }
 
-    const isAllCompressed = [...images].every(img => !!img.compressed);
+    const isAllCompressed = [...images].every(img => !!img.compress);
     if (isAllCompressed) {
       const stats = { ...initialStats };
 
       [...images].forEach(img => {
-        stats.initialSize += img.file.size;
-        stats.compressedSize += img.compressed?.size || 0
+        stats.initialSize += img.initial.size;
+        stats.compressedSize += img.compress?.size || 0
       });
 
       stats.percent = Math.ceil(100 - ((100 / stats.initialSize) * (stats.compressedSize || 0)));
@@ -55,7 +55,7 @@ export const Stats = (props: ParentProps<Props>) => {
           <span class="text-sm opacity-75">Размер уменьшился на</span>{' '}
           <span class="text-2xl font-bold">{stats().percent}%</span>
         </p>
-        <span>{bytesToKb(stats().initialSize)}kb / {bytesToKb(stats().compressedSize)}kb</span>
+        <span>{toMb(stats().initialSize)} MB / {toMb(stats().compressedSize)} MB</span>
       </section>
     </Show>
   )

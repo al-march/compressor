@@ -1,25 +1,30 @@
 import { createStore } from "solid-js/store";
-import type { Image } from "../../models/image.model";
+import type { Image, CompressImage } from "../../models/image.model";
 
 type ImageCompressorState = {
-  images: Set<Image>;
+  images: Set<CompressImage>;
 }
 
 const [state, setState] = createStore<ImageCompressorState>({
   images: new Set(),
 });
 
-function setImage(image: Image) {
+function setImage(image: CompressImage) {
   state.images.add(image);
   setState('images', new Set(state.images));
 }
 
-function setImages(images: Image[]) {
+function setImages(images: CompressImage[]) {
   setState('images', new Set(images));
 }
 
-function removeImage(image: Image) {
+function removeImage(image: CompressImage) {
   state.images.delete(image);
+  setState('images', new Set(state.images));
+}
+
+function compressImage(image: CompressImage) {
+  state.images.add(image);
   setState('images', new Set(state.images));
 }
 
@@ -32,5 +37,6 @@ export const ImageStore = Object.assign({}, {
   setImage,
   setImages,
   removeImage,
+  compressImage,
   reset
 })
