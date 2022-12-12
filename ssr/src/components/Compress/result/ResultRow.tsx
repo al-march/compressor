@@ -62,7 +62,7 @@ export const ResultRow = (props: Props) => {
   return (
     <tr>
       <th class="w-32">
-        <Tooltip content={<ImagePreview image={image()} />}>
+        <Tooltip placement="right" content={<ImagePreview image={image()} />}>
           <div class="font-bold opacity-75 w-32 overflow-hidden">
             <div class="flex gap-1 items-center">
               <span class="material-symbols-outlined text-success">
