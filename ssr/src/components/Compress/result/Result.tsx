@@ -1,6 +1,5 @@
 import { For, Show } from "solid-js";
 import type { CompressImage } from "../../../models/image.model";
-import { Stats } from "../Stats";
 import { ResultRow } from "./ResultRow"
 
 type Props = {

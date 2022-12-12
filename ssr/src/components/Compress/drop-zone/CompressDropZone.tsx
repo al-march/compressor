@@ -5,7 +5,7 @@ import { DropZone } from "../../base/DropZone"
 import { ImageUploadLogo } from "../ImageUploadIcon";
 
 type Props = {
-  onSelect?: (images: File[]) => void;
+  onDropFiles?: (fileList: FileList) => void;
 }
 
 export const CompressDropZone = (props: Props) => {
@@ -22,32 +22,20 @@ export const CompressDropZone = (props: Props) => {
     const files = input.files;
 
     if (files) {
-      processFileList(files);
+      onDroped(files);
     }
 
     input.value = '';
   }
 
-  function processFileList(fileList: FileList) {
-    const images: File[] = [];
-    for (let image of fileList) {
-      if (isAccessImage(image.type)) {
-        images.push(image);
-      } else {
-        console.warn(`image type [${image.type}] not access`);
-      }
-    }
-    props.onSelect?.(images);
-  }
-
-  function isAccessImage(imageType: string) {
-    return AccessibleImages.some(accessFormat => imageType.includes(accessFormat));
+  function onDroped(fileList: FileList) {
+    props.onDropFiles?.(fileList);
   }
 
   return (
     <DropZone
       onEnteredChange={setEntered}
-      onDropFiles={processFileList}
+      onDropFiles={onDroped}
     >
       <div class="flex items-center justify-center">
         <div

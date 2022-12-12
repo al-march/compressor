@@ -1,22 +1,37 @@
-import { createMemo, Show } from 'solid-js'
+import { createMemo, createSignal, Show } from 'solid-js'
 import { ImageStore } from './Store';
 import { downloadService } from '../../services';
 import { CompressDropZone } from './drop-zone';
 import { CompressImage } from '../../models/image.model';
 import { Result } from './result/Result';
+import { DropZone } from '../base/DropZone';
 import { Stats } from './Stats';
+import { AccessibleImages } from '../../constants';
 
 
 export const ImageCompressor = () => {
   const store = ImageStore;
+  const [enteredToResult, setEnteredToResult] = createSignal(false);
 
   const images = createMemo(() => (
     Array.from(store.state.images)
   ));
 
-  function processFileList(list: File[]) {
-    const images = list.map(f => new CompressImage(f));
+  function processFileList(fileList: FileList) {
+    const images: CompressImage[] = [];
+    for (let file of fileList) {
+      if (isAccessImage(file.type)) {
+        const image = new CompressImage(file);
+        images.push(image);
+      } else {
+        console.warn(`image type [${file.type}] not access`);
+      }
+    }
     store.setImages(images);
+  }
+
+  function isAccessImage(imageType: string) {
+    return AccessibleImages.some(accessFormat => imageType.includes(accessFormat));
   }
 
   function reset() {
@@ -41,7 +56,7 @@ export const ImageCompressor = () => {
 
   return (
     <section class="flex flex-1 flex-col gap-4 p-2">
-      <div class="flex flex-col gap-10 max-w-2xl w-full mx-auto rounded">
+      <div class="flex flex-col gap-6 max-w-2xl w-full mx-auto rounded">
 
         <div class="shadow">
           <header class="flex items-center">
@@ -51,17 +66,27 @@ export const ImageCompressor = () => {
 
         <div class="shadow-lg">
           <CompressDropZone
-            onSelect={processFileList}
+            onDropFiles={processFileList}
           />
         </div>
 
         <div class="shadow-lg">
-          <Result
-            images={images()}
-            onImageCompress={onImageCompress}
-            onImageRemove={removeImage}
-            onLoadAll={downloadAll}
-          />
+          <DropZone
+            onEnteredChange={setEnteredToResult}
+            onDropFiles={processFileList}
+          >
+            <div
+              class="transition-all"
+              classList={{ 'opacity-50 scale-95': enteredToResult() }}
+            >
+              <Result
+                images={images()}
+                onImageCompress={onImageCompress}
+                onImageRemove={removeImage}
+                onLoadAll={downloadAll}
+              />
+            </div>
+          </DropZone>
         </div>
 
         <div class="shadow-lg">
