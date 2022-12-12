@@ -2,8 +2,29 @@ import { createMemo, createSignal, onMount, Show } from "solid-js";
 import type { CompressImage } from "../../../models/image.model"
 import { compressorService, convertService, downloadService } from "../../../services";
 import { Loader } from "../../base/Loader";
+import { Tooltip } from "../../base/Tooltip";
 
 const toMb = convertService.bytesToMb;
+
+const ImagePreview = (props: { image: CompressImage }) => {
+  const [previewSrc, setPreviewSrc] = createSignal('');
+
+  onMount(async () => {
+    if (!props.image.previewSrc) {
+      await props.image.createPreviewSrc();
+    }
+
+    setPreviewSrc(props.image.previewSrc!)
+  })
+
+  return (
+    <div class="w-64 h-64 flex items-center justify-center shadow-xl">
+      <Show when={previewSrc()} fallback={<Loader />}>
+        <img class="w-full h-full object-cover" src={previewSrc()} alt={props.image.initial.name} />
+      </Show>
+    </div>
+  )
+}
 
 type Props = {
   image: CompressImage;
@@ -41,9 +62,18 @@ export const ResultRow = (props: Props) => {
   return (
     <tr>
       <th class="w-32">
-        <div class="font-bold opacity-75 w-32 overflow-hidden">
-          <div class="truncate" title={image().initial.name}>{image().initial.name}</div>
-        </div>
+        <Tooltip content={<ImagePreview image={image()} />}>
+          <div class="font-bold opacity-75 w-32 overflow-hidden">
+            <div class="flex gap-1 items-center">
+              <span class="material-symbols-outlined text-success">
+                image
+              </span>
+              <span class="truncate">
+                {image().initial.name}
+              </span>
+            </div>
+          </div>
+        </Tooltip>
       </th>
       <td>
         <div class="text-sm text-center font-bold text-error">
@@ -55,7 +85,7 @@ export const ResultRow = (props: Props) => {
           <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
           <div class="h-8 flex gap-1 items-center justify-center opacity-75 font-semibold">
-            <span class="badge badge-success">Сжато {image().percentDif}%</span> 
+            <span class="badge badge-success">Сжато {image().percentDif}%</span>
           </div>
         </Show>
       </td>
