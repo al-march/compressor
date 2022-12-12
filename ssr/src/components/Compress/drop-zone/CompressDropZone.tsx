@@ -40,10 +40,9 @@ export const CompressDropZone = (props: Props) => {
       <div class="flex items-center justify-center">
         <div
           classList={{ 
-            'border-base-300 shadow-lg': entered(),
-            'border-transparent': entered()
+            'border-base-300 shadow-lg': entered()
           }}
-          class="transition-all border flex-1 p-2 py-4 flex items-stretch overflow-hidden rounded"
+          class="transition-all flex-1 p-2 py-4 flex items-stretch overflow-hidden rounded"
         >
           <article
             classList={{ 'opacity-50 scale-95': entered() }}

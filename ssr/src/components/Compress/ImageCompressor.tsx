@@ -64,13 +64,13 @@ export const ImageCompressor = () => {
           </header>
         </div>
 
-        <div class="shadow-lg">
+        <div class="shadow-xl">
           <CompressDropZone
             onDropFiles={processFileList}
           />
         </div>
 
-        <div class="shadow-lg">
+        <div class="shadow-xl">
           <DropZone
             onEnteredChange={setEnteredToResult}
             onDropFiles={processFileList}
@@ -89,9 +89,9 @@ export const ImageCompressor = () => {
           </DropZone>
         </div>
 
-        <div class="shadow-lg">
+        <div class="shadow-xl">
           <Show when={images().length}>
-            <footer class="flex gap-4 items-center justify-between p-2 border rounded">
+            <footer class="flex gap-4 items-center justify-between p-2 rounded">
               <button class="btn btn-error btn-outline btn-xs" onClick={reset}>
                 Очистить
               </button>
