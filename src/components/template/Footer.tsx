@@ -3,7 +3,7 @@ import { Menu } from "./Menu";
 export const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer class="footer footer-center p-10 px-2 bg-base-200 text-base-content rounded">
+    <footer class="footer footer-center p-10 px-2 bg-neutral text-neutral-content rounded">
       <div class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col gap-4">
         <Menu />
       </div>
