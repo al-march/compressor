@@ -1,6 +1,6 @@
 import { createMemo, ParentProps, createSignal, createEffect, on, Show } from "solid-js";
-import type { CompressImage } from "../../models/image.model";
-import { convertService } from "../../services";
+import type { CompressImage } from "../../../models/image.model";
+import { convertService } from "../../../services";
 
 interface Stats {
   initialSize: number;
@@ -22,7 +22,7 @@ type Props = {
 
 const toMb = convertService.bytesToMb;
 
-export const Stats = (props: ParentProps<Props>) => {
+export const ResultStats = (props: ParentProps<Props>) => {
 
   const images = createMemo(() => props.images);
   const [stats, setStats] = createSignal<Stats>({ ...initialStats })

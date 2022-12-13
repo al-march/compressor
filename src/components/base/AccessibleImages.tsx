@@ -1,5 +1,5 @@
+import { AccessibleImages } from "@app/constants";
 import { For } from "solid-js"
-import { AccessibleImages } from "../../constants"
 
 type Props = {
   block?: boolean;

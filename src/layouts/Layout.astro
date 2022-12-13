@@ -45,9 +45,11 @@ const { title } = Astro.props;
   <title>Compressor | {title}</title>
 
   <body>
-    <main>
+    <main class="min-h-screen flex flex-col">
       <Header client:idle />
-      <slot />
+      <div class="flex-1">
+        <slot />
+      </div>
       <Footer />
     </main>
   </body>

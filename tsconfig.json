@@ -2,6 +2,19 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "baseUrl": ".",
+    "paths": {
+      "@app/components": ["src/components/index"],
+      "@app/components/*": ["src/components/*"],
+      "@app/constants": ["src/constants/index"],
+      "@app/constants/*": ["src/constants/*"],
+      "@app/layouts": ["src/layouts/index"],
+      "@app/layouts/*": ["src/layouts/*"],
+      "@app/models": ["src/models/index"],
+      "@app/models/*": ["src/models/*"],
+      "@app/services": ["src/services/index"],
+      "@app/services/*": ["src/services/*"],
+    }
   }
 }

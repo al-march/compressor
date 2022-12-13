@@ -1,12 +1,11 @@
 import { createMemo, createSignal, Show } from 'solid-js'
 import { ImageStore } from './Store';
-import { downloadService } from '../../services';
+import { downloadService } from '@app/services';
 import { CompressDropZone } from './drop-zone';
-import { CompressImage } from '../../models/image.model';
-import { Result } from './result/Result';
-import { DropZone } from '../base/DropZone';
-import { Stats } from './Stats';
-import { AccessibleImages } from '../../constants';
+import { CompressImage } from '@app/models';
+import { Result, ResultStats } from './result';
+import { AccessibleImages } from '@app/constants';
+import { DropZone } from '@app/components/base';
 
 
 export const ImageCompressor = () => {
@@ -96,7 +95,7 @@ export const ImageCompressor = () => {
                 Очистить
               </button>
 
-              <Stats images={images()} />
+              <ResultStats images={images()} />
 
               <button class="btn btn-primary btn-outline btn-xs" onClick={downloadAll}>
                 Скачать
