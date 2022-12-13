@@ -1,35 +1,27 @@
 ---
 import { ImageCompressor } from "../components/compress/ImageCompressor";
 import { Features } from "../components/template/features";
-import { Footer } from "../components/template/Footer";
-import { Header } from "../components/template/Header";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="сжатие картинок png, jpeg, webp онлайн бесплатно">
-  <main>
-    <Header client:idle />
-
-    <div class="container">
-      <div class="max-w-2xl mx-auto text-center">
-        <h1 class="text-4xl font-bold my-10">
-          Быстрое и эффективное сжатие изображений
-        </h1>
-      </div>
-
-      <section class="flex flex-col">
-        <ImageCompressor client:idle />
-      </section>
-
-      <span class="divider"></span>
-
-      <section class="py-6 px-2 flex flex-col gap-8" id="why-use">
-        <Features />
-      </section>
-
-      <span class="divider"></span>
+  <div class="container">
+    <div class="max-w-2xl mx-auto text-center">
+      <h1 class="text-4xl font-bold my-10">
+        Быстрое и эффективное сжатие изображений
+      </h1>
     </div>
-  </main>
 
-  <Footer />
+    <section class="flex flex-col">
+      <ImageCompressor client:idle />
+    </section>
+
+    <span class="divider"></span>
+
+    <section class="py-6 px-2 flex flex-col gap-8" id="why-use">
+      <Features />
+    </section>
+
+    <span class="divider"></span>
+  </div>
 </Layout>
