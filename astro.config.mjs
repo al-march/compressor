@@ -11,6 +11,6 @@ export default defineConfig({
   site: 'https://compress.monster',
   base: './',
   output: 'static',
-  outDir: '../dist',
+  outDir: './dist',
   integrations: [solidJs(), tailwind()]
 });
