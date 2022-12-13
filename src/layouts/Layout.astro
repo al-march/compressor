@@ -13,37 +13,83 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-  <script is:global>
-    const theme = localStorage.getItem("app-theme") || "night";
-    document.documentElement.setAttribute("data-theme", theme);
-  </script>
+  <head>
+    <script is:global>
+      const theme = localStorage.getItem("app-theme") || "night";
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="generator" content={Astro.generator} />
-  <meta
-    name="description"
-    content="Бесплатное и неограниченное сжатие изображений png jpeg webp и других"
-  />
-  <meta name="author" content="al-march" />
-  <meta
-    name="keywords"
-    content="сжатие изображений, сжатие картинок, сжатие png, jpeg, webp, сжать, бесплатно"
-  />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Бесплатное и неограниченное сжатие изображений png jpeg webp и других"
+    />
+    <meta name="author" content="al-march" />
+    <meta
+      name="keywords"
+      content="сжатие изображений, сжатие картинок, сжатие png, jpeg, webp, сжать, бесплатно"
+    />
 
-  <meta name="yandex-verification" content="b8531cf9e142b8b7" />
-  <meta
-    name="google-site-verification"
-    content="fjwHW8kVrKKMP-R1Hrsyc5-KzERQijovKu4C2GBzgKQ"
-  />
+    <meta name="yandex-verification" content="b8531cf9e142b8b7" />
+    <meta
+      name="google-site-verification"
+      content="fjwHW8kVrKKMP-R1Hrsyc5-KzERQijovKu4C2GBzgKQ"
+    />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-  />
-  <title>Compressor | {title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Compressor | {title}</title>
+
+    <!-- Yandex.Metrika counter -->
+    <script is:global type="text/javascript">
+      (function (m, e, t, r, i, k, a) {
+        m[i] =
+          m[i] ||
+          function () {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) {
+            return;
+          }
+        }
+        (k = e.createElement(t)),
+          (a = e.getElementsByTagName(t)[0]),
+          (k.async = 1),
+          (k.src = r),
+          a.parentNode.insertBefore(k, a);
+      })(
+        window,
+        document,
+        "script",
+        "https://mc.yandex.ru/metrika/tag.js",
+        "ym"
+      );
+
+      ym(91517967, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+      });
+    </script>
+    <noscript
+      ><div>
+        <img
+          src="https://mc.yandex.ru/watch/91517967"
+          style="position:absolute; left:-9999px;"
+          alt=""
+        />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+  </head>
 
   <body>
     <Drawer client:idle>
