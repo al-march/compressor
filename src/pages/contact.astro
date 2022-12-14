@@ -1,14 +1,15 @@
 ---
+import { Container } from "@app/components/template/layout";
+import { H1, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro"
 
 ---
 
 <Layout title="Контакты">
-  <div class="container p-2">
-    <h1 class="text-4xl font-bold my-10">
-      Свяжитесь с нами
-    </h1>
-
-    <p>comming soon...</p>
-  </div>
+  <Container size="sm">
+    <Heading center>
+      <H1>Свяжитесь с нами</H1>
+      <p>Сайт разрабатывается единолично разработчиком <a class="link link-hover text-info" href="https://github.com/al-march" target="_blank">al-march</a>.</p>
+    </Heading>
+  </Container>
 </Layout>
