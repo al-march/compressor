@@ -44,12 +44,12 @@ export const Header = () => {
 
 
   return (
-    <header class="navbar bg-neutral text-neutral-content">
+    <header class="navbar bg-neutral text-neutral-content sticky top-0 z-10">
 
       <a class="btn btn-ghost normal-case text-xl" href="/">Compressor</a>
       <div class="flex-1"></div>
 
-      <menu class="p-0 pr-8 m-0 hidden items-center gap-2 md:flex">
+      <menu class="p-0 pr-8 m-0 hidden items-center gap-4 md:flex">
         <Menu />
       </menu>
 
