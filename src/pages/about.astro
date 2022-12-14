@@ -1,5 +1,9 @@
 ---
-import { Container } from "@app/components/template/layout";
+import {
+  Card,
+  CardContainer,
+  Container,
+} from "@app/components/template/layout";
 import { H1, H3, H4, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 ---
@@ -9,8 +13,8 @@ import Layout from "@app/layouts/Layout.astro";
     <Heading center>
       <H1>О проекте</H1>
       <p class="max-w-lg mx-auto">
-        <strong>CompressMonster</strong> предоставляет функционал для сжатия фото, растровых
-        картинок и других изображений онлайн и абсолютно бесплатно.
+        <strong>CompressMonster</strong> предоставляет функционал для сжатия фото,
+        растровых картинок и других изображений онлайн и абсолютно бесплатно.
       </p>
     </Heading>
 
@@ -19,29 +23,28 @@ import Layout from "@app/layouts/Layout.astro";
     <section class="my-10">
       <H3 class="text-center mb-8">Почему <strong>CompressMonster</strong>?</H3>
 
-      <div class="my-4 flex justify-center items-start gap-4 flex-wrap">
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-2 text-success">money_off</span>
-          <H4>Бесплатно</H4>
-          <span>Функционал сайта доступен каждному</span>
-        </article>
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-2 text-info">settings_motion_mode</span>
-          <H4>Просто и удобно</H4>
-          <span>Быстрая загрузка и эффективное сжатие</span>
-        </article>
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-2 text-warning">vpn_lock</span>
-          <H4>Безопасно</H4>
-          <span>Ваши данные полностью защищены</span>
-        </article>
-      </div>
+      <CardContainer>
+        <Card
+          color="success"
+          icon="money_off"
+          title="Бесплатно"
+          description="Функционал сайта доступен каждному"
+        />
+
+        <Card
+          color="info"
+          icon="settings_motion_mode"
+          title="Просто и удобно"
+          description="Быстрая загрузка и эффективное сжатие"
+        />
+
+        <Card
+          color="warning"
+          icon="vpn_lock"
+          title="Безопасно"
+          description="Ваши данные полностью защищены"
+        />
+      </CardContainer>
     </section>
 
     <section class="my-10">
