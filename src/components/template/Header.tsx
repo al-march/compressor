@@ -44,7 +44,7 @@ export const Header = () => {
 
 
   return (
-    <header class="navbar bg-neutral text-neutral-content sticky top-0 z-10">
+    <header class="navbar bg-neutral text-neutral-content sticky top-0 z-50">
 
       <a class="btn btn-ghost normal-case text-xl" href="/">Compressor</a>
       <div class="flex-1"></div>
