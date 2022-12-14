@@ -1,13 +1,71 @@
 ---
-import Layout from "@app/layouts/Layout.astro"
+import {
+  Card,
+  CardContainer,
+  Container,
+} from "@app/components/template/layout";
+import { H1, H3, H4, Heading } from "@app/components/template/typography";
+import Layout from "@app/layouts/Layout.astro";
 ---
 
 <Layout title="Контакты">
-  <div class="container p-2">
-    <h1 class="text-4xl font-bold my-10">
-      Возможности
-    </h1>
+  <Container size="sm">
+    <Heading center>
+      <H1>Возможности</H1>
 
-    <p>comming soon...</p>
-  </div>
+      <p>
+        CompressMonster активно развивается, но на данный момент готов
+        предложить только функционал по сжатию изображений.
+      </p>
+    </Heading>
+
+    <div class="divider"></div>
+
+    <section>
+      <CardContainer>
+        <Card
+          color="success"
+          icon="image"
+          title="Cжатие"
+          description="Массовое сжатие изображений"
+        >
+          <a class="mt-2 btn btn-sm btn-outline gap-2 btn-success" href="/">
+            <span class="material-symbols-outlined">verified</span>
+            Открыть
+          </a>
+        </Card>
+
+        <Card
+          color="error"
+          icon="edit_square"
+          title="Редактирование"
+          description="Функциональный фоторедактор"
+        >
+          <button class="mt-2 btn btn-sm btn-outline btn-disabled">
+            В разработке...
+          </button>
+        </Card>
+
+        <Card
+          color="error"
+          icon="published_with_changes"
+          title="Преобразование"
+          description="Из одного формата в другой"
+        >
+          <button class="mt-2 btn btn-sm btn-outline btn-disabled">
+            В разработке...
+          </button>
+        </Card>
+      </CardContainer>
+    </section>
+
+    <div class="divider"/>
+
+    <section>
+      <Heading center>
+        <H3>Многое еще в планах!</H3>
+        <p>Добавьте сайт в закладки, чтобы не пропустить ничего нового.</p>
+      </Heading>
+    </section>
+  </Container>
 </Layout>
