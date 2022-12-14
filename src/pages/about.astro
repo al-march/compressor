@@ -5,16 +5,44 @@ import Layout from "@app/layouts/Layout.astro";
 ---
 
 <Layout title="Контакты">
-  <Container>
+  <Container size="sm">
     <Heading center>
       <H1>О проекте</H1>
       <p class="max-w-lg mx-auto">
-        Compress.monster предоставляет функционал для сжатия фото, растровых
+        <strong>CompressMonster</strong> предоставляет функционал для сжатия фото, растровых
         картинок и других изображений онлайн и абсолютно бесплатно.
       </p>
     </Heading>
 
     <span class="divider"></span>
+
+    <section class="my-10">
+      <H3 class="text-center mb-8">Почему <strong>CompressMonster</strong>?</H3>
+
+      <div class="my-4 flex justify-center items-start gap-4 flex-wrap">
+        <article
+          class="flex flex-col w-48 text-center items-center justify-center rounded"
+        >
+          <span class="material-symbols-outlined text-4xl mb-2 text-success">money_off</span>
+          <H4>Бесплатно</H4>
+          <span>Функционал сайта доступен каждному</span>
+        </article>
+        <article
+          class="flex flex-col w-48 text-center items-center justify-center rounded"
+        >
+          <span class="material-symbols-outlined text-4xl mb-2 text-info">settings_motion_mode</span>
+          <H4>Просто и удобно</H4>
+          <span>Быстрая загрузка и эффективное сжатие</span>
+        </article>
+        <article
+          class="flex flex-col w-48 text-center items-center justify-center rounded"
+        >
+          <span class="material-symbols-outlined text-4xl mb-2 text-warning">vpn_lock</span>
+          <H4>Безопасно</H4>
+          <span>Ваши данные полностью защищены</span>
+        </article>
+      </div>
+    </section>
 
     <section class="my-10">
       <H3>Как работает?</H3>
@@ -57,34 +85,6 @@ import Layout from "@app/layouts/Layout.astro";
           <a class="btn btn-primary btn-outline btn-sm" href="/">К сжатию</a>
         </div>
       </figure>
-    </section>
-
-    <section class="my-10">
-      <H3 class="text-center mb-8">Почему compress.monster?</H3>
-
-      <div class="my-4 flex justify-center items-start gap-4 flex-wrap">
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-4 text-success">money_off</span>
-          <H4 class="text-lg">Бесплатно</H4>
-          <span>Функционал сайта доступен каждному</span>
-        </article>
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-4 text-info">settings_motion_mode</span>
-          <H4 class="text-lg">Просто и удобно</H4>
-          <span>Быстрая загрузка и эффективное сжатие</span>
-        </article>
-        <article
-          class="flex flex-col w-48 text-center items-center justify-center rounded"
-        >
-          <span class="material-symbols-outlined text-4xl mb-4 text-warning">vpn_lock</span>
-          <H4 class="text-lg">Безопасно</H4>
-          <span>Ваши данные полностью защищены</span>
-        </article>
-      </div>
     </section>
   </Container>
 </Layout>
