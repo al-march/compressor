@@ -13,7 +13,7 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head data-theme="night">
     <script is:global>
       const theme = localStorage.getItem("app-theme") || "night";
       document.documentElement.setAttribute("data-theme", theme);
