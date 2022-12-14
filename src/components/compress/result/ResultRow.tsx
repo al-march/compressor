@@ -6,6 +6,16 @@ import { Tooltip } from "../../base/Tooltip";
 
 const toMb = convertService.bytesToMb;
 
+function TitleWidthFixed(title: string, max = 20) {
+  if (title.length > max) {
+    const part = Math.floor(max / 2);
+    const start = title.slice(0, part);
+    const end = title.slice(-part);
+    return `${start}...${end}`;
+  }
+  return title;
+}
+
 const ImagePreview = (props: { image: CompressImage }) => {
   const [previewSrc, setPreviewSrc] = createSignal('');
 
@@ -60,36 +70,36 @@ export const ResultRow = (props: Props) => {
   }
 
   return (
-    <tr>
-      <th class="w-32">
+    <>
+      <div class="result-table-cell title">
         <Tooltip placement="right" content={<ImagePreview image={image()} />}>
-          <div class="font-bold opacity-75 w-32 overflow-hidden">
-            <div class="flex gap-1 items-center">
+          <div class="font-bold opacity-75 overflow-hidden">
+            <div class="flex gap-1 items-center w-full">
               <span class="material-symbols-outlined text-success">
                 image
               </span>
-              <span class="truncate">
-                {image().initial.name}
+              <span class="truncate font-semibold" title={image().initial.name}>
+                {TitleWidthFixed(image().initial.name)}
               </span>
             </div>
           </div>
         </Tooltip>
-      </th>
-      <td>
+      </div>
+      <div class="result-table-cell before">
         <div class="text-sm text-center font-bold text-error">
           {toMb(image().initial.size)} MB
         </div>
-      </td>
-      <td>
+      </div>
+      <div class="result-table-cell status">
         <Show when={!load()} fallback={
           <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
           <div class="h-8 flex gap-1 items-center justify-center opacity-75 font-semibold">
-            <span class="badge badge-success">Сжато {image().percentDif}%</span>
+            <span class="badge badge-success">-{image().percentDif}%</span>
           </div>
         </Show>
-      </td>
-      <td>
+      </div>
+      <div class="result-table-cell after">
         <Show when={!load()} fallback={
           <div class="h-8 flex justify-center items-center"><Loader size="sm" /></div>
         }>
@@ -97,11 +107,11 @@ export const ResultRow = (props: Props) => {
             <span class="text-sm font-bold text-success">{toMb(image().compress?.size || 0)} MB</span>
           </div>
         </Show>
-      </td>
-      <td>
+      </div>
+      <div class="result-table-cell actions">
         <div class="w-full flex justify-center">
           <button
-            classList={{ 'hidden': load() }}
+            classList={{ 'invisible': load() }}
             class="btn btn-circle btn-ghost text-error btn-sm"
             onClick={remove}
             title="Удалить"
@@ -112,7 +122,7 @@ export const ResultRow = (props: Props) => {
           </button>
 
           <button
-            classList={{ 'hidden': load() }}
+            classList={{ 'invisible': load() }}
             class="btn btn-circle btn-ghost btn-sm"
             onClick={download}
             title="Выгрузить"
@@ -122,7 +132,7 @@ export const ResultRow = (props: Props) => {
             </span>
           </button>
         </div>
-      </td>
-    </tr>
+      </div>
+    </>
   )
 }

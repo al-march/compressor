@@ -1,0 +1,34 @@
+.result-table {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(min-content, auto));
+  align-items: center;
+  @apply gap-1 overflow-x-scroll;
+}
+
+.result-table-cell {
+  @apply overflow-hidden py-1;
+}
+
+.result-table-cell.th {
+  @apply bg-neutral text-neutral-content font-black rounded mb-2;
+}
+
+.result-table-cell.title {
+  min-width: 160px;
+}
+
+.result-table-cell.before {
+  min-width: 80px;
+}
+
+.result-table-cell.status {
+  min-width: 64px;
+}
+
+.result-table-cell.after {
+  min-width: 80px;
+}
+
+.result-table-cell.actions {
+  min-width: 64px;
+}
