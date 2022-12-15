@@ -32,7 +32,7 @@ const QualityControl = (props: { value: number, onChange?: (v: number) => void }
 }
 
 export const CompressSettings = () => {
-  const store = ImageStore;  
+  const store = ImageStore;
 
   return (
     <div class="h-72 flex items-center justify-center">
@@ -53,7 +53,7 @@ export const CompressSettings = () => {
               type="number"
               placeholder="Введите число"
               class="input input-sm input-bordered w-full"
-              onChange={e => store.mergeSettings({ width: Number(e.currentTarget.value) })}
+              onInput={e => store.mergeSettings({ width: Number(e.currentTarget.value) })}
             />
           </div>
 
@@ -66,7 +66,7 @@ export const CompressSettings = () => {
               type="number"
               placeholder="Введите число"
               class="input input-sm input-bordered w-full"
-              onChange={e => store.mergeSettings({ height: Number(e.currentTarget.value) })}
+              onInput={e => store.mergeSettings({ height: Number(e.currentTarget.value) })}
             />
           </div>
         </section>
@@ -80,7 +80,7 @@ export const CompressSettings = () => {
               type="text"
               placeholder="Префикс-"
               class="input input-sm input-bordered w-full"
-              onChange={e => store.mergeSettings({ prefix: e.currentTarget.value })}
+              onInput={e => store.mergeSettings({ prefix: e.currentTarget.value })}
             />
           </div>
           <div class="form-control max-w-full w-1/2">
@@ -91,12 +91,10 @@ export const CompressSettings = () => {
               type="text"
               placeholder="-Суфикс"
               class="input input-sm input-bordered w-full"
-              onChange={e => store.mergeSettings({ suffix: e.currentTarget.value })}
+              onInput={e => store.mergeSettings({ suffix: e.currentTarget.value })}
             />
           </div>
         </section>
-
-        <button class="btn btn-outline btn-xs mt-2" onClick={() => store.recompressAll()}>Go!</button>
       </article>
     </div>
   )

@@ -17,6 +17,8 @@ export type ImageCompressorState = {
   shouldRecompress$: Observable<CompressSettings>
 }
 
+const settings$ = new Subject<CompressSettings>();
+
 const defaultSettings: CompressSettings = {
   quality: .8,
 }
@@ -60,6 +62,7 @@ function reset() {
 
 function setSettings(settings: CompressSettings) {
   setState('settings', settings);
+  settings$.next(settings);
 }
 
 function mergeSettings(settings: Partial<CompressSettings>) {
@@ -70,6 +73,11 @@ function mergeSettings(settings: Partial<CompressSettings>) {
 function recompressAll() {
   shouldRecompress$.next({ ...state.settings });
 }
+
+settings$.pipe(debounceTime(300)).subscribe(() => {
+  console.log('recompress')
+  recompressAll();
+})
 
 export const ImageStore = Object.assign({}, {
   state,
