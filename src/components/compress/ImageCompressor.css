@@ -1,0 +1,4 @@
+.result-border {
+  @apply border;
+  border-color: theme(backgroundColor.base-300);
+}

@@ -1,4 +1,4 @@
-import { createMemo, createSignal, Show } from 'solid-js'
+import { createMemo, createSignal, Match, onCleanup, onMount, Show, Switch } from 'solid-js'
 import { ImageStore } from './Store';
 import { downloadService } from '@app/services';
 import { CompressDropZone } from './drop-zone';
@@ -6,11 +6,17 @@ import { CompressImage } from '@app/models';
 import { Result, ResultStats } from './result';
 import { AccessibleImages } from '@app/constants';
 import { DropZone } from '@app/components/base';
+import { CompressSettings } from './drop-zone/CompressSettings';
+import { Scale } from '../base/animations';
+import './ImageCompressor.css';
 
+type View = 'compress' | 'settings';
 
 export const ImageCompressor = () => {
   const store = ImageStore;
   const [enteredToResult, setEnteredToResult] = createSignal(false);
+  const [viewType, setViewType] = createSignal<View>('compress');
+
 
   const images = createMemo(() => (
     Array.from(store.state.images)
@@ -27,6 +33,7 @@ export const ImageCompressor = () => {
       }
     }
     store.setImages(images);
+    setViewType('settings');
   }
 
   function isAccessImage(imageType: string) {
@@ -35,6 +42,7 @@ export const ImageCompressor = () => {
 
   function reset() {
     store.reset();
+    setViewType('compress');
   }
 
   function downloadAll() {
@@ -51,6 +59,9 @@ export const ImageCompressor = () => {
 
   function removeImage(image: CompressImage) {
     store.removeImage(image);
+    if (!store.state.images.size) {
+      setViewType('compress');
+    }
   }
 
   return (
@@ -63,13 +74,45 @@ export const ImageCompressor = () => {
           </header>
         </div>
 
-        <div class="shadow-xl">
-          <CompressDropZone
-            onDropFiles={processFileList}
-          />
+        <div class="shadow rounded p-2 result-border">
+          <header class="w-full flex gap-1">
+            <div class="flex-1" />
+            <button
+              type="button"
+              class="btn btn-sm"
+              classList={{ 'btn-primary': viewType() === 'compress' }}
+              onClick={() => setViewType('compress')}
+            >
+              Сжатие
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-sm"
+              classList={{ 'btn-primary': viewType() === 'settings' }}
+              onClick={() => setViewType('settings')}
+            >
+              Настройки
+            </button>
+          </header>
+
+          <Scale>
+            <Switch>
+              <Match when={viewType() === 'compress'}>
+                <CompressDropZone
+                  onDropFiles={processFileList}
+                />
+              </Match>
+
+              <Match when={viewType() === 'settings'}>
+                <CompressSettings />
+              </Match>
+            </Switch>
+          </Scale>
+
         </div>
 
-        <div class="shadow-xl">
+        <div class={images().length && 'shadow' || ''}>
           <DropZone
             onEnteredChange={setEnteredToResult}
             onDropFiles={processFileList}
@@ -88,7 +131,7 @@ export const ImageCompressor = () => {
           </DropZone>
         </div>
 
-        <div class="shadow-xl">
+        <div class={images().length && 'shadow' || ''}>
           <Show when={images().length}>
             <footer class="flex gap-4 items-center justify-between p-2 rounded">
               <button class="btn btn-error btn-outline btn-xs" onClick={reset}>

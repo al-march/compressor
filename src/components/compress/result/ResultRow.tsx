@@ -1,19 +1,36 @@
-import { createMemo, createSignal, onMount, Show } from "solid-js";
+import type { Subscription } from "rxjs";
+import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js";
 import type { CompressImage } from "../../../models/image.model"
 import { compressorService, convertService, downloadService } from "../../../services";
 import { Loader } from "../../base/Loader";
 import { Tooltip } from "../../base/Tooltip";
+import { ImageStore } from "../Store";
 
 const toMb = convertService.bytesToMb;
 
-function TitleWidthFixed(title: string, max = 20) {
-  if (title.length > max) {
+function sliceExt(fileName: string) {
+  const reversed = fileName.split('').reverse();
+  const dotIndex = reversed.findIndex(w => w === '.');
+  const ext = reversed.splice(0, dotIndex + 1);
+  return {
+    name: reversed.reverse().join(''),
+    ext: ext.reverse().join(''),
+  }
+}
+
+function TitleWidthFixed(title: string, prefix = '', suffix = '') {
+  const max = 20;
+  const { name, ext } = sliceExt(title);
+
+  const output = `${prefix}${name}${suffix}${ext}`;
+
+  if (output.length > max) {
     const part = Math.floor(max / 2);
-    const start = title.slice(0, part);
-    const end = title.slice(-part);
+    const start = output.slice(0, part);
+    const end = output.slice(-part);
     return `${start}...${end}`;
   }
-  return title;
+  return output;
 }
 
 const ImagePreview = (props: { image: CompressImage }) => {
@@ -44,19 +61,40 @@ type Props = {
 }
 
 export const ResultRow = (props: Props) => {
+  const store = ImageStore;
 
   const image = createMemo(() => props.image);
-  const [load, setLoad] = createSignal(true);
+  const [load, setLoad] = createSignal(false);
+
+  let subscription: Subscription;
 
   onMount(async () => {
+    await compress();
+    subscription = ImageStore.state.shouldRecompress$
+      .subscribe(() => {
+        compress();
+      })
+  })
+
+  onCleanup(() => {
+    if (subscription) {
+      subscription.unsubscribe();
+    }
+  })
+
+  async function compress() {
+    if (load()) {
+      return;
+    }
+    setLoad(true);
     const file = await compressorService.image(props.image.initial, {
-      quality: 0.8
+      ...store.state.settings
     });
 
     image().compress = file;
     props.onCompressed?.(image());
     setLoad(false);
-  })
+  }
 
   function download() {
     const compress = image().compress;
@@ -79,7 +117,11 @@ export const ResultRow = (props: Props) => {
                 image
               </span>
               <span class="truncate font-semibold" title={image().initial.name}>
-                {TitleWidthFixed(image().initial.name)}
+                {TitleWidthFixed(
+                  image().initial.name,
+                  store.state.settings.prefix,
+                  store.state.settings.suffix
+                )}
               </span>
             </div>
           </div>

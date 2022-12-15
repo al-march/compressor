@@ -2,7 +2,6 @@ import { AccessibleImagesBadges, DropZone } from "@app/components/base";
 import { createSignal } from "solid-js";
 import { ImageUploadLogo } from "../ImageUploadIcon";
 
-
 type Props = {
   onDropFiles?: (fileList: FileList) => void;
 }
@@ -36,10 +35,10 @@ export const CompressDropZone = (props: Props) => {
       onEnteredChange={setEntered}
       onDropFiles={onDroped}
     >
-      <div class="flex items-center justify-center">
+      <div class="h-72 flex items-center justify-center">
         <div
           classList={{ 
-            'border-base-300 shadow-lg': entered()
+            'border-base-300': entered()
           }}
           class="transition-all flex-1 p-2 py-4 flex items-stretch overflow-hidden rounded"
         >

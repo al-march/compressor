@@ -1,12 +1,35 @@
+import { debounceTime, Observable, Subject } from "rxjs";
 import { createStore } from "solid-js/store";
-import type { Image, CompressImage } from "../../models/image.model";
+import type { CompressImage } from "../../models/image.model";
 
-type ImageCompressorState = {
-  images: Set<CompressImage>;
+export type CompressSettings = {
+  quality: number;
+  width?: number;
+  height?: number;
+  prefix?: string;
+  suffix?: string;
 }
+
+export type ImageCompressorState = {
+  images: Set<CompressImage>;
+  settings: CompressSettings;
+
+  shouldRecompress$: Observable<CompressSettings>
+}
+
+const defaultSettings: CompressSettings = {
+  quality: .8,
+}
+
+const shouldRecompress$ = new Subject<CompressSettings>();
 
 const [state, setState] = createStore<ImageCompressorState>({
   images: new Set(),
+  settings: defaultSettings,
+
+  shouldRecompress$: shouldRecompress$.pipe(
+    debounceTime(200),
+  ),
 });
 
 function setImage(image: CompressImage) {
@@ -35,11 +58,27 @@ function reset() {
   setState('images', new Set());
 }
 
+function setSettings(settings: CompressSettings) {
+  setState('settings', settings);
+}
+
+function mergeSettings(settings: Partial<CompressSettings>) {
+  const s = Object.assign({ ...state.settings }, settings);
+  setSettings(s);
+}
+
+function recompressAll() {
+  shouldRecompress$.next({ ...state.settings });
+}
+
 export const ImageStore = Object.assign({}, {
   state,
   setImage,
   setImages,
   removeImage,
   compressImage,
-  reset
+  reset,
+  setSettings,
+  mergeSettings,
+  recompressAll
 })
