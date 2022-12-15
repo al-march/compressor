@@ -1,6 +1,6 @@
 import { createMemo, createSignal, Match, onCleanup, onMount, Show, Switch } from 'solid-js'
 import { ImageStore } from './Store';
-import { downloadService } from '@app/services';
+import { downloadService, imageService } from '@app/services';
 import { CompressDropZone } from './drop-zone';
 import { CompressImage } from '@app/models';
 import { Result, ResultStats } from './result';
@@ -47,10 +47,20 @@ export const ImageCompressor = () => {
 
   function downloadAll() {
     const files = images()
-      .map(image => image.compress)
-      .filter(file => file instanceof File) as File[];
+      .map(image => {
+        const file = image.compress;
+        if (file) {
+          const fileName = imageService.addPrefixAndSuffix(
+            file.name,
+            store.state.settings.prefix,
+            store.state.settings.suffix,
+          )
+          return new File([file], fileName);
+        }
+      })
+      .filter(file => file instanceof File) as File[]
 
-    downloadService.zip(files, store.state.settings);
+    downloadService.zip(files);
   }
 
   function onImageCompress(image: CompressImage) {
