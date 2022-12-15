@@ -1,28 +1,15 @@
 import type { Subscription } from "rxjs";
 import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js";
-import type { CompressImage } from "../../../models/image.model"
-import { compressorService, convertService, downloadService } from "../../../services";
-import { Loader } from "../../base/Loader";
-import { Tooltip } from "../../base/Tooltip";
+import type { CompressImage } from "@app/models"
+import { compressorService, convertService, downloadService, imageService } from "@app/services";
+import { Loader, Tooltip } from "@app/components/base";
 import { ImageStore } from "../Store";
 
 const toMb = convertService.bytesToMb;
 
-function sliceExt(fileName: string) {
-  const reversed = fileName.split('').reverse();
-  const dotIndex = reversed.findIndex(w => w === '.');
-  const ext = reversed.splice(0, dotIndex + 1);
-  return {
-    name: reversed.reverse().join(''),
-    ext: ext.reverse().join(''),
-  }
-}
-
-function TitleWidthFixed(title: string, prefix = '', suffix = '') {
+function titleWidthFixed(title: string, prefix = '', suffix = '') {
   const max = 20;
-  const { name, ext } = sliceExt(title);
-
-  const output = `${prefix}${name}${suffix}${ext}`;
+  const output = imageService.addPrefixAndSuffix(title, prefix, suffix);
 
   if (output.length > max) {
     const part = Math.floor(max / 2);
@@ -96,10 +83,16 @@ export const ResultRow = (props: Props) => {
     setLoad(false);
   }
 
-  function download() {
+  async function download() {
     const compress = image().compress;
     if (compress) {
-      downloadService.file(compress);
+      const fileName = imageService.addPrefixAndSuffix(
+        compress.name,
+        store.state.settings.prefix,
+        store.state.settings.suffix
+      )
+      const file = new File([compress], fileName)
+      downloadService.file(file);
     }
   }
 
@@ -117,7 +110,7 @@ export const ResultRow = (props: Props) => {
                 image
               </span>
               <span class="truncate font-semibold" title={image().initial.name}>
-                {TitleWidthFixed(
+                {titleWidthFixed(
                   image().initial.name,
                   store.state.settings.prefix,
                   store.state.settings.suffix

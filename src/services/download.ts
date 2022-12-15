@@ -1,4 +1,6 @@
+import type { CompressSettings } from '@app/components/compress/Store';
 import { BlobWriter, ZipWriter } from '@zip.js/zip.js';
+import { imageService } from './image';
 
 async function file(file: File) {
   const anchor = document.createElement('a');
@@ -10,12 +12,15 @@ async function file(file: File) {
   document.body.removeChild(anchor);
 }
 
-async function zip(files: File[]) {
+async function zip(files: File[], config: Partial<CompressSettings> = {}) {
   /** @See https://gildas-lormeau.github.io/zip.js/api/index.html */
   const zipWriter = new ZipWriter(new BlobWriter('application/zip'));
-  await Promise.all(files.map(file => zipWriter.add(file.name, file.stream())));
+  await Promise.all(files.map(file => {
+    const fileName = imageService.addPrefixAndSuffix(file.name, config.prefix, config.suffix)
+    return zipWriter.add(fileName, file.stream())
+  }));
   const blob = await zipWriter.close();
   return file(new File([blob], 'images.zip'));
 }
 
-export const downloadService = Object.assign({}, {file, zip})
+export const downloadService = Object.assign({}, { file, zip })

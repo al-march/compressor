@@ -14,6 +14,23 @@ function fileListToImages(list: FileList) {
   return images;
 }
 
+function sliceExt(fileName: string) {
+  const reversed = fileName.split('').reverse();
+  const dotIndex = reversed.findIndex(w => w === '.');
+  const ext = reversed.splice(0, dotIndex + 1);
+  return {
+    name: reversed.reverse().join(''),
+    ext: ext.reverse().join(''),
+  }
+}
+
+function addPrefixAndSuffix(title: string, prefix = '', suffix = '') {
+  const { name, ext } = sliceExt(title);
+  return `${prefix}${name}${suffix}${ext}`;
+}
+
 export const imageService = Object.assign({}, {
-  fileListToImages
+  fileListToImages,
+  addPrefixAndSuffix,
+  sliceExt
 })

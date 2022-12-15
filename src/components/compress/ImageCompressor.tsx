@@ -50,7 +50,7 @@ export const ImageCompressor = () => {
       .map(image => image.compress)
       .filter(file => file instanceof File) as File[];
 
-    downloadService.zip(files);
+    downloadService.zip(files, store.state.settings);
   }
 
   function onImageCompress(image: CompressImage) {
