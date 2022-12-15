@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js"
-import { ImageStore } from "../Store";
+import { CompressSettings as Settings, ImageStore } from "../Store";
 
 const QualityControl = (props: { value: number, onChange?: (v: number) => void }) => {
   const [v, setV] = createSignal((props.value || 0.8) * 100);
@@ -34,12 +34,20 @@ const QualityControl = (props: { value: number, onChange?: (v: number) => void }
 export const CompressSettings = () => {
   const store = ImageStore;
 
+  const defaultValue: Settings = {
+    quality: store.state.settings.quality,
+    prefix: store.state.settings.prefix || '',
+    suffix: store.state.settings.suffix || '',
+    width: store.state.settings.width,
+    height: store.state.settings.height,
+  }
+
   return (
     <div class="h-72 flex items-center justify-center">
       <article class="p-10 w-full h-full flex-1 flex flex-col">
 
         <QualityControl
-          value={store.state.settings.quality}
+          value={defaultValue.quality}
           onChange={(v) => store.mergeSettings({ quality: v / 100 })}
         />
 
@@ -53,6 +61,7 @@ export const CompressSettings = () => {
               type="number"
               placeholder="Введите число"
               class="input input-sm input-bordered w-full"
+              value={defaultValue.width}
               onInput={e => store.mergeSettings({ width: Number(e.currentTarget.value) })}
             />
           </div>
@@ -66,6 +75,7 @@ export const CompressSettings = () => {
               type="number"
               placeholder="Введите число"
               class="input input-sm input-bordered w-full"
+              value={defaultValue.height}
               onInput={e => store.mergeSettings({ height: Number(e.currentTarget.value) })}
             />
           </div>
@@ -80,6 +90,7 @@ export const CompressSettings = () => {
               type="text"
               placeholder="Префикс-"
               class="input input-sm input-bordered w-full"
+              value={defaultValue.prefix}
               onInput={e => store.mergeSettings({ prefix: e.currentTarget.value })}
             />
           </div>
@@ -91,6 +102,7 @@ export const CompressSettings = () => {
               type="text"
               placeholder="-Суфикс"
               class="input input-sm input-bordered w-full"
+              value={defaultValue.suffix}
               onInput={e => store.mergeSettings({ suffix: e.currentTarget.value })}
             />
           </div>
