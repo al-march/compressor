@@ -4,7 +4,7 @@ import {
   CardContainer,
   Container,
 } from "@app/components/template/layout";
-import { H1, H3, H4, Heading } from "@app/components/template/typography";
+import { H1, H3, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 ---
 
@@ -47,8 +47,61 @@ import Layout from "@app/layouts/Layout.astro";
       </CardContainer>
     </section>
 
+    <div class="divider"></div>
+
+    <section>
+      <Heading center>
+        <H3>Продукт</H3>
+      </Heading>
+
+      <br />
+
+      <p>
+        На данный момент реализована лишь часть функционала, которую хотелось бы
+        видеть на проекте.
+      </p>
+
+      <br />
+
+      <p>
+        У нас большие планы!. <strong>CompressMonster</strong> стремится предоставлять
+        лучшие услуги по работе с вашими личными фото, картинками для сайтов или
+        социальных сетей и прочих изображений.
+      </p>
+
+      <br />
+
+      <p>
+        Наш приоритет - <strong>качество</strong>, <strong>доступность</strong> и
+        <strong>безопасность</strong>. Проект в активной разработке, мы готовим
+        множество интересных новвоведений, которые, надеемся, будут вам
+        интересны.
+      </p>
+
+      <figure
+        class="mt-8 p-4 bg-neutral text-neutral-content text-center rounded shadow-xl"
+      >
+        <p class="max-w-md mx-auto">
+          Чтобы увидеть планы по развитию проекта, посетите наш соответствующий
+          раздел раздел
+        </p>
+
+        <div class="text-center pt-4">
+          <a class="btn btn-primary btn-outline btn-sm" href="/features"
+            >Возможности и планы</a
+          >
+        </div>
+      </figure>
+    </section>
+
+    <div class="divider"></div>
+
     <section class="my-10">
-      <H3>Как работает?</H3>
+      <Heading center>
+        <H3>Как работает?</H3>
+      </Heading>
+
+      <br />
 
       <p>
         При сжатии специальный алгоритм пытается снизить размер занимаемой
@@ -57,19 +110,29 @@ import Layout from "@app/layouts/Layout.astro";
         Сжатие картинок глобально разделяют на два вида:
       </p>
 
-      <ul class="my-4 flex flex-col gap-2">
-        <li>
-          <strong>С потерями</strong> - сжатие, при котором изображение теряет в
-          качестве, но становится заметно компактнее. Чаще всего основано на специфике
-          человеческого зрения - картинка сжимается так, чтобы человеку были максимально
-          незаметны потери.
-        </li>
-        <li>
-          <strong>Без потерь</strong> - используются специальные алгоритмы, благодаря
-          которым можно восстановить исходное (до сжатия) изображение. Наиболее эффективны
-          при сжатии векторных и других графических изображений.
-        </li>
-      </ul>
+      <CardContainer class="my-8">
+        <Card
+          full
+          class="text-justify w-full sm:w-5/12"
+          title="С потерями"
+          description={`
+            сжатие, при котором изображение теряет в
+            качестве, но становится заметно компактнее. Чаще всего основано на специфике
+            человеческого зрения - картинка сжимается так, чтобы человек не видел разницы.
+          `}
+        />
+
+        <Card
+          full
+          class="text-justify w-full sm:w-5/12"
+          title="Без потерь"
+          description={`
+            используются специальные алгоритмы, благодаря
+            которым можно восстановить исходное (до сжатия) изображение. Наиболее эффективны
+            при сжатии векторных и других графических изображений.
+          `}
+        />
+      </CardContainer>
 
       <p>
         Существует множество алгоритмов для сжатия с потерями и без для
@@ -80,8 +143,8 @@ import Layout from "@app/layouts/Layout.astro";
         class="mt-8 p-4 bg-neutral text-neutral-content text-center rounded shadow-xl"
       >
         <p class="max-w-md mx-auto">
-          На основной странице сайта можно эффективно сжать группу картинок за
-          раз
+          На основной странице сайта можно эффективно сжать группу фотографий
+          или любых других изображений за раз онлайн.
         </p>
 
         <div class="text-center pt-4">

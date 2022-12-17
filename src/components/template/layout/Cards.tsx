@@ -22,12 +22,18 @@ type CardProps = {
   title?: string;
   description?: string;
   color?: DaisyColor;
+  full?: boolean;
+  class?: string;
 }
 
 export const Card = (props: ParentProps<CardProps>) => {
   return (
     <article
-      class="w-48 flex flex-col gap-2 items-center justify-center text-center"
+      class="flex flex-col gap-2 items-center justify-center text-center"
+      classList={{
+        [props.class || '']: !!props.class,
+        'w-48': !props.full
+      }}
     >
       <span
         class="material-symbols-outlined text-4xl"
