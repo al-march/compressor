@@ -98,11 +98,10 @@ export const Tooltip = (props: ParentProps<Props>) => {
               onAfterEnter={el => (el as HTMLElement).style.opacity = '1'}
               onEnter={(el, done) => {
                 const a = el.animate([
-                  { opacity: .3, transform: 'translateY(15px)' }, 
-                  { opacity: 1, transform: 'translateY(0)' }
+                  { opacity: .3, transform: 'scale(0.7)' }, 
+                  { opacity: 1, transform: 'scale(1)' }
                 ], {
-                  duration: 240,
-                  easing: 'cubic-bezier(0.1, -0.3, 0.2, 0)'
+                  duration: 140,
                 });
                 a.finished.then(done);
               }}
