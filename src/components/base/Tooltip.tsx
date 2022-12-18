@@ -1,12 +1,20 @@
-import { createSignal, JSXElement, onCleanup, ParentProps, Show } from "solid-js"
+import { createMemo, createSignal, JSXElement, Match, onCleanup, ParentProps, Show, Switch } from "solid-js"
 import { Portal } from 'solid-js/web'
 import { createPopper, Instance, Placement } from '@popperjs/core';
 import { Transition } from "solid-transition-group";
 
+const TooltipMessage = (props: ParentProps) => (
+  <span class="p-2 px-4 rounded bg-base-100 flex gap-4 shadow-xl">
+    {props.children}
+  </span>
+)
+
 type Props = {
-  content: JSXElement;
+  content?: JSXElement;
+  message?: JSXElement;
   class?: string;
   placement?: Placement;
+  debounce?: number;
 
   onShow?: () => void;
   onHide?: () => void;
@@ -28,21 +36,25 @@ export const Tooltip = (props: ParentProps<Props>) => {
   })
 
   function onShow() {
+    console.log('messag', props.message);
+    
+    
     timeoutId = window.setTimeout(() => {
       setShow(true);
       setContentShow(true);
       initPopper();
       props.onShow?.();
-    }, 250);
+    }, 200);
   }
 
   function onHide() {
+    window.clearTimeout(timeoutId);
     setContentShow(false);
+
     setTimeout(() => {
-      window.clearTimeout(timeoutId);
       setShow(false);
       props.onHide?.();
-    }, 200)
+    }, 180)
   }
 
   function initPopper() {
@@ -68,7 +80,7 @@ export const Tooltip = (props: ParentProps<Props>) => {
         ref={setRef}
         tabIndex="0"
         class="inline-flex"
-        classList={{[props.class || '']: !!props.class}}
+        classList={{ [props.class || '']: !!props.class }}
         onMouseEnter={onShow}
         onFocus={onShow}
         onMouseLeave={onHide}
@@ -80,14 +92,17 @@ export const Tooltip = (props: ParentProps<Props>) => {
       <Show when={show()}>
         <Portal>
           <div class="z-50 relative" ref={setTooltip}>
-
             <Transition
               appear
-              onBeforeEnter={el => (el as HTMLElement).style.opacity = '0'}
+              onBeforeEnter={el => (el as HTMLElement).style.opacity = '0.3'}
               onAfterEnter={el => (el as HTMLElement).style.opacity = '1'}
               onEnter={(el, done) => {
-                const a = el.animate([{ opacity: 0 }, { opacity: 1 }], {
-                  duration: 200
+                const a = el.animate([
+                  { opacity: .3, transform: 'translateY(15px)' }, 
+                  { opacity: 1, transform: 'translateY(0)' }
+                ], {
+                  duration: 240,
+                  easing: 'cubic-bezier(0.1, -0.3, 0.2, 0)'
                 });
                 a.finished.then(done);
               }}
@@ -99,9 +114,14 @@ export const Tooltip = (props: ParentProps<Props>) => {
               }}
             >
               <Show when={contentShow()}>
-                <div class="rounded shadow-lg bg-base-300 overflow-hidden">
-                  {props.content}
-                </div>
+                <Switch>
+                  <Match when={props.content}>
+                    {props.content}
+                  </Match>
+                  <Match when={props.message}>
+                    <TooltipMessage>{props.message}</TooltipMessage>
+                  </Match>
+                </Switch>
               </Show>
             </Transition>
 

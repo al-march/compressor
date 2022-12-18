@@ -103,7 +103,11 @@ export const ResultRow = (props: Props) => {
   return (
     <>
       <div class="result-table-cell title">
-        <Tooltip placement="right" content={<ImagePreview image={image()} />}>
+        <Tooltip
+          placement="right"
+          content={<ImagePreview image={image()} />}
+          class="w-full"
+        >
           <div class="font-bold opacity-75 overflow-hidden">
             <div class="flex gap-1 items-center w-full">
               <span class="material-symbols-outlined text-success">
@@ -145,27 +149,36 @@ export const ResultRow = (props: Props) => {
       </div>
       <div class="result-table-cell actions">
         <div class="w-full flex justify-center">
-          <button
-            classList={{ 'invisible': load() }}
-            class="btn btn-circle btn-ghost text-error btn-sm"
-            onClick={remove}
-            title="Удалить"
-          >
-            <span class="material-symbols-outlined">
-              backspace
-            </span>
-          </button>
 
-          <button
-            classList={{ 'invisible': load() }}
-            class="btn btn-circle btn-ghost btn-sm"
-            onClick={download}
-            title="Выгрузить"
+          <Tooltip
+            message="Удалить"
+            placement="top"
           >
-            <span class="material-symbols-outlined">
-              download
-            </span>
-          </button>
+            <button
+              classList={{ 'invisible': load() }}
+              class="btn btn-circle btn-ghost text-error btn-sm"
+              onClick={remove}
+            >
+              <span class="material-symbols-outlined">
+                backspace
+              </span>
+            </button>
+          </Tooltip>
+
+          <Tooltip
+            message="Выгрузить"
+            placement="top"
+          >
+            <button
+              classList={{ 'invisible': load() }}
+              class="btn btn-circle btn-ghost btn-sm"
+              onClick={download}
+            >
+              <span class="material-symbols-outlined">
+                download
+              </span>
+            </button>
+          </Tooltip>
         </div>
       </div>
     </>
