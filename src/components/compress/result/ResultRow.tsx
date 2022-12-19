@@ -45,6 +45,7 @@ type Props = {
 
   onCompressed?: (image: CompressImage) => void;
   onRemove?: (image: CompressImage) => void;
+  onCompare?: (image: CompressImage) => void;
 }
 
 export const ResultRow = (props: Props) => {
@@ -157,10 +158,27 @@ export const ResultRow = (props: Props) => {
             <button
               classList={{ 'invisible': load() }}
               class="btn btn-circle btn-ghost text-error btn-sm"
+              type="button"
               onClick={remove}
             >
               <span class="material-symbols-outlined">
                 backspace
+              </span>
+            </button>
+          </Tooltip>
+
+          <Tooltip
+            message="Сравнить"
+            placement="top"
+          >
+            <button
+              classList={{ 'invisible': load() }}
+              class="btn btn-circle btn-ghost btn-sm"
+              type="button"
+              onClick={() => props.onCompare?.(props.image)}
+            >
+              <span class="material-symbols-outlined">
+                compare
               </span>
             </button>
           </Tooltip>
@@ -172,6 +190,7 @@ export const ResultRow = (props: Props) => {
             <button
               classList={{ 'invisible': load() }}
               class="btn btn-circle btn-ghost btn-sm"
+              type="button"
               onClick={download}
             >
               <span class="material-symbols-outlined">

@@ -1,8 +1,9 @@
-import { For, Show } from "solid-js";
+import { createSignal, For, Show } from "solid-js";
 import { TransitionGroup } from "solid-transition-group";
-import type { CompressImage } from "../../../models/image.model";
 import { ResultRow } from "./ResultRow"
 import './Result.css';
+import { CompareResultModal } from "./CompareResultModal";
+import type { CompressImage } from "@app/models";
 
 type Props = {
   images: CompressImage[];
@@ -13,6 +14,10 @@ type Props = {
 }
 
 export const Result = (props: Props) => {
+  const [modal, setModal] = createSignal(false);
+  const [compareImage, setCompareImage] = createSignal<CompressImage>();
+
+
   return (
     <div class="overflow-x-auto rounded py-1">
       <div class="result-table">
@@ -56,12 +61,22 @@ export const Result = (props: Props) => {
                   image={image}
                   onCompressed={props.onImageCompress}
                   onRemove={props.onImageRemove}
+                  onCompare={() => {
+                    setCompareImage(image);
+                    setModal(true);
+                  }}
                 />
               )}
             </For>
           </Show>
         </TransitionGroup>
       </div>
+
+      <CompareResultModal
+        show={modal()}
+        image={compareImage()}
+        onClose={() => setModal(false)}
+      />
     </div>
   )
 }

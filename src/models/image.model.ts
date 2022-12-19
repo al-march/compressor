@@ -20,24 +20,25 @@ export class CompressImage {
 
   async createPreviewSrc() {
     if (this.compress) {
-      this.previewSrc = await createSrc(this.compress);
+      this.previewSrc = await CompressImage.createSrc(this.compress);
     }
 
     return this.previewSrc;
   }
+
+  static createSrc(file: File): Promise<string> {
+    return new Promise((res, rej) => {
+      const fr = new FileReader();
+      fr.readAsDataURL(file);
+      fr.onload = (event) => {
+        const src = event.target?.result;
+        if (src) {
+          res(String(src));
+        } else {
+          rej('cannot parse image');
+        }
+      };
+    });
+  }
 }
 
-function createSrc(file: File): Promise<string> {
-  return new Promise((res, rej) => {
-    const fr = new FileReader();
-    fr.readAsDataURL(file);
-    fr.onload = (event) => {
-      const src = event.target?.result;
-      if (src) {
-        res(String(src));
-      } else {
-        rej('cannot parse image');
-      }
-    };
-  });
-}
