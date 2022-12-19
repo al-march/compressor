@@ -1,4 +1,4 @@
-import { createMemo, createSignal, Match, onCleanup, onMount, Show, Switch } from 'solid-js'
+import { createMemo, createSignal, Match, Show, Switch } from 'solid-js'
 import { ImageStore } from './Store';
 import { downloadService, imageService } from '@app/services';
 import { CompressDropZone } from './drop-zone';
@@ -156,7 +156,7 @@ export const ImageCompressor = () => {
             </footer>
           </Show>
         </div>
-
+        
       </div>
     </section>
   )
