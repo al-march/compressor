@@ -4,38 +4,61 @@ import { Transition } from "solid-transition-group";
 type Props = {
   mode?: "inout" | "outin";
   appear?: boolean;
+  onExit?: () => void;
 }
 
-export const Scale = (props: ParentProps<Props>) => {
+export const Scale = (props: ParentProps<Props>) => {  
+  const onExitDone = () => {
+    props.onExit?.();
+  };
+
   return (
     <Transition
-      mode={props.mode || "outin"}
       appear={props.appear}
-      onBeforeEnter={el => (el as HTMLElement).style.opacity = '0'}
-      onAfterEnter={el => (el as HTMLElement).style.opacity = '1'}
-      onEnter={(el, done) => {
-        const a = el.animate(
+      mode={props.mode}
+      onBeforeEnter={el => ((el as HTMLElement).style.opacity = '0')}
+      onEnter={async (el, done) => {        
+        await el.animate?.(
           [
-            { opacity: 0, transform: 'scale(0.8)' },
-            { opacity: 1, transform: 'scale(1)' }
-          ], {
-          duration: 100,
-          easing: 'cubic-bezier(0.1, -0.3, 0.2, 0)'
-        });
-        a.finished.then(done);
+            {
+              opacity: 0,
+              transform: 'scale(0.8) translateX(-5px) translateY(20px)',
+            },
+            {
+              opacity: 1,
+              transform: 'scale(1) translateX(0) translateY(0)',
+            },
+          ],
+          {
+            duration: 160,
+            easing: 'cubic-bezier(0.55, 0, 0.55, 0.2)',
+          }
+        ).finished;
+        done();
       }}
-      onExit={(el, done) => {
-        const a = el.animate([
-          { opacity: 1, transform: 'scale(1)' },
-          { opacity: 0, transform: 'scale(0.6)' },
-        ], {
-          duration: 150,
-          easing: 'cubic-bezier(0.1, -0.3, 0.2, 0)'
-        });
-        a.finished.then(done);
+      onAfterEnter={el => ((el as HTMLElement).style.opacity = '1')}
+      onExit={async (el, done) => {
+        await el.animate?.(
+          [
+            {
+              opacity: 1,
+              transform: 'scale(1)',
+            },
+            {
+              opacity: 0,
+              transform: 'scale(0.90)',
+            },
+          ],
+          {
+            duration: 120,
+            easing: 'cubic-bezier(0.55, 0, 0.55, 0.2)',
+          }
+        ).finished;
+        onExitDone();
+        done();
       }}
     >
       {props.children}
     </Transition>
-  )
+  );
 }

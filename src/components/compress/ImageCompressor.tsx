@@ -106,7 +106,7 @@ export const ImageCompressor = () => {
             </button>
           </header>
 
-          <Scale>
+          <Scale mode="outin">
             <Switch>
               <Match when={viewType() === 'compress'}>
                 <CompressDropZone

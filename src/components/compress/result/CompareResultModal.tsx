@@ -1,4 +1,5 @@
 import { ImageCompareSlider, Loader } from "@app/components/base"
+import { Height, Scale } from "@app/components/base/animations";
 import { CompressImage } from "@app/models";
 import { createEffect, createSignal, ParentProps, Show } from "solid-js"
 import { Portal } from "solid-js/web";
@@ -12,16 +13,16 @@ type Props = {
 
 export const CompareResultModal = (props: ParentProps<Props>) => {
 
+  const [shouldShow, setShouldShow] = createSignal(!!props.show);
   const [load, setLoad] = createSignal(true);
+  const [showSlider, setShowSlider] = createSignal(false);
   const [beforeSrc, setBeforeSrc] = createSignal('');
   const [afterSrc, setAfterSrc] = createSignal('');
 
   createEffect(async () => {
     if (props.show) {
+      setShouldShow(true);
       const { initial, compress } = props.image || {};
-
-      console.log(props.image);
-
 
       if (initial && compress) {
         setLoad(true);
@@ -30,36 +31,52 @@ export const CompareResultModal = (props: ParentProps<Props>) => {
 
         setBeforeSrc(beforeSrc);
         setAfterSrc(afterSrc);
-        setLoad(false);
+
+        setTimeout(() => {
+          setLoad(false);
+        }, 350)
       }
     }
   })
 
   return (
-    <Portal>
-      <Show when={props.show}>
-        <div class="modal" classList={{ 'modal-open': !!props.show }} onClick={props.onClose}>
-          <div class="modal-box max-w-screen-2xl" onClick={e => e.stopPropagation()}>
-            <Show when={!load()} fallback={<Loader />}>
-              <ImageCompareSlider
-                class="max-h-[400px]"
-                before={<img src={beforeSrc()} />}
-                after={<img src={afterSrc()} />}
-              />
-            </Show>
+    <Show when={shouldShow()}>
+      <Portal>
+        <div class="modal" classList={{ 'modal-open': !!shouldShow() }} onClick={props.onClose}>
+          <Scale appear onExit={() => {
+            setShouldShow(false)
+          }}>
+            <Show when={props.show}>
+              <div class="modal-box rounded p-2 max-w-screen-2xl" onClick={e => e.stopPropagation()}>
 
-            <div class="modal-action">
-              <button
-                type="button"
-                class="btn"
-                onClick={props.onClose}
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
+                <Show when={!load()} fallback={
+                  <div class="max-h-[400px] p-10 flex justify-center items-center">
+                    <Loader />
+                  </div>
+                }>
+                  <Height appear>
+                    <ImageCompareSlider
+                      class="max-h-[80vh]"
+                      before={<img src={beforeSrc()} />}
+                      after={<img src={afterSrc()} />}
+                    />
+                  </Height>
+                </Show>
+
+                <div class="modal-action">
+                  <button
+                    type="button"
+                    class="btn"
+                    onClick={props.onClose}
+                  >
+                    Закрыть
+                  </button>
+                </div>
+              </div>
+            </Show>
+          </Scale>
         </div>
-      </Show>
-    </Portal>
+      </Portal>
+    </Show>
   )
 }

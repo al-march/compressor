@@ -177,7 +177,7 @@ export const ResultRow = (props: Props) => {
               type="button"
               onClick={() => props.onCompare?.(props.image)}
             >
-              <span class="material-symbols-outlined">
+              <span class="material-symbols-outlined text-info">
                 compare
               </span>
             </button>
