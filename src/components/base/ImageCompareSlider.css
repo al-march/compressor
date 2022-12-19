@@ -1,0 +1,35 @@
+.compare-divider {
+  @apply h-full absolute top-0 bottom-0;
+}
+
+.compare-img img {
+  display: block;
+  object-fit: cover;
+  max-width: initial;
+  width: 100%;
+  height: 100%;
+}
+
+.compare-img--after {
+  @apply w-full h-full absolute left-0 top-0 overflow-hidden;
+}
+
+.compare-img--after img {
+  width: initial;
+}
+
+.compare-divider:hover .compare-divider__arrows {
+  transform: translate3d(-50%, -50%, 0) scale(1.4);
+}
+
+.compare-divider__arrows {
+  transition: ease .2s;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.compare-label {
+  text-shadow: 1px 1px 1px black
+}
