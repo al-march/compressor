@@ -33,6 +33,25 @@ export const Height = (props: ParentProps<Props>) => {
         ).finished;
         done();
       }}
+      onAfterEnter={el => ((el as HTMLElement).style.height = el.scrollHeight + 'px')}
+      onExit={async (el, done) => {
+        await el.animate?.(
+          [
+            {
+              height: el.scrollHeight + 'px',
+            },
+            {
+              height: 0
+            },
+          ],
+          {
+            duration: 120,
+            easing: 'ease',
+          }
+        ).finished;
+        onExitDone();
+        done();
+      }}
     >
       {props.children}
     </Transition>

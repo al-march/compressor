@@ -55,11 +55,13 @@ export const CompareResultModal = (props: ParentProps<Props>) => {
                   </div>
                 }>
                   <Height appear>
-                    <ImageCompareSlider
-                      class="max-h-[80vh]"
-                      before={<img src={beforeSrc()} />}
-                      after={<img src={afterSrc()} />}
-                    />
+                    <div class="w-full h-full overflow-hidden">
+                      <ImageCompareSlider
+                        class="max-h-[80vh]"
+                        before={<img src={beforeSrc()} />}
+                        after={<img src={afterSrc()} />}
+                      />
+                    </div>
                   </Height>
                 </Show>
 
