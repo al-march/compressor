@@ -50,19 +50,17 @@ export const CompareResultModal = (props: ParentProps<Props>) => {
               <div class="modal-box rounded p-2 max-w-screen-2xl" onClick={e => e.stopPropagation()}>
 
                 <Show when={!load()} fallback={
-                  <div class="max-h-[400px] p-10 flex justify-center items-center">
+                  <div class="max-h-[80vh] h-full p-10 flex justify-center items-center">
                     <Loader />
                   </div>
                 }>
-                  <Height appear>
-                    <div class="w-full h-full overflow-hidden">
-                      <ImageCompareSlider
-                        class="max-h-[80vh]"
-                        before={<img src={beforeSrc()} />}
-                        after={<img src={afterSrc()} />}
-                      />
-                    </div>
-                  </Height>
+                  <div class="w-full h-full overflow-hidden">
+                    <ImageCompareSlider
+                      class="max-h-[80vh]"
+                      before={<img src={beforeSrc()} />}
+                      after={<img src={afterSrc()} />}
+                    />
+                  </div>
                 </Show>
 
                 <div class="modal-action">
