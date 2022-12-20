@@ -1,4 +1,5 @@
 ---
+import { ContactForm } from "@app/components/template/ContactForm";
 import { Container } from "@app/components/template/layout";
 import { H1, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro"
@@ -10,6 +11,8 @@ import Layout from "@app/layouts/Layout.astro"
     <Heading center>
       <H1>Свяжитесь с нами</H1>
       <p>Сайт разрабатывается единолично разработчиком <a class="link link-hover text-info" href="https://github.com/al-march" target="_blank">al-march</a>.</p>
+
+      <ContactForm client:idle />
     </Heading>
   </Container>
 </Layout>

@@ -17,6 +17,8 @@ const { title } = Astro.props;
     <script is:global>
       const theme = localStorage.getItem("app-theme") || "night";
       document.documentElement.setAttribute("data-theme", theme);
+
+      window.backendUrl = 'http://127.0.0.1:8800'
     </script>
 
     <meta charset="UTF-8" />
