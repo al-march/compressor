@@ -1,5 +1,5 @@
 import type { DaisyColor } from "@app/constants";
-import type { ParentProps } from "solid-js";
+import type { JSXElement, ParentProps } from "solid-js";
 import { H4 } from "../typography";
 
 type CardContainerProps = {
@@ -19,8 +19,8 @@ export const CardContainer = (props: ParentProps<CardContainerProps>) => {
 
 type CardProps = {
   icon?: string;
-  title?: string;
-  description?: string;
+  title?: JSXElement;
+  description?: JSXElement;
   color?: DaisyColor;
   full?: boolean;
   class?: string;

@@ -11,7 +11,7 @@ export const Drawer = (props: ParentProps) => {
         class="drawer-toggle"
         checked={drawer.isOpen}
       />
-      <div class="drawer-content">
+      <div class="drawer-content scroll-smooth">
         {props.children}
       </div>
       <div class="drawer-side">

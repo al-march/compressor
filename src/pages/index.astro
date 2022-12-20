@@ -2,26 +2,117 @@
 import Layout from "@app/layouts/Layout.astro";
 import { ImageCompressor } from "@app/components/compress";
 import { Features } from "@app/components/template/features";
+import {
+  Card,
+  CardContainer,
+  Container,
+} from "@app/components/template/layout";
+import { H1, H2, H4, Heading } from "@app/components/template/typography";
+import { HowToUse } from "@app/components/template/HowToUse";
 ---
 
 <Layout title="сжатие картинок png, jpeg, webp онлайн бесплатно">
-  <div class="container">
-    <div class="max-w-2xl mx-auto text-center">
-      <h1 class="text-4xl font-bold my-10">
-        Быстрое и эффективное сжатие изображений
-      </h1>
-    </div>
+  <Container size="md">
+    <Heading center>
+      <H1>Быстрое и эффективное <br /> сжатие изображений</H1>
+    </Heading>
 
-    <section class="flex flex-col">
+    <br />
+    <br />
+
+    <section class="flex flex-col" id="compressor">
       <ImageCompressor client:idle />
     </section>
 
     <span class="divider"></span>
 
-    <section class="py-6 px-2 flex flex-col gap-8" id="why-use">
+    <section class="py-10 px-2 flex flex-col gap-8" id="why-use">
       <Features />
     </section>
 
     <span class="divider"></span>
-  </div>
+
+    <section class="py-10 px-2">
+      <Heading center>
+        <H2>Зачем сжимать изображения?</H2>
+
+        <p>
+          <strong>Сжатие</strong> - распространенный и удобный способ сделать изображение
+          меньше по объему занимаемой памяти, практически не изменяя качество. Сжатые
+          картинки быстрее загружаются по сети интернет, дешевле стоят в случае хранения
+          на сервисах вроде Cloud от Apple, Yandex или Google дисках.
+        </p>
+      </Heading>
+
+      <br />
+
+      <br />
+
+      <H4 class="text-center">Сжатие используют для:</H4>
+      <br />
+      <CardContainer>
+        <Card
+          color="success"
+          icon="trending_up"
+          title="Роста в выдаче"
+          description="Оптимизированные страницы любят Google и Yandex"
+        />
+
+        <Card
+          color="success"
+          icon="speed"
+          title="Ускорение сайта"
+          description="Сжатые картинки сильно ускоряют загрузку страниц"
+        />
+
+        <Card
+          color="success"
+          icon="save"
+          title="Экономии"
+          description="После сжатия можно сэкономить на облачных дисках"
+        />
+      </CardContainer>
+
+      <br />
+      <br />
+
+      <p>
+        Основная задача сжатия фото/картинок и других изображений - уменьшить их
+        размер. Существует сжатие как с потерями, так и без потерь, но
+        современные алгоритмы сжатия обеспечивают практически незаметную разницу
+        между картинками до и после даже при сжатии с потерями.
+      </p>
+
+      <br />
+
+      <p>
+        По статистике, чем меньше время ожидания пользователя загрузки сайта -
+        тем выше конверсия. Чем быстрее загрузится сайт - тем выше вероятность,
+        что посетитель с ним ознакомиться. В противном случае человек может уйти
+        со страницы сайта и не взглянув на контент страницы.
+      </p>
+
+      <br />
+
+      <p>
+        Медиаконтент (фото и видео) на странице любого сайта чаще всего вносит
+        наибольший вклад в объем загружаемых данных. А самый простой способ
+        ускорость сайт - сжать картинки.
+      </p>
+    </section>
+
+    <span class="divider"></span>
+
+    <section class="py-10 px-2">
+      <Heading center>
+        <H2>
+          3 простых шага для сжатия картинки <br>
+          <span class="text-xl font-normal">с потерей качества или без</span>
+        </H2>
+      </Heading>
+      <br />
+
+      <HowToUse />
+    </section>
+  </Container>
 </Layout>
