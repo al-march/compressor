@@ -1,6 +1,7 @@
 import { AppStore } from "@app/stores";
 import { createSignal, onMount } from "solid-js"
 import { Theme } from "../../constants"
+import { Icon } from "../base";
 import { Menu } from "./Menu";
 
 const THEME_STORAGE_KEY = 'app-theme';
@@ -46,11 +47,18 @@ export const Header = () => {
   return (
     <header class="navbar bg-neutral text-neutral-content sticky top-0 z-50">
 
-      <a class="btn btn-ghost normal-case text-xl" href="/">Compressor</a>
+      <a class="btn btn-ghost normal-case text-xl gap-2" href="/">
+        <Icon code="home" />
+        Compressor
+      </a>
       <div class="flex-1"></div>
 
-      <menu class="p-0 pr-8 m-0 hidden items-center gap-4 md:flex">
-        <Menu />
+      <menu class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex">
+        <a class="btn btn-ghost btn-sm gap-2" href="/editor"><Icon code="palette" class="text-secondary" /> Редактор</a>
+        <a class="btn btn-ghost btn-sm gap-2" href="/about"><Icon code="store" class="text-info" /> О продукте</a>
+        <a class="btn btn-ghost btn-sm gap-2" href="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</a>
+        <a class="btn btn-ghost btn-sm gap-2" href="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</a>
+        <a class="btn btn-ghost btn-sm gap-2" href="/faq"><Icon code="help" class="text-error" /> FAQ</a>
       </menu>
 
       <div>
@@ -60,7 +68,7 @@ export const Header = () => {
           <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" /></svg>
         </button>
 
-        <button class="btn btn-circle swap swap-rotate md:hidden" onClick={drawer.toggle}>
+        <button class="btn btn-circle swap swap-rotate lg:hidden" onClick={drawer.toggle}>
           <input type="checkbox" checked={drawer.isOpen} />
           <svg class="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
           <svg class="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
