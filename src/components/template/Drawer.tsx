@@ -28,6 +28,7 @@ export const Drawer = (props: ParentProps) => {
           </header>
 
           <ul class="menu menu-compact p-2">
+            <li onClick={drawer.close}><a href="/editor">Редактор</a></li>
             <li onClick={drawer.close}><a href="/about">О продукте</a></li>
             <li onClick={drawer.close}><a href="/features">Возможности</a></li>
             <li onClick={drawer.close}><a href="/contact">Контакты</a></li>
