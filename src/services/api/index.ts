@@ -1,5 +1,7 @@
 declare global {
-  interface Window { backendUrl: string; }
+  interface Window {
+    backendUrl: string;
+  }
 }
 
 export * from './fetchAvailability';
