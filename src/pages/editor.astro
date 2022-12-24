@@ -11,7 +11,10 @@ import Layout from "@app/layouts/Layout.astro";
   src="https://scaleflex.cloudimg.io/v7/plugins/filerobot-image-editor/latest/filerobot-image-editor.min.js"
 ></script>
 
-<Layout title="Онлайн редактор картинок">
+<Layout
+  title="Онлайн редактор картинок"
+  description="Редайтируйте картинки онлайн без установки дополнительных программ"
+>
   <Container size="sm">
     <Heading center>
       <H1>Онлайн редактор изображений</H1>
@@ -26,7 +29,5 @@ import Layout from "@app/layouts/Layout.astro";
     <br />
 
     <Editor client:idle />
-
-    
   </Container>
 </Layout>

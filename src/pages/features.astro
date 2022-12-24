@@ -8,14 +8,17 @@ import { H1, H3, H4, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 ---
 
-<Layout title="Возможности">
+<Layout
+  title="Возможности"
+  description="Сжимайте, редактируйте и улучшайте свои изображения"
+>
   <Container size="sm">
     <Heading center>
       <H1>Возможности</H1>
 
       <p>
-        CompressMonster активно развивается, но на данный момент готов
-        предложить только функционал по сжатию изображений.
+        CompressMonster активно развивается. На данный момент готов предложить
+        функционал по сжатию и редактированию изображений.
       </p>
     </Heading>
 
@@ -41,7 +44,10 @@ import Layout from "@app/layouts/Layout.astro";
           title="Редактирование"
           description="Функциональный фоторедактор"
         >
-          <a class="mt-2 btn btn-sm btn-outline btn-success gap-2" href="/editor">
+          <a
+            class="mt-2 btn btn-sm btn-outline btn-success gap-2"
+            href="/editor"
+          >
             <span class="material-symbols-outlined">verified</span>
             Открыть
           </a>
@@ -60,7 +66,7 @@ import Layout from "@app/layouts/Layout.astro";
       </CardContainer>
     </section>
 
-    <div class="divider"/>
+    <div class="divider"></div>
 
     <section>
       <Heading center>
