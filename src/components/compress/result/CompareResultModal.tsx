@@ -57,6 +57,7 @@ export const CompareResultModal = (props: ParentProps<Props>) => {
                   <div class="w-full h-full overflow-hidden">
                     <ImageCompareSlider
                       class="max-h-[80vh]"
+                      withLabels
                       before={<img src={beforeSrc()} />}
                       after={<img src={afterSrc()} />}
                     />

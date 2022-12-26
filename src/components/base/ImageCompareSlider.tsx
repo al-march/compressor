@@ -1,4 +1,4 @@
-import { createSignal, JSXElement, onMount, ParentProps } from "solid-js";
+import { createSignal, JSXElement, onMount, ParentProps, Show } from "solid-js";
 import './ImageCompareSlider.css';
 
 type Position = {
@@ -10,6 +10,7 @@ type Props = {
   before: JSXElement;
   after: JSXElement;
 
+  withLabels?: boolean;
   class?: string;
 }
 
@@ -64,8 +65,10 @@ export const ImageCompareSlider = (props: ParentProps<Props>) => {
         </svg>
       </div>
 
-      <label class="compare-label absolute top-6 right-5 font-black">После</label>
-      <label class="compare-label absolute top-6 left-5 font-black">До</label>
+      <Show when={props.withLabels}>
+        <label class="compare-label absolute top-6 right-5 font-black">После</label>
+        <label class="compare-label absolute top-6 left-5 font-black">До</label>
+      </Show>
     </div>
   )
 }
