@@ -1,1 +1,0 @@
-import{g as t,e as d,k as a,t as l}from"./web.ae784fa2.js";const v=l('<div class="lds-ring w-8 h-8"><div></div><div></div><div></div><div></div></div>'),n=e=>(()=>{const s=t(v);return d(i=>a(s,{[e.class||""]:!!e.class,"w-2 h-2":e.size==="xs","w-4 h-4":e.size==="sm","w-8 h-8":e.size==="md","w-12 h-12":e.size==="lg"},i)),s})();export{n as L};
