@@ -52,6 +52,7 @@ export const Header = () => {
         <Icon code="home" />
         Compressor
       </a>
+
       <div class="flex-1"></div>
 
       <menu class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex">
