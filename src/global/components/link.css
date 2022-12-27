@@ -1,0 +1,3 @@
+.link-active {
+  @apply link-success underline;
+}
