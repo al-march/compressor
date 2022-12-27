@@ -1,4 +1,4 @@
-import { ParentProps, JSX, splitProps, createMemo, onMount, createSignal } from "solid-js";
+import { ParentProps, JSX, splitProps, onMount, createSignal } from "solid-js";
 
 type Props = {
   to: string;
@@ -13,7 +13,7 @@ export const Link = (props: ParentProps<Props>) => {
   const [activeClass, setActiveClass] = createSignal('');
 
   onMount(() => {
-    const isActive = location.pathname === local.to;
+    const isActive = isIncludesPathname();
     setIsActive(isActive);
 
     if (ref) {
@@ -23,7 +23,13 @@ export const Link = (props: ParentProps<Props>) => {
         setActiveClass('link-active');
       }
     }
-  })
+  });
+
+  function isIncludesPathname() {
+    const pathname = location.pathname.replaceAll('/', '');
+    const to = local.to.replaceAll('/', '');
+    return pathname === to;
+  };
 
   return (
     <a
