@@ -58,9 +58,9 @@ export const Header = () => {
       <div class="flex-1"></div>
 
       <menu
-        role="navigation"
         itemscope
         itemtype="http://schema.org/SiteNavigationElement"
+        role="navigation"
         class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex"
       >
         <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>

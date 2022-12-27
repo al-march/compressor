@@ -19,7 +19,11 @@ export const Drawer = (props: ParentProps) => {
       <div class="drawer-side">
         <label class="drawer-overlay" onClick={drawer.close}></label>
 
-        <div class="flex flex-col w-80 bg-base-100 text-base-content">
+        <div
+          itemscope
+          itemtype="http://schema.org/WPSideBar"
+          class="flex flex-col w-80 bg-base-100 text-base-content"
+        >
           <header class="navbar bg-base-200">
             <a class="btn btn-ghost normal-case text-xl flex gap-2" href="/">
               Compressor
@@ -51,7 +55,12 @@ export const Drawer = (props: ParentProps) => {
 
             <div class="divider" />
 
-            <ul class="menu menu-compact p-2 gap-1">
+            <ul
+              itemscope
+              itemtype="http://schema.org/SiteNavigationElement"
+              role="navigation"
+              class="menu menu-compact p-2 gap-1"
+            >
               <li onClick={drawer.close}>
                 <Link itemprop="url" class="btn btn-ghost justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
               </li>
