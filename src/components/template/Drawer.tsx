@@ -27,18 +27,21 @@ export const Drawer = (props: ParentProps) => {
           </header>
 
           <div class="flex-1 flex flex-col py-2">
-            <ul class="menu menu-compact p-2 gap-1">
+            <ul
+              itemscope itemtype="http://schema.org/SiteNavigationElement"
+              class="menu menu-compact p-2 gap-1"
+            >
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/"><Icon code="home" /> Главная</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/"><Icon code="home" /> Главная</Link>
               </li>
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
               </li>
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
               </li>
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
               </li>
             </ul>
 
@@ -48,10 +51,10 @@ export const Drawer = (props: ParentProps) => {
 
             <ul class="menu menu-compact p-2 gap-1">
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
               </li>
               <li onClick={drawer.close}>
-                <Link class="btn btn-ghost justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+                <Link itemprop="url" class="btn btn-ghost justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
               </li>
             </ul>
           </div>

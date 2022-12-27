@@ -8,7 +8,7 @@ import {
   Container,
 } from "@app/components/template/layout";
 import { H1, H2, H4, Heading } from "@app/components/template/typography";
-import { HowToUse } from "@app/components/template/HowToUse";
+import { HowToUse } from "./index/HowToUse";
 import { CompressExample } from "./index/CompressExample";
 ---
 
@@ -121,9 +121,9 @@ import { CompressExample } from "./index/CompressExample";
 
     <span class="divider"></span>
 
-    <section class="py-10 px-2">
+    <section class="py-10 px-2" itemscope itemtype="http://schema.org/HowTo">
       <Heading center>
-        <H2>
+        <H2 itemprop="name">
           3 простых шага для сжатия картинки <br />
           <span class="text-xl font-normal">с потерей качества или без</span>
         </H2>

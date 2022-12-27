@@ -3,7 +3,6 @@ import { createSignal, onMount } from "solid-js"
 import { Theme } from "../../constants"
 import { Icon } from "../base";
 import { Link } from "../base/link";
-import { Menu } from "./Menu";
 
 const THEME_STORAGE_KEY = 'app-theme';
 
@@ -46,21 +45,29 @@ export const Header = () => {
 
 
   return (
-    <header class="navbar bg-neutral text-neutral-content sticky top-0 z-50">
-
-      <a class="btn btn-ghost normal-case text-xl gap-2" href="/">
+    <header
+      itemscope
+      itemtype="http://schema.org/WPHeader"
+      class="navbar bg-neutral text-neutral-content sticky top-0 z-50"
+    >
+      <a itemprop="url" class="btn btn-ghost normal-case text-xl gap-2" href="/">
         <Icon code="home" />
         Compressor
       </a>
 
       <div class="flex-1"></div>
 
-      <menu class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex">
-        <Link class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
-        <Link class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
-        <Link class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
-        <Link class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
-        <Link class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+      <menu
+        role="navigation"
+        itemscope
+        itemtype="http://schema.org/SiteNavigationElement"
+        class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex"
+      >
+        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
       </menu>
 
       <div>

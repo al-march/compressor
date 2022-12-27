@@ -1,18 +1,24 @@
 import type { DaisyColor } from "@app/constants";
-import type { JSXElement, ParentProps } from "solid-js";
+import { JSXElement, ParentProps, JSX, splitProps } from "solid-js";
 import { H4 } from "../typography";
 
 type CardContainerProps = {
   class?: string;
-}
+} & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const CardContainer = (props: ParentProps<CardContainerProps>) => {
+  const [local, others] = splitProps(props, ['class', 'classList', 'children']);
+
   return (
     <div
       class="flex items-start justify-center gap-4 flex-wrap"
-      classList={{ [props.class || '']: !!props.class }}
+      classList={{
+        [local.class || '']: !!props.class,
+        ...local.classList
+      }}
+      {...others}
     >
-      {props.children}
+      {local.children}
     </div>
   )
 }
