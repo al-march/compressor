@@ -5,7 +5,12 @@ type Props = {} & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const Menu = (props: Props) => {
   return (
-    <div itemscope itemtype="http://schema.org/SiteNavigationElement" {...props}>
+    <div
+      role="navigation"
+      itemscope
+      itemtype="http://schema.org/SiteNavigationElement"
+      {...props}
+    >
       <Link itemprop="url" class="link link-hover" to="/">Главная</Link>
       <Link itemprop="url" class="link link-hover" to="/editor">Редактор</Link>
       <Link itemprop="url" class="link link-hover" to="/about">О продукте</Link>

@@ -8,6 +8,7 @@ type Props = {
 export const Heading = (props: ParentProps<Props>) => {
   return (
     <div
+      role="heading"
       class="flex flex-col gap-4"
       classList={{
         [props.class || '']: !!props.class,

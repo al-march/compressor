@@ -28,7 +28,9 @@ export const Drawer = (props: ParentProps) => {
 
           <div class="flex-1 flex flex-col py-2">
             <ul
-              itemscope itemtype="http://schema.org/SiteNavigationElement"
+              itemscope
+              itemtype="http://schema.org/SiteNavigationElement"
+              role="navigation"
               class="menu menu-compact p-2 gap-1"
             >
               <li onClick={drawer.close}>

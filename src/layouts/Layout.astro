@@ -124,7 +124,7 @@ const { title, description } = Astro.props;
       <div class="min-h-screen flex flex-col">
         <Header client:idle />
 
-        <main itemscope itemprop="mainContentOfPage" class="flex-1">
+        <main class="flex-1" role="main" itemscope itemprop="mainContentOfPage">
           <slot />
         </main>
         <Footer client:idle />
