@@ -1,12 +1,14 @@
+import { Link } from "../base/link"
+
 export const Menu = () => {
   return (
     <>
-      <a class="link link-hover" href="/">Главная</a>
-      <a class="link link-hover" href="/editor">Редактор</a>
-      <a class="link link-hover" href="/about">О продукте</a>
-      <a class="link link-hover" href="/features">Возможности</a>
-      <a class="link link-hover" href="/contact">Контакты</a>
-      <a class="link link-hover" href="/faq">FAQ</a>
+      <Link class="link link-hover" to="/">Главная</Link>
+      <Link class="link link-hover" to="/editor">Редактор</Link>
+      <Link class="link link-hover" to="/about">О продукте</Link>
+      <Link class="link link-hover" to="/features">Возможности</Link>
+      <Link class="link link-hover" to="/contact">Контакты</Link>
+      <Link class="link link-hover" to="/faq">FAQ</Link>
     </>
   )
 }

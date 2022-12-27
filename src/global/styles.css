@@ -1,4 +1,5 @@
 @import url('./components/loader.css');
+@import url('./components/link.css');
 
 .container {
   margin: 0 auto;

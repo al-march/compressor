@@ -2,6 +2,7 @@ import { AppStore } from "@app/stores";
 import { createSignal, onMount } from "solid-js"
 import { Theme } from "../../constants"
 import { Icon } from "../base";
+import { Link } from "../base/link";
 import { Menu } from "./Menu";
 
 const THEME_STORAGE_KEY = 'app-theme';
@@ -54,11 +55,11 @@ export const Header = () => {
       <div class="flex-1"></div>
 
       <menu class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex">
-        <a class="btn btn-ghost btn-sm gap-2" href="/editor"><Icon code="palette" class="text-secondary" /> Редактор</a>
-        <a class="btn btn-ghost btn-sm gap-2" href="/about"><Icon code="store" class="text-info" /> О продукте</a>
-        <a class="btn btn-ghost btn-sm gap-2" href="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</a>
-        <a class="btn btn-ghost btn-sm gap-2" href="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</a>
-        <a class="btn btn-ghost btn-sm gap-2" href="/faq"><Icon code="help" class="text-error" /> FAQ</a>
+        <Link class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+        <Link class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+        <Link class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+        <Link class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+        <Link class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
       </menu>
 
       <div>
