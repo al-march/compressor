@@ -7,8 +7,7 @@ type Props = {
 
 export const Heading = (props: ParentProps<Props>) => {
   return (
-    <div
-      role="heading"
+    <header
       class="flex flex-col gap-4"
       classList={{
         [props.class || '']: !!props.class,
@@ -17,6 +16,6 @@ export const Heading = (props: ParentProps<Props>) => {
       }}
     >
       {props.children}
-    </div>
+    </header>
   )
 }

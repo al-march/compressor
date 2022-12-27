@@ -9,10 +9,13 @@ export const Drawer = (props: ParentProps) => {
   return (
     <div class="drawer">
       <input
+        role="none"
+        aria-label="открыть меню"
         type="checkbox"
         class="drawer-toggle"
         checked={drawer.isOpen}
       />
+
       <div class="drawer-content scroll-smooth">
         {props.children}
       </div>
@@ -31,43 +34,30 @@ export const Drawer = (props: ParentProps) => {
           </header>
 
           <div class="flex-1 flex flex-col py-2">
-            <ul
+            <nav
               itemscope
               itemtype="http://schema.org/SiteNavigationElement"
-              role="navigation"
               class="menu menu-compact p-2 gap-1"
             >
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/"><Icon code="home" /> Главная</Link>
-              </li>
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
-              </li>
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
-              </li>
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
-              </li>
-            </ul>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/"><Icon code="home" /> Главная</Link>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+            </nav>
 
             <div class="flex-1" />
 
             <div class="divider" />
 
-            <ul
+            <nav
               itemscope
               itemtype="http://schema.org/SiteNavigationElement"
               role="navigation"
               class="menu menu-compact p-2 gap-1"
             >
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
-              </li>
-              <li onClick={drawer.close}>
-                <Link itemprop="url" class="btn btn-ghost justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
-              </li>
-            </ul>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+            </nav>
           </div>
         </div>
 

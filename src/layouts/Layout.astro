@@ -57,66 +57,6 @@ const { title, description } = Astro.props;
     />
     <meta itemprop="description" name="description" content={description} />
     <title itemprop="headline">Compressor | {title}</title>
-
-    <!-- Yandex.Metrika counter -->
-    <script is:global type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        m[i].l = 1 * new Date();
-        for (var j = 0; j < document.scripts.length; j++) {
-          if (document.scripts[j].src === r) {
-            return;
-          }
-        }
-        (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a);
-      })(
-        window,
-        document,
-        "script",
-        "https://mc.yandex.ru/metrika/tag.js",
-        "ym"
-      );
-
-      ym(91517967, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-      });
-    </script>
-    <noscript
-      ><div>
-        <img
-          src="https://mc.yandex.ru/watch/91517967"
-          style="position:absolute; left:-9999px;"
-          alt=""
-        />
-      </div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      is:global
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-NL6SKTDSRR"
-    ></script>
-    <script is:global>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-NL6SKTDSRR");
-    </script>
   </head>
 
   <body>
@@ -131,4 +71,58 @@ const { title, description } = Astro.props;
       </div>
     </Drawer>
   </body>
+
+  <!-- Yandex.Metrika counter -->
+  <script is:global type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] =
+        m[i] ||
+        function () {
+          (m[i].a = m[i].a || []).push(arguments);
+        };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      (k = e.createElement(t)),
+        (a = e.getElementsByTagName(t)[0]),
+        (k.async = 1),
+        (k.src = r),
+        a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(91517967, "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+    });
+  </script>
+  <noscript
+    ><div>
+      <img
+        src="https://mc.yandex.ru/watch/91517967"
+        style="position:absolute; left:-9999px;"
+        alt=""
+      />
+    </div>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+
+  <!-- Google tag (gtag.js) -->
+  <script
+    is:global
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-NL6SKTDSRR"
+  ></script>
+  <script is:global>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-NL6SKTDSRR");
+  </script>
 </html>

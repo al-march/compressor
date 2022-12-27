@@ -52,7 +52,7 @@ export const CompressDropZone = (props: Props) => {
               <div>
                 <AccessibleImagesBadges />
               </div>
-              <span class="opacity-60 font-light text-sm text-center">Перетащите или нажмите на кнопку ниже</span>
+              <span class="font-light text-sm text-center">Перетащите или нажмите на кнопку ниже</span>
             </div>
 
             <button
