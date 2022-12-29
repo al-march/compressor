@@ -1,7 +1,7 @@
 import { CardContainer } from "@app/components/template/layout";
 import { H4 } from "@app/components/template/typography";
 import type { DaisyColor } from "@solsy/ui";
-import { JSXElement, ParentProps, JSX, splitProps } from "solid-js"
+import { JSXElement, ParentProps, JSX, splitProps, createMemo } from "solid-js"
 
 type CardProps = {
   position?: string;
@@ -26,9 +26,12 @@ export const Card = (props: ParentProps<CardProps>) => {
     'children'
   ])
 
+  const id = createMemo(() => 'step-' + local.position)
+
   return (
     <article
-      itemprop="step" itemscope itemtype="http://schema.org/HowToSection"
+      id={id()}
+      itemprop="step" itemscope itemtype="http://schema.org/HowToStep"
       class="flex flex-col gap-2 items-center justify-center text-center"
       classList={{
         [props.class || '']: !!local.class,
@@ -38,6 +41,7 @@ export const Card = (props: ParentProps<CardProps>) => {
       {...others}
     >
       <meta itemprop="position" content={local.position} />
+      <meta itemprop="url" content={'#' + id()} />
       <span
         itemprop="image"
         class="material-symbols-outlined text-4xl"
@@ -55,7 +59,14 @@ export const Card = (props: ParentProps<CardProps>) => {
       </span>
 
       <H4 itemprop="name">{local.title}</H4>
-      <p itemprop="text">{local.description}</p>
+
+      <div
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/HowToDirection"
+      >
+        <p itemprop="text">{local.description}</p>
+      </div>
 
       {local.children}
     </article>
