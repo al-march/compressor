@@ -63,6 +63,14 @@ const { title, description } = Astro.props;
     />
     <meta itemprop="description" name="description" content={description} />
     <title itemprop="headline">Compressor | {title}</title>
+    <script type="application/ld+json" is:global>
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "https://compress.monster",
+        "logo": "https://compress.monster/logo.png"
+      }
+      </script>
   </head>
 
   <body>

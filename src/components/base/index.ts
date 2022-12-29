@@ -4,4 +4,4 @@ export * from './Loader';
 export * from './Tooltip';
 export * from './ImageCompareSlider';
 export * from './Icon';
-
+export * from './AppLogo';

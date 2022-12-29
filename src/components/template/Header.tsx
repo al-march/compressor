@@ -1,7 +1,7 @@
 import { AppStore } from "@app/stores";
 import { createSignal, onMount } from "solid-js"
 import { Theme } from "../../constants"
-import { Icon } from "../base";
+import { AppLogo, Icon } from "../base";
 import { Link } from "../base/link";
 
 const THEME_STORAGE_KEY = 'app-theme';
@@ -50,9 +50,8 @@ export const Header = () => {
       itemtype="http://schema.org/WPHeader"
       class="navbar bg-neutral text-neutral-content sticky top-0 z-50"
     >
-      <a itemprop="url" class="btn btn-ghost normal-case text-xl gap-2" href="/">
-        <Icon code="home" />
-        Compressor
+      <a itemprop="url" class="btn btn-ghost btn-circle p-1" href="/">
+        <AppLogo />
       </a>
 
       <div class="flex-1"></div>
