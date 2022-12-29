@@ -14,7 +14,7 @@ export const AppLogo = (props: Props) => {
         [local.class || '']: !!local.class,
         ...local.classList
       }}
-      src="logo.png"
+      src="/logo.png"
       alt="App Logo"
       {...others}
     />
