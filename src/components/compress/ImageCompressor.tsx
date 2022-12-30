@@ -9,6 +9,7 @@ import { DropZone } from '@app/components/base';
 import { CompressSettings } from './drop-zone/CompressSettings';
 import { Scale } from '../base/animations';
 import './ImageCompressor.css';
+import { DropButton } from './components';
 
 type View = 'compress' | 'settings';
 
@@ -137,6 +138,17 @@ export const ImageCompressor = () => {
                 onImageRemove={removeImage}
                 onLoadAll={downloadAll}
               />
+
+              <Show when={images().length}>
+                <div class="w-full flex items-center justify-center">
+                  <DropButton
+                    class="btn-sm btn-outline mt-4"
+                    onDropFiles={processFileList}
+                  >
+                    Загрузить еще
+                  </DropButton>
+                </div>
+              </Show>
             </div>
           </DropZone>
         </div>
@@ -156,7 +168,7 @@ export const ImageCompressor = () => {
             </footer>
           </Show>
         </div>
-        
+
       </div>
     </section>
   )
