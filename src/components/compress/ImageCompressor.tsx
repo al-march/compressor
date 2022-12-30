@@ -8,8 +8,8 @@ import { AccessibleImages } from '@app/constants';
 import { DropZone } from '@app/components/base';
 import { CompressSettings } from './drop-zone/CompressSettings';
 import { Scale } from '../base/animations';
-import './ImageCompressor.css';
 import { DropButton } from './components';
+import './ImageCompressor.css';
 
 type View = 'compress' | 'settings';
 
@@ -163,7 +163,7 @@ export const ImageCompressor = () => {
               <ResultStats images={images()} />
 
               <button class="btn btn-primary btn-outline btn-xs" onClick={downloadAll}>
-                Скачать
+                Скачать ({images().length})
               </button>
             </footer>
           </Show>
