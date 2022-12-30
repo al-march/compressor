@@ -39,10 +39,10 @@ export const Drawer = (props: ParentProps) => {
               itemtype="http://schema.org/SiteNavigationElement"
               class="menu menu-compact p-2 gap-1"
             >
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/"><Icon code="home" /> Главная</Link>
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/"><Icon code="home" /> Главная</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
             </nav>
 
             <div class="flex-1" />
@@ -55,8 +55,8 @@ export const Drawer = (props: ParentProps) => {
               role="navigation"
               class="menu menu-compact p-2 gap-1"
             >
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
-              <Link onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
             </nav>
           </div>
         </div>

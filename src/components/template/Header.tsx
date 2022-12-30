@@ -62,11 +62,11 @@ export const Header = () => {
         role="navigation"
         class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex"
       >
-        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
-        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
-        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
-        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
-        <Link itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
       </menu>
 
       <div>
