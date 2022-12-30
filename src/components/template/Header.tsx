@@ -62,6 +62,7 @@ export const Header = () => {
         role="navigation"
         class="p-0 pr-8 m-0 items-center gap-1 hidden lg:flex"
       >
+        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/"><Icon code="home" class="text-secondary" /> Главная</Link>
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
