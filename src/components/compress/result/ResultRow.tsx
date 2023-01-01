@@ -2,23 +2,11 @@ import type { Subscription } from "rxjs";
 import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js";
 import type { CompressImage } from "@app/models"
 import { compressorService, convertService, downloadService, imageService } from "@app/services";
+import { titleWidthFixed } from "@app/services/utils";
 import { Loader, Tooltip } from "@app/components/base";
 import { ImageStore } from "../Store";
 
 const toMb = convertService.bytesToMb;
-
-function titleWidthFixed(title: string, prefix = '', suffix = '') {
-  const max = 20;
-  const output = imageService.addPrefixAndSuffix(title, prefix, suffix);
-
-  if (output.length > max) {
-    const part = Math.floor(max / 2);
-    const start = output.slice(0, part);
-    const end = output.slice(-part);
-    return `${start}...${end}`;
-  }
-  return output;
-}
 
 const ImagePreview = (props: { image: CompressImage }) => {
   const [previewSrc, setPreviewSrc] = createSignal('');
