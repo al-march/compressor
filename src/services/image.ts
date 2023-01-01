@@ -1,6 +1,6 @@
 import { CompressImage } from "@app/models";
 
-function fileListToImages(list: FileList) {
+function fileListToCompressImages(list: FileList) {
   const images: CompressImage[] = [];
 
   for (let i = 0; i < list.length; i++) {
@@ -12,6 +12,18 @@ function fileListToImages(list: FileList) {
   }
 
   return images;
+}
+
+function listToImages(list: FileList) {
+  const output: File[] = [];
+
+  for (const item of list) {
+    if (item instanceof File) {
+      output.push(item);
+    }
+  }
+
+  return output;
 }
 
 function sliceExt(fileName: string) {
@@ -30,7 +42,8 @@ function addPrefixAndSuffix(title: string, prefix = '', suffix = '') {
 }
 
 export const imageService = Object.assign({}, {
-  fileListToImages,
+  fileListToCompressImages,
+  listToImages,
   addPrefixAndSuffix,
   sliceExt
 })

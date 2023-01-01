@@ -3,7 +3,7 @@ import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js";
 import type { CompressImage } from "@app/models"
 import { compressorService, convertService, downloadService, imageService } from "@app/services";
 import { titleWidthFixed } from "@app/services/utils";
-import { Loader, Tooltip } from "@app/components/base";
+import { Icon, Loader, Tooltip } from "@app/components/base";
 import { ImageStore } from "../Store";
 
 const toMb = convertService.bytesToMb;
@@ -99,9 +99,7 @@ export const ResultRow = (props: Props) => {
         >
           <div class="font-bold opacity-75 overflow-hidden">
             <div class="flex gap-1 items-center w-full">
-              <span class="material-symbols-outlined text-success">
-                image
-              </span>
+              <Icon code="image" class="text-success" />
               <span class="truncate font-semibold" title={image().initial.name}>
                 {titleWidthFixed(
                   image().initial.name,

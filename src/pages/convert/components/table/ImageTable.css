@@ -1,0 +1,4 @@
+.convert-table {
+  @apply grid gap-1;
+  grid-template-columns: repeat(4, minmax(auto, 1fr));
+}

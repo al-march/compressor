@@ -1,0 +1,28 @@
+---
+import { Container } from "@app/components/template/layout";
+import { H1, Heading } from "@app/components/template/typography";
+import Layout from "@app/layouts/Layout.astro";
+import { ImageConverter } from "./components";
+---
+
+<Layout
+  title="Конвертация изображений в jpg, png, webp и другие"
+  description="Беслатная и быстрая конвертация картинок в различные форматы"
+>
+  <Container size="sm">
+    <Heading center>
+      <H1>Онлайн конвертация</H1>
+
+      <p>
+        Бесплатная онлайн преобразование картинок, фотографий и других
+        изображений
+        <br />
+        в jpg, jpeg, png, webp и прочие форматы
+      </p>
+    </Heading>
+
+    <span class="divider"></span>
+
+    <ImageConverter client:only="solid-js" />
+  </Container>
+</Layout>
