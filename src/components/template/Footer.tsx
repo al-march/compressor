@@ -9,7 +9,7 @@ export const Footer = () => {
       class="footer footer-center p-10 px-2 bg-neutral text-neutral-content rounded"
     >
       <Menu
-        class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col gap-4"
+        class="grid grid-rows-3 sm:grid-rows-2 md:grid-rows-1 grid-flow-col gap-4"
       />
       <div>
         <p>Copyright © <span itemprop="copyrightYear">{year}</span> - All right reserved</p>

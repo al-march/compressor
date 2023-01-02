@@ -41,6 +41,7 @@ export const Drawer = (props: ParentProps) => {
             >
               <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/"><Icon code="home" /> Главная</Link>
               <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
+              <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/convert"><Icon code="transform" class="text-warning" /> Конвертер</Link>
               <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
               <Link rel="prefetch" onClick={drawer.close} itemprop="url" class="btn btn-ghost gap-2 justify-start" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
             </nav>

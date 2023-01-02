@@ -11,12 +11,13 @@ export const Menu = (props: Props) => {
       itemtype="http://schema.org/SiteNavigationElement"
       {...props}
     >
-      <Link itemprop="url" class="link link-hover" to="/">Главная</Link>
-      <Link itemprop="url" class="link link-hover" to="/editor">Редактор</Link>
-      <Link itemprop="url" class="link link-hover" to="/about">О продукте</Link>
-      <Link itemprop="url" class="link link-hover" to="/features">Возможности</Link>
-      <Link itemprop="url" class="link link-hover" to="/contact">Контакты</Link>
-      <Link itemprop="url" class="link link-hover" to="/faq">FAQ</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/">Главная</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/editor">Редактор</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/convert">Конвертер</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/about">О продукте</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/features">Возможности</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/contact">Контакты</Link>
+      <Link itemprop="url" class="link link-hover justify-self-start" to="/faq">FAQ</Link>
     </div>
   )
 }

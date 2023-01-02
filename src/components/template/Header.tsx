@@ -65,9 +65,33 @@ export const Header = () => {
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/"><Icon code="home" class="text-secondary" /> Главная</Link>
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/editor"><Icon code="palette" class="text-secondary" /> Редактор</Link>
         <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/about"><Icon code="store" class="text-info" /> О продукте</Link>
-        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/features"><Icon code="tips_and_updates" class="text-warning" /> Возможности</Link>
-        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/contact"><Icon code="outgoing_mail" class="text-primary" /> Контакты</Link>
-        <Link rel="prefetch" itemprop="url" class="btn btn-ghost btn-sm gap-2" to="/faq"><Icon code="help" class="text-error" /> FAQ</Link>
+
+        <ul class="menu menu-horizontal px-1">
+          <li tabindex="0">
+            <a class="btn btn-ghost btn-sm gap-2 p-1 px-2">
+              Другое
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+            </a>
+
+            <ul class="p-2 bg-neutral shadow-xl">
+              <li>
+                <Link rel="prefetch" itemprop="url" activeClass="btn-active" class="gap-2" to="/features">
+                  <Icon code="tips_and_updates" class="text-warning" /> Возможности
+                </Link>
+              </li>
+              <li>
+                <Link rel="prefetch" itemprop="url" activeClass="btn-active" class="gap-2" to="/contact">
+                  <Icon code="outgoing_mail" class="text-primary" /> Контакты
+                </Link>
+              </li>
+              <li>
+                <Link rel="prefetch" itemprop="url" activeClass="btn-active" class="gap-2" to="/faq">
+                  <Icon code="help" class="text-error" /> FAQ
+                </Link>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </menu>
 
       <div>
