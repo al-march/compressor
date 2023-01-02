@@ -1,0 +1,1 @@
+.convert-table{display:grid;gap:.25rem;grid-template-columns:repeat(4,minmax(auto,1fr))}
