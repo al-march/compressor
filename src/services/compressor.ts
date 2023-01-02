@@ -1,16 +1,11 @@
 import Compressor from 'compressorjs';
 
-export interface CompressConfig {
-  quality: number;
-  width?: number;
-}
+export type CompressConfig = Compressor.Options;
 
 const image = (file: File, config: CompressConfig): Promise<File> => {
   return new Promise((res, rej) => {
     new Compressor(file, {
-      quality: config.quality,
-      width: config.width,
-
+      ...config,
       success: (file: File | Blob) => {
         let compressedImage: File;
         if (file instanceof Blob) {

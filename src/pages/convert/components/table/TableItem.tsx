@@ -1,5 +1,5 @@
 import { Icon, Tooltip } from "@app/components/base";
-import { downloadService, imageService } from "@app/services";
+import { compressorService, downloadService, imageService } from "@app/services";
 import { titleWidthFixed } from "@app/services/utils";
 import { createMemo } from "solid-js";
 import { ConvertImage, ConvertTypes } from "../../store";
@@ -19,14 +19,19 @@ export const TableItem = (props: Props) => {
     return props.type === ConvertTypes.INITIAL
       ? initialType()
       : props.type
-  })
+  });
 
   function remove() {
     props.onRemove?.(props.image);
   }
 
-  function download() {
-    downloadService.file(props.image.file);
+  async function download() {
+    const file = await compressorService.image(props.image.file, {
+      quality: 0.9,
+      mimeType: convertType(),
+    }); 
+
+    downloadService.file(file);
   }
 
   return (

@@ -2,7 +2,7 @@ import { splitProps, JSX, createSignal } from "solid-js"
 
 type Props = {
   onDropFiles?: (fileList: FileList) => void;
-} & JSX.HTMLAttributes<HTMLButtonElement>;
+} & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const DropButton = (props: Props) => {
   const [inputRef, setInputRef] = createSignal<HTMLInputElement>();
@@ -10,7 +10,7 @@ export const DropButton = (props: Props) => {
     'class',
     'classList',
     'onClick'
-  ])
+  ]);
 
   function onSelectFiles() {
     inputRef()?.click();
