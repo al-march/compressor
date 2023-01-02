@@ -2,38 +2,54 @@ import { Icon, Tooltip } from "@app/components/base";
 import { downloadService, imageService } from "@app/services";
 import { titleWidthFixed } from "@app/services/utils";
 import { createMemo } from "solid-js";
+import { ConvertImage, ConvertTypes } from "../../store";
 
 type Props = {
-  file: File;
+  image: ConvertImage;
+  type: ConvertTypes;
 
-  onRemove: (file: File) => void;
+  onRemove: (file: ConvertImage) => void;
 }
 
 export const TableItem = (props: Props) => {
 
-  const ext = createMemo(() => imageService.sliceExt(props.file.name).ext)
+  const initialType = createMemo(() => props.image.file.type);
+
+  const convertType = createMemo(() => {
+    return props.type === ConvertTypes.INITIAL
+      ? initialType()
+      : props.type
+  })
 
   function remove() {
-    props.onRemove?.(props.file);
+    props.onRemove?.(props.image);
   }
 
   function download() {
-    downloadService.file(props.file);
+    downloadService.file(props.image.file);
   }
 
   return (
     <>
-      <div class="p-1">
+      <div class="p-1 overflow-hidden">
         <div class="flex gap-1 items-center w-full">
           <Icon code="image" class="text-success" />
-          <span class="whitespace-nowrap font-semibold" title={props.file.name}>
-            {titleWidthFixed(props.file.name)}
+          <span class="whitespace-nowrap font-semibold" title={props.image.file.name}>
+            {titleWidthFixed(props.image.file.name)}
           </span>
         </div>
       </div>
-      <div class="p-1 text-center">{ext()}</div>
-      <div class="p-1"></div>
-      <div class="p-1">
+      <div class="p-1 text-center overflow-hidden">
+        <span class="badge badge-info font-bold">
+          {initialType()}
+        </span>
+      </div>
+      <div class="p-1 text-center overflow-hidden">
+        <span class="badge badge-info font-bold">
+          {convertType()}
+        </span>
+      </div>
+      <div class="p-1 overflow-hidden">
         <div class="flex gap-2 justify-center">
           <Tooltip message="Удалить" placement="top">
             <button
@@ -53,7 +69,6 @@ export const TableItem = (props: Props) => {
             </button>
           </Tooltip>
         </div>
-
       </div>
     </>
   )

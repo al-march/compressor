@@ -75,7 +75,6 @@ function recompressAll() {
 }
 
 settings$.pipe(debounceTime(300)).subscribe(() => {
-  console.log('recompress')
   recompressAll();
 })
 

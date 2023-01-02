@@ -1,15 +1,21 @@
 import { HeightGroup } from "@app/components/base/animations";
-import { For } from "solid-js";
+import { createEffect, For } from "solid-js";
 import { TableItem } from "./TableItem";
 import './ImageTable.css';
+import type { ConvertImage, ConvertTypes } from "../../store";
 
 type Props = {
-  images: File[];
+  images: ConvertImage[];
+  type: ConvertTypes;
 
-  onRemove: (file: File) => void;
+  onRemove: (file: ConvertImage) => void;
 }
 
 export const ImageTable = (props: Props) => {
+
+  createEffect(() => {
+    console.log(props);
+  })
 
   return (
     <section class="convert-table">
@@ -22,7 +28,8 @@ export const ImageTable = (props: Props) => {
         <For each={props.images}>
           {file => (
             <TableItem
-              file={file}
+              image={file}
+              type={props.type}
               onRemove={props.onRemove}
             />
           )}
