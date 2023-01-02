@@ -54,14 +54,18 @@ import Layout from "@app/layouts/Layout.astro";
         </Card>
 
         <Card
-          color="error"
-          icon="published_with_changes"
+          color="success"
+          icon="transform"
           title="Преобразование"
           description="Из одного формата в другой"
         >
-          <button class="mt-2 btn btn-sm btn-outline btn-disabled">
-            В разработке...
-          </button>
+          <a
+            class="mt-2 btn btn-sm btn-outline btn-success gap-2"
+            href="/convert"
+          >
+            <span class="material-symbols-outlined">verified</span>
+            Открыть
+          </a>
         </Card>
       </CardContainer>
     </section>
