@@ -1,6 +1,8 @@
 ---
+import { Divider } from "@app/components/base";
+import { HowTo } from "@app/components/template/HowTo";
 import { Container } from "@app/components/template/layout";
-import { H1, Heading } from "@app/components/template/typography";
+import { H1, H2, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 import { ImageConverter } from "./components";
 ---
@@ -21,8 +23,37 @@ import { ImageConverter } from "./components";
       </p>
     </Heading>
 
-    <span class="divider"></span>
+    <Divider />
 
-    <ImageConverter client:only="solid-js" />
+    <ImageConverter client:idle />
+
+    <Divider />
+
+    <HowTo
+      client:idle
+      heading="Как пользоваться конвертацией картинок"
+    >
+      <HowTo.Card
+        position="1"
+        color="success"
+        icon="image"
+        title="Выберете изображения"
+        description="Перетащите картинки или нажмите на кнопку"
+      />
+      <HowTo.Card
+        position="2"
+        color="success"
+        icon="settings"
+        title="Выберете нужный формат"
+        description="Нажмите на кнопку расширения картинки"
+      />
+      <HowTo.Card
+        position="3"
+        color="success"
+        icon="download"
+        title="Выгрузите картинки"
+        description="Выгрузьте все картинки или по отдельности"
+      />
+    </HowTo>
   </Container>
 </Layout>
