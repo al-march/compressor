@@ -76,19 +76,35 @@ const Card = (props: ParentProps<CardProps>) => {
 
 type Props = {
   heading: JSXElement;
-}
+} & JSX.HTMLAttributes<HTMLElement>;
 
 const HowToUse = (props: ParentProps<Props>) => {
+  const [local, others] = splitProps(props, [
+    'heading',
+    'class',
+    'classList',
+    'children'
+  ]);
+
   return (
-    <section class="flex flex-col gap-6" itemscope itemtype="http://schema.org/HowTo">
+    <section
+      class="flex flex-col gap-6"
+      classList={{
+        [local.class || '']: !!props.class,
+        ...local.classList
+      }}
+      itemscope
+      itemtype="http://schema.org/HowTo"
+      {...others}
+    >
       <Heading center>
         <H2 itemprop="name">
-          {props.heading}
+          {local.heading}
         </H2>
       </Heading>
 
       <CardContainer>
-        {props.children}
+        {local.children}
       </CardContainer>
     </section>
   )
