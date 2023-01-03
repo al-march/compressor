@@ -1,0 +1,24 @@
+---
+import { Divider } from "@app/components/base";
+import { Container } from "@app/components/template/layout";
+import { H1, Heading } from "@app/components/template/typography";
+import Layout from "@app/layouts/Layout.astro";
+import { TextParser } from "./components";
+---
+
+<Layout
+  title="Получить текст с изображения онлайн"
+  description="Парсинг текста с фото, картинки или любого другого изображения онлайн"
+>
+  <Container size="sm">
+    <Heading center>
+      <H1>Текст с картинки</H1>
+
+      <p>Инструмент для получения текста из фото</p>
+    </Heading>
+
+    <Divider />
+
+    <TextParser client:idle />
+  </Container>
+</Layout>

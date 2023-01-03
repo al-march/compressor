@@ -25,6 +25,7 @@
     "rxjs": "^7.6.0",
     "solid-js": "^1.6.4",
     "solid-transition-group": "^0.0.12",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "tesseract.js": "^4.0.2"
   }
 }
