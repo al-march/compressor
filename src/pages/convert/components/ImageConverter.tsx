@@ -41,8 +41,19 @@ export const ImageConverter = () => {
         mimeType: store.state.settings.type
       })
     });
+
     const list = await Promise.all(awaitList);
-    downloadService.zip(list);
+    const unique: File[] = [];
+    const names: Set<string> = new Set();
+
+    list.forEach(file => {
+      if (!names.has(file.name)) {
+        names.add(file.name);
+        unique.push(file);
+      }
+    });
+
+    downloadService.zip(unique);
   }
 
   return (
