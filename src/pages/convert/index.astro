@@ -1,8 +1,8 @@
 ---
-import { Divider } from "@app/components/base";
+import { Divider, Icon } from "@app/components/base";
 import { HowTo } from "@app/components/template/HowTo";
 import { Container } from "@app/components/template/layout";
-import { H1, Heading } from "@app/components/template/typography";
+import { H1, H2, H3, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 import { ImageConverter } from "./components";
 ---
@@ -32,7 +32,7 @@ import { ImageConverter } from "./components";
     <HowTo
       client:idle
       class="pb-8"
-      heading="Как пользоваться конвертацией картинок"
+      heading="Как пользоваться конвертацией"
     >
       <HowTo.Card
         position="1"
@@ -56,5 +56,51 @@ import { ImageConverter } from "./components";
         description="Выгрузьте все картинки или по отдельности"
       />
     </HowTo>
+
+    <Divider />
+
+    <Heading center>
+      <H2>Возможности</H2>
+
+      <p>
+        С помощью сервиса конвертации картинок вы можете
+        массово преобразовать изображения в различные форматы
+      </p>
+    </Heading>
+
+    <div class="flex justify-center flex-wrap my-6 gap-4">
+      <article
+        class="p-4 w-48 shadow-2xl rounded text-center transition-all hover:scale-110"
+      >
+        <p class="px-4">Конвертация <br /> в JPEG</p>
+        <Divider class="my-2" />
+        <a href="/convert/to-jpeg" class="btn btn-sm btn-outline gap-2">
+          Перейти
+          <Icon code="google_plus_reshare" class="text-sm" />
+        </a>
+      </article>
+
+      <article
+        class="p-4 w-48 shadow-2xl rounded text-center transition-all hover:scale-110"
+      >
+        <p class="px-4">Конвертация <br /> в PNG</p>
+        <Divider class="my-2" />
+        <a href="/convert/to-png" class="btn btn-sm btn-outline gap-2">
+          Перейти
+          <Icon code="google_plus_reshare" class="text-sm" />
+        </a>
+      </article>
+
+      <article
+        class="p-4 w-48 shadow-2xl rounded text-center transition-all hover:scale-110"
+      >
+        <p class="px-4">Конвертация <br /> в WEBP</p>
+        <Divider class="my-2" />
+        <a href="/convert/to-webp" class="btn btn-sm btn-outline gap-2">
+          Перейти
+          <Icon code="google_plus_reshare" class="text-sm" />
+        </a>
+      </article>
+    </div>
   </Container>
 </Layout>
