@@ -3,19 +3,25 @@ import { Scale } from "@app/components/base/animations";
 import { DropButton } from "@app/components/compress/components";
 import { CompressDropZone } from "@app/components/compress/drop-zone";
 import { compressorService, downloadService, imageService } from "@app/services";
-import { createEffect, createMemo, Match, Switch } from "solid-js"
-import { ConvertImage, ConvertStore } from "../store";
+import { createMemo, Match, onMount, Switch } from "solid-js"
+import { ConvertImage, ConvertStore, ConvertTypes } from "../store";
 import { ConvertTypeBtns } from "./control";
 import { ImageTable } from "./table";
 
-export const ImageConverter = () => {
+type Props = {
+  type?: ConvertTypes;
+}
+
+export const ImageConverter = (props: Props) => {
   const store = ConvertStore;
 
   const images = createMemo(() => Array.from(store.state.images));
 
-  createEffect(() => {
-    console.log(store.state);
-
+  onMount(() => {
+    const type = props.type;
+    if (type) {
+      store.setType(type);
+    }
   })
 
   function processFileList(fileList: FileList) {

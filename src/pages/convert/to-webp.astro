@@ -5,27 +5,27 @@ import { Container } from "@app/components/template/layout";
 import { H1, Heading } from "@app/components/template/typography";
 import Layout from "@app/layouts/Layout.astro";
 import { ImageConverter } from "./components";
+import { ConvertTypes } from "./store";
 ---
 
 <Layout
-  title="Конвертация изображений в jpg, png, webp и другие"
-  description="Беслатная и быстрая конвертация картинок в различные форматы"
+  title="Конвертация изображений в WEBP"
+  description="Беслатная и быстрая конвертация картинок из любого формата в WEBP"
 >
   <Container size="sm">
     <Heading center>
-      <H1>Онлайн конвертация</H1>
+      <H1>Конвертация в WEBP</H1>
 
       <p>
-        Бесплатная онлайн преобразование картинок, фотографий и других
-        изображений
+        Бесплатная онлайн преобразование картинок,
         <br />
-        в jpg, jpeg, png, webp и прочие форматы
+        фотографий и других изображений в WEBP
       </p>
     </Heading>
 
     <Divider />
 
-    <ImageConverter client:idle />
+    <ImageConverter client:idle type={ConvertTypes.WEBP} />
 
     <Divider />
 
@@ -56,5 +56,7 @@ import { ImageConverter } from "./components";
         description="Выгрузьте все картинки или по отдельности"
       />
     </HowTo>
+
+    <Divider />
   </Container>
 </Layout>
