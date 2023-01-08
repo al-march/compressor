@@ -1,56 +1,13 @@
-import { checkBackendStatus, Message, sendMessage } from "@app/services/api"
-import { tick } from "@app/services/utils";
-import { createSignal, JSXElement, Match, onMount, Show, Switch } from "solid-js"
-import { Loader } from "../base";
-import { Scale } from "../base/animations";
+import { Message, sendMessage } from "@app/services/api"
+import { createSignal, JSXElement, Match, Show, Switch } from "solid-js"
+import { HasBackend, Loader } from "../base";
 
 export const ContactForm = () => {
-
-  const [load, setLoad] = createSignal(true);
-  const [hasBackend, setHasBackend] = createSignal(false);
-
-  onMount(async () => {
-    fetchStatus();
-  })
-
-  async function fetchStatus() {
-    setLoad(true);
-    setHasBackend(await checkBackendStatus());
-    await tick(500);
-    setLoad(false);
-  }
-
   return (
     <div class="flex flex-col py-10">
-      <Scale mode="outin" appear>
-        <Switch fallback={
-          <div class="flex h-full items-center justify-center m-auto">
-            <Loader />
-          </div>
-        }>
-          <Match when={!load() && hasBackend()}>
-            <Form />
-          </Match>
-          <Match when={!load() && !hasBackend()}>
-            <div class="flex flex-col h-full items-center justify-center m-auto">
-              <p class="flex items-center gap-2 mb-2">
-                <span>Сервер недоступен =(</span>
-              </p>
-              <button
-                type="button"
-                class="btn btn-ghost btn-sm text-warning gap-1"
-                onClick={() => fetchStatus()}
-              >
-                Перезагрузить
-
-                <span class="material-symbols-outlined">
-                  autorenew
-                </span>
-              </button>
-            </div>
-          </Match>
-        </Switch>
-      </Scale>
+      <HasBackend>
+        <Form />
+      </HasBackend>
     </div>
   )
 }

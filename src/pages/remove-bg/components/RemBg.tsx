@@ -1,4 +1,4 @@
-import { Icon, ImageCompareSlider, Loader, Tooltip } from "@app/components/base";
+import { HasBackend, Icon, ImageCompareSlider, Loader, Tooltip } from "@app/components/base";
 import { Scale } from "@app/components/base/animations";
 import { CompressDropZone } from "@app/components/compress/drop-zone"
 import { CompressImage } from "@app/models";
@@ -53,8 +53,10 @@ export const RemBg = () => {
   }
 
   return (
-    <div>
-      <CompressDropZone onDropFiles={processFiles} />
+    <HasBackend>
+      <CompressDropZone
+        onDropFiles={processFiles}
+      />
 
       <div class="w-full">
         <Scale>
@@ -89,6 +91,6 @@ export const RemBg = () => {
           </Switch>
         </Scale>
       </div>
-    </div>
+    </HasBackend>
   )
 }
