@@ -1,1 +1,0 @@
-import{i as a}from"./Scale.c4673c7e.js";const u=e=>new Promise(i=>{setTimeout(i,e)}),x=(e,i="",r="")=>{const t=a.addPrefixAndSuffix(e,i,r);if(t.length>20){const o=Math.floor(10),s=t.slice(0,o),n=t.slice(-o);return`${s}...${n}`}return t};export{u as a,x as t};
