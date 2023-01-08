@@ -1,1 +1,1 @@
-export * from './CompressDropZone';
+export * from './CompressSettings';

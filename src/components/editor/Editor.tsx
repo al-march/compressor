@@ -1,7 +1,7 @@
 import { CompressImage } from "@app/models";
 import { createSignal, Match, Switch } from "solid-js"
 import { Scale } from "../base/animations";
-import { CompressDropZone } from "../compress/drop-zone";
+import { ImageDropZone } from "@app/components/base";
 import { ImageEditor } from "./components";
 
 export const Editor = () => {
@@ -17,7 +17,7 @@ export const Editor = () => {
     <Scale>
       <Switch>
         <Match when={!source()}>
-          <CompressDropZone
+          <ImageDropZone
             onDropFiles={onDropFiles}
           />
         </Match>

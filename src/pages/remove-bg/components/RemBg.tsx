@@ -1,6 +1,6 @@
 import { HasBackend, Icon, ImageCompareSlider, Loader, Tooltip } from "@app/components/base";
 import { Scale } from "@app/components/base/animations";
-import { CompressDropZone } from "@app/components/compress/drop-zone"
+import { ImageDropZone } from "@app/components/base"
 import { CompressImage } from "@app/models";
 import { downloadService, imageService } from "@app/services";
 import { removeBg } from "@app/services/api";
@@ -54,7 +54,7 @@ export const RemBg = () => {
 
   return (
     <HasBackend>
-      <CompressDropZone
+      <ImageDropZone
         onDropFiles={processFiles}
       />
 

@@ -1,7 +1,7 @@
 import { createMemo, createSignal, Match, Show, Switch } from 'solid-js'
 import { ImageStore } from './Store';
 import { downloadService, imageService } from '@app/services';
-import { CompressDropZone } from './drop-zone';
+import { ImageDropZone } from '@app/components/base';
 import { CompressImage } from '@app/models';
 import { Result, ResultStats } from './result';
 import { AccessibleImages } from '@app/constants';
@@ -110,7 +110,7 @@ export const ImageCompressor = () => {
           <Scale mode="outin">
             <Switch>
               <Match when={viewType() === 'compress'}>
-                <CompressDropZone
+                <ImageDropZone
                   onDropFiles={processFileList}
                 />
               </Match>

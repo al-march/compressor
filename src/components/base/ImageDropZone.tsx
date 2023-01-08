@@ -1,12 +1,12 @@
 import { AccessibleImagesBadges, DropZone } from "@app/components/base";
 import { createSignal } from "solid-js";
-import { ImageUploadLogo } from "../ImageUploadIcon";
+import { ImageUploadLogo } from "../compress/ImageUploadIcon";
 
 type Props = {
   onDropFiles?: (fileList: FileList) => void;
 }
 
-export const CompressDropZone = (props: Props) => {
+export const ImageDropZone = (props: Props) => {
 
   const [inputRef, setInputRef] = createSignal<HTMLInputElement>();
   const [entered, setEntered] = createSignal(false);
