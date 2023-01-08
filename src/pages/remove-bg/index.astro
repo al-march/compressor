@@ -1,0 +1,28 @@
+---
+import { Divider } from "@app/components/base";
+import { Container } from "@app/components/template/layout";
+import { H1, Heading } from "@app/components/template/typography";
+import Layout from "@app/layouts/Layout.astro";
+import { RemBg } from "./components/RemBg";
+---
+
+<Layout
+  title="Удаление фона у изображений"
+  description="Онлайн удаление фона у любых картинок"
+>
+  <Container size="sm">
+    <Heading center>
+      <H1>Удаление фона</H1>
+
+      <p>
+        Бесплатная онлайн удаление фона у картинок.
+        <br>
+        Удаляйте фон у селфи или других объектов в фокусе
+      </p>
+    </Heading>
+
+    <Divider />
+
+    <RemBg client:idle></RemBg>
+  </Container>
+</Layout>

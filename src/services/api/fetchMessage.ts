@@ -5,7 +5,7 @@ export type Message = {
 }
 
 export const sendMessage = (message: Message) => {
-  return fetch(`${window.backendUrl}/send`, {
+  return fetch(`${window.backendUrl}/api/v1/send`, {
     method: 'POST',
     body: JSON.stringify(message),
     headers: {

@@ -6,3 +6,5 @@ declare global {
 
 export * from './fetchAvailability';
 export * from './fetchMessage';
+export * from './fetchRemoveBg';
+
