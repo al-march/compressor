@@ -1,4 +1,4 @@
-import { Message, sendMessage } from "@app/services/api"
+import { Message, sendHelpMessage } from "@app/services/api"
 import { createSignal, JSXElement, Match, Show, Switch } from "solid-js"
 import { HasBackend, Loader } from "../base";
 
@@ -32,7 +32,7 @@ function Form() {
 
       setLoad(true);
       try {
-        await sendMessage(msg);
+        await sendHelpMessage(msg);
         showSuccess();
       } catch {
         showError();
