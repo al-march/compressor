@@ -1,4 +1,4 @@
-import"./Scale.c4673c7e.js";/*!
+import"./ImageDropZone.b4a97d8d.js";/*!
  * Compressor.js v1.1.1
  * https://fengyuanchen.github.io/compressorjs
  *
