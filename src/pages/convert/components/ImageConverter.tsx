@@ -1,7 +1,6 @@
-import { Icon } from "@app/components/base";
+import { Icon, ImageDropZone } from "@app/components/base";
 import { Scale } from "@app/components/base/animations";
 import { DropButton } from "@app/components/compress/components";
-import { ImageDropZone } from "@app/components/compress/drop-zone";
 import { compressorService, downloadService, imageService } from "@app/services";
 import { createMemo, Match, onMount, Switch } from "solid-js"
 import { ConvertImage, ConvertStore, ConvertTypes } from "../store";

@@ -1,6 +1,5 @@
-import { HasBackend, Icon, ImageCompareSlider, Loader, Tooltip } from "@app/components/base";
+import { HasBackend, Icon, ImageCompareSlider, Loader, Tooltip, ImageDropZone } from "@app/components/base";
 import { Scale } from "@app/components/base/animations";
-import { ImageDropZone } from "@app/components/base"
 import { CompressImage } from "@app/models";
 import { downloadService, imageService } from "@app/services";
 import { removeBg } from "@app/services/api";
