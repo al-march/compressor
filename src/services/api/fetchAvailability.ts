@@ -4,8 +4,8 @@ export const status = () => {
 
 export const checkBackendStatus = async () => {
   try {
-    await status();
-    return true;
+    const response = await status();
+    return response.ok;
   } catch {
     return false;
   }
