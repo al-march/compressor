@@ -9,18 +9,25 @@ export interface Props {
   description: string;
 }
 
+const mode = import.meta.env.MODE;
+const backendUrl = mode === 'development'
+  ? 'http://localhost:8000'
+  : 'https://api.compress.monster';
+
 const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head data-theme="night" itemscope itemtype="http://schema.org/WPHeader">
+
+    <script set:html={`window.backendUrl = "${backendUrl}";`}></script>
+
     <script is:global>
       const theme = localStorage.getItem("app-theme") || "night";
       document.documentElement.setAttribute("data-theme", theme);
-
-      window.backendUrl = "https://api.compress.monster";
     </script>
+
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
