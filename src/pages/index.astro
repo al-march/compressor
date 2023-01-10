@@ -10,22 +10,42 @@ import {
 import { H1, H2, H4, Heading } from "@app/components/template/typography";
 import { HowToUse } from "./index/HowToUse";
 import { CompressExample } from "./index/CompressExample";
+import { Divider, Icon } from "@app/components/base";
 ---
 
+<link rel="stylesheet" href="/background.css" />
 <Layout
   title="сжатие картинок png, jpeg, webp онлайн бесплатно"
   description="Бесплатное и неограниченное сжатие изображений png jpeg webp и других"
 >
-  <Container size="md">
-    <Heading center>
-      <H1>Быстрое и эффективное <br /> сжатие изображений</H1>
-    </Heading>
+  <div class="py-8 max-w-[1240px] mx-auto">
+    <section
+      class="min-h-screen md:grid md:grid-cols-2 gap-6 items-center"
+    >
+      <Heading class="p-6">
+        <H1 class="text-5xl">Быстрое и эффективное сжатие <br /> изображений</H1
+        >
+        <p class="text-2xl">Без потери в качестве</p>
 
-    <br />
-    <br />
+        <Divider class="max-w-[60px]" />
 
-    <section class="flex flex-col" id="compressor">
-      <ImageCompressor client:idle />
+        <div>
+          <a href="#compressor" class="btn btn-accent gap-2">
+            <Icon code="arrow_downward" />
+            <span>К сжатию</span>
+          </a>
+        </div>
+      </Heading>
+
+      <div class="p-8 sm:p-0">
+        <CompressExample client:load />
+      </div>
+    </section>
+  </div>
+
+  <Container size="sm">
+    <section class="flex flex-col py-8" id="compressor">
+      <ImageCompressor client:load />
     </section>
 
     <span class="divider"></span>
@@ -47,20 +67,6 @@ import { CompressExample } from "./index/CompressExample";
 
     <section class="py-10 px-2 flex flex-col gap-8" id="why-use">
       <Features />
-    </section>
-
-    <span class="divider"></span>
-
-    <section class="py-10 px-2 flex flex-col gap-8" id="why-use">
-      <Heading center>
-        <H2>Пример работы сжатия</H2>
-        <p>
-          Сжатые картинки сильно теряют в объеме занимаемой памяти, но изменения
-          практически незаметны человеческому глазу
-        </p>
-      </Heading>
-
-      <CompressExample client:idle />
     </section>
 
     <span class="divider"></span>

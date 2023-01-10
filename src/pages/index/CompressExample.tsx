@@ -1,7 +1,6 @@
-import { ImageCompareSlider, Loader } from "@app/components/base"
+import { ImageCompareSlider, Loader, MouseParalax } from "@app/components/base"
 import { Scale } from "@app/components/base/animations";
 import { ResultStats } from "@app/components/compress/result";
-import { H3 } from "@app/components/template/typography";
 import { CompressImage } from "@app/models";
 import { compressorService } from "@app/services";
 import { createSignal, onMount, Show } from "solid-js"
@@ -39,21 +38,25 @@ export const CompressExample = () => {
   })
 
   return (
-    <Scale>
-      <Show when={!load()} fallback={<Loader center />}>
-        <div class="flex flex-col gap-8">
-          <ImageCompareSlider
-            class="rounded overflow-hidden"
-            before={<img src={beforeSrc()} alt="before image" />}
-            after={<img src={afterSrc()} alt="before image" />}
-          />
-
-          <div class="flex justify-evenly items-center gap-4">
-            <H3 class="text-error">До</H3>
-            <ResultStats images={images()} />
-            <H3 class="text-success">После</H3>
-          </div>
+    <Scale mode="inout">
+      <Show when={!load()} fallback={
+        <div class="flex items-center justify-center">
+          <Loader center />
         </div>
+      }>
+        <MouseParalax>
+          <div class="flex flex-col gap-8">
+            <ImageCompareSlider
+              class="rounded overflow-hidden"
+              before={<img src={beforeSrc()} alt="before image" />}
+              after={<img src={afterSrc()} alt="after image" />}
+            />
+
+            <div class="flex justify-evenly items-center gap-4">
+              <ResultStats images={images()} />
+            </div>
+          </div>
+        </MouseParalax>
       </Show>
     </Scale>
   )
