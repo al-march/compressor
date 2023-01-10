@@ -8,3 +8,4 @@ export * from './AppLogo';
 export * from './Divider';
 export * from './HasBackend';
 export * from './ImageDropZone';
+export * from './MouseParalax';
