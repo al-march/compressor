@@ -1,1 +1,0 @@
-import{y as r,g as o,z as n,A as l,i as c,r as p,t as m}from"./web.0e38cc26.js";const i=m("<span></span>"),d=e=>{const[s,a]=r(e,["class","code"]);return(()=>{const t=o(i);return n(t,l({get class(){return"material-symbols-outlined"+(s.class?` ${s.class}`:"")}},a),!1,!0),c(t,()=>s.code),p(),t})()};export{d as I};
