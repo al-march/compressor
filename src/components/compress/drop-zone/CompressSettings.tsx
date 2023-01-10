@@ -22,7 +22,7 @@ const QualityControl = (props: { value: number, onChange?: (v: number) => void }
           min="20"
           max="100"
           value={v()}
-          class="range range-sm range-primary"
+          class="range range-sm range-accent"
           onInput={updateValue}
         />
         <span>{v()}</span>
@@ -44,7 +44,7 @@ export const CompressSettings = () => {
 
   return (
     <div class="h-72 flex items-center justify-center">
-      <article class="p-10 w-full h-full flex-1 flex flex-col">
+      <article class="py-2 sm:py-10 w-full flex flex-col">
 
         <QualityControl
           value={defaultValue.quality}

@@ -11,18 +11,20 @@ import { H1, H2, H4, Heading } from "@app/components/template/typography";
 import { HowToUse } from "./index/HowToUse";
 import { CompressExample } from "./index/CompressExample";
 import { Divider, Icon } from "@app/components/base";
+import { Circles } from "@app/components/base/circles";
 ---
 
-<link rel="stylesheet" href="/background.css" />
 <Layout
   title="сжатие картинок png, jpeg, webp онлайн бесплатно"
   description="Бесплатное и неограниченное сжатие изображений png jpeg webp и других"
 >
-  <div class="py-8 max-w-[1240px] mx-auto">
+  <div class="relative overflow-hidden">
+    <Circles width="90%" height="90%" />
+
     <section
-      class="min-h-screen md:grid md:grid-cols-2 gap-6 items-center"
+      class="min-h-screen md:grid md:grid-cols-2 gap-6 items-center max-w-[1240px] mx-auto"
     >
-      <Heading class="p-6">
+      <Heading class="p-6 relative">
         <H1 class="text-5xl">Быстрое и эффективное сжатие <br /> изображений</H1
         >
         <p class="text-2xl">Без потери в качестве</p>
@@ -37,14 +39,14 @@ import { Divider, Icon } from "@app/components/base";
         </div>
       </Heading>
 
-      <div class="p-8 sm:p-0">
+      <div class="p-8 sm:p-0 relative">
         <CompressExample client:load />
       </div>
     </section>
   </div>
 
   <Container size="sm">
-    <section class="flex flex-col py-8" id="compressor">
+    <section class="flex flex-col" id="compressor">
       <ImageCompressor client:load />
     </section>
 

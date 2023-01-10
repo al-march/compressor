@@ -1,10 +1,10 @@
-import { createMemo, createSignal, Match, Show, Switch } from 'solid-js'
+import { createMemo, createSignal, Match, mergeProps, Show, Switch } from 'solid-js'
 import { ImageStore } from './Store';
 import { downloadService, imageService } from '@app/services';
 import { ImageDropZone } from '@app/components/base';
 import { CompressImage } from '@app/models';
 import { Result, ResultStats } from './result';
-import { AccessibleImages } from '@app/constants';
+import { AccessibleImages, DaisyBrandColor } from '@app/constants';
 import { DropZone } from '@app/components/base';
 import { CompressSettings } from './drop-zone/CompressSettings';
 import { Scale } from '../base/animations';
@@ -91,7 +91,7 @@ export const ImageCompressor = () => {
             <button
               type="button"
               class="btn btn-sm"
-              classList={{ 'btn-primary': viewType() === 'compress' }}
+              classList={{ 'btn-accent': viewType() === 'compress' }}
               onClick={() => setViewType('compress')}
             >
               Сжатие
@@ -100,7 +100,7 @@ export const ImageCompressor = () => {
             <button
               type="button"
               class="btn btn-sm"
-              classList={{ 'btn-primary': viewType() === 'settings' }}
+              classList={{ 'btn-accent': viewType() === 'settings' }}
               onClick={() => setViewType('settings')}
             >
               Настройки
@@ -162,7 +162,7 @@ export const ImageCompressor = () => {
 
               <ResultStats images={images()} />
 
-              <button class="btn btn-primary btn-outline btn-xs" onClick={downloadAll}>
+              <button class="btn btn-accent btn-xs" onClick={downloadAll}>
                 Скачать ({images().length})
               </button>
             </footer>

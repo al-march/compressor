@@ -17,7 +17,7 @@ export const AccessibleImagesBadges = (props: Props) => {
       }}
     >
       <For each={AccessibleImages}>
-        {img => <span class="badge badge-primary">.{img}</span>}
+        {img => <span class="badge badge-accent">.{img}</span>}
       </For>
     </span>
   )

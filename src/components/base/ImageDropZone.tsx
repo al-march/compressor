@@ -1,4 +1,4 @@
-import { AccessibleImagesBadges, DropZone } from "@app/components/base";
+import { AccessibleImagesBadges, DropZone, Icon } from "@app/components/base";
 import { createSignal } from "solid-js";
 import { ImageUploadLogo } from "../compress/ImageUploadIcon";
 
@@ -56,13 +56,11 @@ export const ImageDropZone = (props: Props) => {
             </div>
 
             <button
-              class="btn btn-primary btn-outline gap-2 btn-xs"
+              class="btn btn-accent gap-2 btn-sm"
               type="button"
               onClick={onSelectFiles}
             >
-              <span class="material-symbols-outlined">
-                image
-              </span>
+              <Icon code="add_photo_alternate"/>
               <span>Выбрать</span>
             </button>
           </article>
