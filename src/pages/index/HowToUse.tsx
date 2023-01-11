@@ -1,26 +1,25 @@
-import { CardContainer } from "@app/components/template/layout";
 import { H4 } from "@app/components/template/typography";
 import type { DaisyColor } from "@solsy/ui";
 import { JSXElement, ParentProps, JSX, splitProps, createMemo } from "solid-js"
 
 type CardProps = {
   position?: string;
-  icon?: string;
+  reverse?: boolean;
+  image?: JSXElement;
   title?: JSXElement;
   description?: JSXElement;
   color?: DaisyColor;
-  full?: boolean;
   class?: string;
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const Card = (props: ParentProps<CardProps>) => {
   const [local, others] = splitProps(props, [
-    'icon',
+    'position',
+    'reverse',
+    'image',
     'title',
     'description',
     'color',
-    'full',
-    'position',
     'class',
     'classList',
     'children'
@@ -32,78 +31,86 @@ export const Card = (props: ParentProps<CardProps>) => {
     <article
       id={id()}
       itemprop="step" itemscope itemtype="http://schema.org/HowToStep"
-      class="flex flex-col gap-2 items-center justify-center text-center"
+      class="flex items-center gap-2"
       classList={{
         [props.class || '']: !!local.class,
-        'w-48': !local.full,
+        'flex-row-reverse': local.reverse,
         ...local.classList
       }}
       {...others}
     >
       <meta itemprop="position" content={local.position} />
-      <meta itemprop="url" content={'#' + id()} />
-      <span
-        itemprop="image"
-        class="material-symbols-outlined text-4xl"
-        classList={{
-          'text-primary': local.color === 'primary',
-          'text-secondary': local.color === 'secondary',
-          'text-accent': local.color === 'accent',
-          'text-info': local.color === 'info',
-          'text-success': local.color === 'success',
-          'text-warning': local.color === 'warning',
-          'text-error': local.color === 'error',
-        }}
-      >
-        {local.icon}
-      </span>
+      <meta itemprop="url" content={'https://compress.monster/#' + id()} />
 
-      <H4 itemprop="name">{local.title}</H4>
-
-      <div
-        itemprop="itemListElement"
-        itemscope
-        itemtype="https://schema.org/HowToDirection"
-      >
-        <p itemprop="text">{local.description}</p>
+      <div class="w-[80px] shrink-0">
+        <img itemprop="image" src={`how-to-compress/step-${props.position}.png`} alt="" />
       </div>
 
-      {local.children}
+      <section class="flex flex-col gap-2">
+        <H4 itemprop="name">{local.title}</H4>
+
+        <div
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/HowToDirection"
+        >
+          <p itemprop="text">{local.description}</p>
+        </div>
+
+        {local.children}
+      </section>
     </article>
   )
 }
 
 export const HowToUse = () => {
   return (
-    <CardContainer>
+    <div class="flex flex-col gap-6">
       <Card
         position="1"
-        color="success"
-        icon="add_photo_alternate"
-        title="Загрузите"
+        title="Загрузите изображения"
         description={(
           <span>
-            Фотографии на сайт, нажав на кнопку{' '}
+            Выберете картинки на своем устройстве и перенесите на область загрузки файлов на сайт.
+            <br />
+            Или воспользуйтесь соответствующей кнопкой{' '}
             <a class="link link-success" itemprop="url" href="#compressor">выбрать</a>
           </span>
         )}
       />
 
+      <div class="w-full flex items-center justify-center">
+        <img class="h-[40px]" src="/arrow-down.png" alt="" />
+      </div>
+
       <Card
         position="2"
-        color="success"
-        icon="settings"
-        title="Настройте"
-        description="Выберете параметры сжатия"
+        title="Настройте параметры"
+        description={(
+          <span>
+            При необходимости отредактируйте настройки сжатия картинок.
+            <br />
+            Измените качество изображения, его размер, префикс, суфикс и другие параметры
+            для лучшего результата.
+          </span>
+        )}
       />
+
+      <div class="w-full flex items-center justify-center">
+        <img class="h-[40px]" src="/arrow-down.png" alt="" />
+      </div>
 
       <Card
         position="3"
-        color="success"
-        icon="download"
-        title="Скачайте"
-        description="Выгрузьте оптимизированные картинки"
+        title="Выгрузьте результат"
+        description={(
+          <span>
+            Скачайте сжатые изображения на свое устройство.
+            <br />
+            Скачать можно как отдельно сжатое изображение, так и все разом в виде zip архива.
+          </span>
+        )}
       />
-    </CardContainer>
+    </div>
   )
 }

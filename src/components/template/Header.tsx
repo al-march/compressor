@@ -48,7 +48,7 @@ export const Header = () => {
     <header
       itemscope
       itemtype="http://schema.org/WPHeader"
-      class="navbar bg-neutral text-neutral-content sticky top-0 z-50"
+      class="navbar bg-neutral text-neutral-content z-50"
     >
       <a itemprop="url" class="btn btn-ghost btn-circle p-1" href="/">
         <AppLogo />
