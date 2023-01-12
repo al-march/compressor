@@ -1,13 +1,13 @@
+import { appService } from "@app/services/app";
 import { AppStore } from "@app/stores";
 import { createSignal, onMount } from "solid-js"
 import { Theme } from "../../constants"
 import { AppLogo, Icon } from "../base";
 import { Link } from "../base/link";
 
-const THEME_STORAGE_KEY = 'app-theme';
 
 export const Header = () => {
-  const storageTheme = getThemeFromStorage();
+  const storageTheme = appService.getThemeFromStorage();
   const [theme, setTheme] = createSignal<Theme>(storageTheme);
   const { drawer } = AppStore;
 
@@ -26,23 +26,8 @@ export const Header = () => {
   }
 
   function updateTheme() {
-    document.documentElement.setAttribute('data-theme', theme());
-    localStorage.setItem(THEME_STORAGE_KEY, theme());
+    appService.updateTheme(theme());
   }
-
-  function getThemeFromStorage() {
-    const theme = localStorage.getItem(THEME_STORAGE_KEY);
-
-    switch (theme) {
-      case Theme.DARK:
-        return Theme.DARK;
-      case Theme.LIGHT:
-        return Theme.LIGHT;
-      default:
-        return Theme.LIGHT;
-    }
-  }
-
 
   return (
     <header
@@ -50,8 +35,8 @@ export const Header = () => {
       itemtype="http://schema.org/WPHeader"
       class="navbar bg-neutral text-neutral-content z-50"
     >
-      <a itemprop="url" class="btn btn-ghost btn-circle p-1" href="/">
-        <AppLogo />
+      <a itemprop="url" class="btn btn-ghost p-1 w-[140px]" href="/">
+        <AppLogo theme={Theme.LIGHT} />
       </a>
 
       <div class="flex-1"></div>
