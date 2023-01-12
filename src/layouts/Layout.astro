@@ -10,9 +10,10 @@ export interface Props {
 }
 
 const mode = import.meta.env.MODE;
-const backendUrl = mode === 'development'
-  ? 'http://localhost:8000'
-  : 'https://api.compress.monster';
+const backendUrl =
+  mode === "development"
+    ? "http://localhost:8000"
+    : "https://api.compress.monster";
 
 const { title, description } = Astro.props;
 ---
@@ -20,14 +21,12 @@ const { title, description } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head data-theme="night" itemscope itemtype="http://schema.org/WPHeader">
-
     <script set:html={`window.backendUrl = "${backendUrl}";`}></script>
 
     <script is:global>
       const theme = localStorage.getItem("app-theme") || "night";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
-
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -69,15 +68,19 @@ const { title, description } = Astro.props;
       content="сжатие изображений, сжатие картинок, сжатие png, jpeg, webp, сжать, бесплатно"
     />
     <meta itemprop="description" name="description" content={description} />
-    <title itemprop="headline">Compressor | {title}</title>
-    <script type="application/ld+json" is:global>
+    <title itemprop="headline">{title}</title>
+    <script
+      type="application/ld+json"
+      is:global
+      set:html={`
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "url": "https://compress.monster",
-        "logo": "https://compress.monster/logo.png"
+        "logo": "https://compress.monster/logo-light.svg"
       }
-      </script>
+    `}
+    ></script>
   </head>
 
   <body>
